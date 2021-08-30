@@ -4,12 +4,11 @@ import styles from './Styles';
 
 export default function HomeHeader(){
 
+    // Actualmente componente sin uso
+
     return(
         <View style={styles.container}>
             <Text style={{color:'white'}}>HOLA SOY EL HEADER</Text>
-        
         </View>
-
     );
-
 }

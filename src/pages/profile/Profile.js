@@ -18,7 +18,6 @@ export default function Profile({}) {
                 </View>
 
                 <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
-
                     <TouchableOpacity style={styles.buttonStyle}>
                         <Text style={styles.buttonText}>Modificar Perfil</Text>
                         <Ionicons name={'arrow-forward'} size={24} color={Colors.inactiveTint}/>
@@ -48,13 +47,12 @@ export default function Profile({}) {
                         <Text style={styles.buttonText}>Modificar Perfil</Text>
                         <Ionicons name={'arrow-forward'} size={24} color={Colors.inactiveTint}/>
                     </TouchableOpacity>
-
-
-
                 </ScrollView>
+
                 <TouchableOpacity style={styles.buttonStyleLogOut}>
                         <Text style={styles.buttonTextogOut}>Cerrar Sesion</Text>
                 </TouchableOpacity>
+
                 <Text style={{color:'white', position:'absolute', bottom: 5}}>Version: 0.1 - Dev</Text>
             </View>
         </View>

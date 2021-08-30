@@ -1,10 +1,7 @@
 import React from 'react';
 import {SafeAreaView,FlatList,TouchableOpacity,ScrollView,Image,ImageBackground,TouchableWithoutFeedback,View,Text, Animated, Dimensions } from 'react-native';
 import MoviePreview from '../moviePreview/MoviePreview';
-
 import dummyData from '../../assets/moviesDummy';
-
-
 
 const Carrousel = ({nav})=>{
 
@@ -39,7 +36,6 @@ const Carrousel = ({nav})=>{
                 </TouchableOpacity>
             )
         }}>
-
         </Animated.FlatList>
     )
 }

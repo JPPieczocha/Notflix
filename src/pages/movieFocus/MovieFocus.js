@@ -8,10 +8,7 @@ import styles from './Styles';
 const MovieFocus = ({navigation,route})=>{
 
     const {title, idMovie, imageSource} = route.params;
-
-
     //Falta el loading al cargar la pelicula, más adelante
-
 
     const header = ()=>{
         return(
@@ -45,11 +42,6 @@ const MovieFocus = ({navigation,route})=>{
                 justifyContent:'flex-end'
             }} 
             source={require("../../assets/images/images/series/money_heist/money_heist_cover.jpg")}>
-                {/* <View style={styles.main}>
-                    <View style={styles.mainHeader}>
-                        <Text style={styles.titleText}>{title}</Text>
-                    </View>
-                </View> */}
                 <BlurView  intensity={80} tint="dark" style={styles.main}>
                     <View style={styles.mainHeader}>
                         <Text style={styles.titleText}>{title}</Text>
@@ -59,7 +51,6 @@ const MovieFocus = ({navigation,route})=>{
                     </View>
 
                     <View style={{width:'100%', justifyContent:'center', alignItems:"center"}}>
-                    {/* <TouchableOpacity style={styles.playMovie} onPress={()=>navigation.navigate('VideoPlayer')}> */}
                     <TouchableOpacity style={styles.playMovie} onPress={()=>navigation.navigate('MoviePlayer',{title:title})}>
                         <Text style={styles.playMovieText}>Reproducir</Text>
                     </TouchableOpacity>
