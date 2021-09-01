@@ -9,6 +9,13 @@ const {width, height} = Dimensions.get('window')
 const VideoPlayer = ({navigation, route})=>{
 
 	const {title} = route.params;
+
+	const [miliseconds, setMiliSeconds] = useState(0);
+	const [seconds, setSeconds] = useState(0);
+	const [minutes, setMinutes] = useState(0);
+	const [hours, setHours] = useState(0);
+
+
 	const [topLayer,setTopLayer] = useState(true);
 	const video = React.useRef(null);
 	const [status, setStatus] = React.useState({});
@@ -30,6 +37,45 @@ const VideoPlayer = ({navigation, route})=>{
 
 	const handleBackButton = ()=>{
 		navigation.pop()
+	}
+
+	const handleBackwardVideo = async()=>{
+		let data = await video.current.getStatusAsync();
+		video.current.setPositionAsync(data.positionMillis - 15000)
+	}
+
+	const handleForwardVideo = async ()=>{
+		let data = await video.current.getStatusAsync();
+		if(data.isLoaded){
+			video.current.setPositionAsync(data.positionMillis + 15000)
+		}
+	}
+	
+	const handleChangeStatusTime = (estado)=>{
+		//No creo que la utilice, prefiero el original del celu.
+		//Se necesita crear la barra deslizanet tmb para mover la peli.
+		//Un bardo
+		setStatus(estado)
+		if(miliseconds > 999){
+			setMiliSeconds(0)
+			console.log("ESTOYYY");
+			setSeconds(seconds+1);
+		}else if(seconds >= 59){
+			setSeconds(0);
+			setMinutes(minutes+1);
+		}else if(minutes >= 59){
+			setMinutes(0);
+			setHours(hours+1);
+		}
+		else{
+		setMiliSeconds(miliseconds+500)
+		}
+	}
+
+	const prueba = ()=>{
+		// video.current.presentFullscreenPlayer()
+		//MIRA VOS ESTO ME LO HACE SOLO, QUE BOLUDO
+		console.log(status);
 	}
 
 	const videoLayer = ()=>{
@@ -57,10 +103,22 @@ const VideoPlayer = ({navigation, route})=>{
 					</View>
 
 					<View style={styles.footerLayer}>
-						<TouchableOpacity style={styles.backButton} onPress={()=>handlePlay()}>
-							<Ionicons name={status.isPlaying ? 'pause' : 'play'} size={30} color={Colors.inactiveTint}/>
-						</TouchableOpacity>
-						<Text style={styles.headerLayerText}>----------Aca va la duracion---------</Text>
+						<View style={styles.buttonsFooter}>
+							<TouchableOpacity style={styles.backButton} onPress={()=>handleBackwardVideo()}>
+								<Ionicons name="ios-play-back-sharp" size={30} color={Colors.inactiveTint} />
+
+							</TouchableOpacity>
+							
+							<TouchableOpacity style={styles.backButton} onPress={()=>handlePlay()}>
+								<Ionicons name={status.isPlaying ? 'pause' : 'play'} size={30} color={Colors.inactiveTint}/>
+							</TouchableOpacity>
+
+							{/* <TouchableOpacity style={styles.backButton} onPress={()=>prueba()}> */}
+							<TouchableOpacity style={styles.backButton} onPress={()=>handleForwardVideo()}>
+								<Ionicons name="ios-play-forward-sharp" size={30} color={Colors.inactiveTint} />
+							</TouchableOpacity>
+						</View>
+						<Text style={styles.headerLayerText}>--{hours} : {minutes} : {seconds}----</Text>
 						{/* Lo de arriba es prueba */}
 					</View>
 				</Animated.View>
@@ -80,6 +138,10 @@ const VideoPlayer = ({navigation, route})=>{
 					uri: 'https://es.vid.web.acsta.net/nmedia/34/19/06/03/14//19562331_hd_013.mp4'
 					,}}
 					resizeMode="contain"
+					// onPlaybackStatusUpdate={status => handleChangeStatusTime(() => status)} 
+					// esto de arriba muestra cuánto tiempo va dela peli. No se si lo usemos, aclarado en la funcion
+
+					//Y si lo pongo en pantalla chiquita y doy la chance de que hagan fullscreen?? MMm
 					onPlaybackStatusUpdate={status => setStatus(() => status)}
 					shouldPlay={true}
 					autoplay={true}
@@ -130,8 +192,16 @@ const styles = StyleSheet.create({
 
 		flexDirection:'row',
 		alignItems:'center',
-		justifyContent:'space-evenly'
+		justifyContent:'center'
+	},
+	buttonsFooter:{
+		width: '25%',
+
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent:'space-around'
 	}
+
   });
 
 export default VideoPlayer;
