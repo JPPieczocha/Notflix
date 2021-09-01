@@ -36,9 +36,6 @@ const MovieBasicPreview = ({src})=>{
                 marginTop: 10,
                 width: width*0.85,
                 height: width*0.30,
-                // justifyContent:"flex-end",
-                // borderColor: Colors.secondary,
-                // borderWidth: 2,
                 borderRadius: 20
             }}
             >

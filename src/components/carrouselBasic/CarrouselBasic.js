@@ -35,11 +35,6 @@ const CarrouselBasic = ({nav})=>{
         // Se renderiza la pelicula
         renderItem={({index,item}) => {
             return(
-                // <TouchableOpacity
-                //     onPress={()=>nav.navigate('MovieFocus',{title:item.name, idMovie: item.id, imageSource: item.details.coverImage})}
-                // >
-                //     <MoviePreview src={item.thumbnail} ></MoviePreview>
-                // </TouchableOpacity>
                 <TouchableOpacity
                 // onPress={()=>nav.navigate('MovieFocus',{title:item.name, idMovie: item.id, imageSource: item.details.coverImage})}
                 onPress={()=>handleOnPress(item)}
