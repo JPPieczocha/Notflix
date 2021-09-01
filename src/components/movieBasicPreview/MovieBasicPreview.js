@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View,ImageBackground,Dimensions, Image} from 'react-native';
 import Colors from '../../constants/colors'
 
-const MoviePreview = ({src})=>{
+const MovieBasicPreview = ({src})=>{
 
     const { width, height } = Dimensions.get("window");
 
@@ -33,12 +33,13 @@ const MoviePreview = ({src})=>{
             <Image 
             source={src}
             style={{
+                marginTop: 10,
                 width: width*0.85,
-                height: width*0.90,
+                height: width*0.30,
                 // justifyContent:"flex-end",
-                borderColor: Colors.secondary,
-                borderWidth: 2,
-                borderRadius: 25
+                // borderColor: Colors.secondary,
+                // borderWidth: 2,
+                borderRadius: 20
             }}
             >
 
@@ -49,4 +50,4 @@ const MoviePreview = ({src})=>{
 
 }
 
-export default MoviePreview;
+export default MovieBasicPreview;
