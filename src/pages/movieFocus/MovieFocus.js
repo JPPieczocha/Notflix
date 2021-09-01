@@ -52,6 +52,7 @@ const MovieFocus = ({navigation,route})=>{
 
                     <View style={{width:'100%', justifyContent:'center', alignItems:"center"}}>
                     <TouchableOpacity style={styles.playMovie} onPress={()=>navigation.navigate('MoviePlayer',{title:title})}>
+                        {/* Aca arriba, varia entre MoviePlayer y VideoPlayer */}
                         <Text style={styles.playMovieText}>Reproducir</Text>
                     </TouchableOpacity>
 

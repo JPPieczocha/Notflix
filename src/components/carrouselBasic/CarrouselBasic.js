@@ -21,22 +21,21 @@ const CarrouselBasic = ({nav})=>{
         // snapToAlignment="center"
         // snapToInterval={width}
         showsHorizontalScrollIndicator={false}
-        scrollEventThrottle={16}
-        decelerationRate={0}
+        // scrollEventThrottle={16}
+        // decelerationRate={0}
         // contentContainerStyle={{
         //     marginTop: 10
         // }}
         data={dummyData.newSeason}
         keyExtractor={item => `${item.id}`}
-        onScroll={
-            Animated.event([{nativeEvent:{contentOffset: {x: newSeasonScrollX}}}],{useNativeDriver:false})
-        }
+        // onScroll={
+        //     Animated.event([{nativeEvent:{contentOffset: {x: newSeasonScrollX}}}],{useNativeDriver:false})
+        // }
 
         // Se renderiza la pelicula
         renderItem={({index,item}) => {
             return(
                 <TouchableOpacity
-                // onPress={()=>nav.navigate('MovieFocus',{title:item.name, idMovie: item.id, imageSource: item.details.coverImage})}
                 onPress={()=>handleOnPress(item)}
                 >
                     <MovieBasicPreview src={item.thumbnail} ></MovieBasicPreview>

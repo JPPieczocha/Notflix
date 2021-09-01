@@ -17,27 +17,28 @@ export default function Tabs({navigation}){
         <Tab.Navigator
         screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, size}) => {
-              let iconName;
-              let iconColor
-
-              if (route.name === 'Home') {
-                iconName = 'home-outline';
-              } else if (route.name === 'Search') {
-                iconName = 'search';
-              } else if(route.name === 'Settings'){
-                iconName = 'options';
-              }
-              iconColor = focused ? Colors.secondary : Colors.inactiveTint
+                let iconName;
+                let iconColor
+                if (route.name === 'Home') {
+                    iconName = 'home-outline';
+                } else if (route.name === 'Search') {
+                    iconName = 'search';
+                } else if(route.name === 'Settings'){
+                    iconName = 'options';
+                }
+                iconColor = focused ? Colors.secondary : Colors.inactiveTint
               //Retorno el icono para cada caso
-              return <Ionicons name={iconName} size={24} color={iconColor} />;
+                return <Ionicons name={iconName} size={24} color={iconColor} />;
             },
             tabBarShowLabel:false,
             tabBarStyle:{
                 borderTopColor:Colors.secondary,
                 borderTopWidth:2,
-                backgroundColor: Colors.primary
+                // backgroundColor: Colors.primary
+                backgroundColor: Colors.primaryv2
+
             }
-          })}
+        })}
         >
             <Tab.Screen 
             name="Home" 
@@ -48,7 +49,8 @@ export default function Tabs({navigation}){
                     color: 'white'
                 },
                 headerStyle:{
-                    backgroundColor: Colors.primary,
+                    // backgroundColor: Colors.primary,
+                    backgroundColor: Colors.primaryv2,
                 },
                 headerTitleAlign:'center'
             }}/>
