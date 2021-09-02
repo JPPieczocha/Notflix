@@ -10,38 +10,25 @@ const MoviePreview = ({src})=>{
         <View
         style={{
             alignItems:'center',
-            width:width,
+            // width: width*0.7,
+            // height: width*0.9,
             justifyContent: 'center',
         }}
         >
-            {/* <ImageBackground
-                        source={src}
-                        resizeMode={"cover"}
-                        style={{
-                            width: width*0.85,
-                            height: width*0.90,
-                            // justifyContent:"flex-end",
-                            borderColor: Colors.secondary,
-                            borderWidth: 2,
-                            borderRadius: 25
-                        }}
-                        imageStyle={{
-                            borderRadius: 25
-                        }}
-                        >
-            </ImageBackground> */}
             <Image 
             source={src}
             style={{
-                width: width*0.85,
-                height: width*0.90,
+                width: width*0.6,
+                // height: width*0.90,
+                resizeMode:'contain',
                 // justifyContent:"flex-end",
-                borderColor: Colors.secondary,
-                borderWidth: 2,
-                borderRadius: 25
+                // borderColor: Colors.secondary,
+                // borderWidth: 2,
+                borderRadius: 25,
+
+                // backgroundColor: 'red'
             }}
             >
-
             </Image>
         </View>
 

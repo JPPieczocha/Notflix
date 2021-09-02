@@ -18,6 +18,7 @@ const CarrouselBasic = ({nav})=>{
         <Animated.FlatList
         horizontal
         pagingEnabled
+        bounces={false}
         // snapToAlignment="center"
         // snapToInterval={width}
         showsHorizontalScrollIndicator={false}
