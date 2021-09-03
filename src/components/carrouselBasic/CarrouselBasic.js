@@ -1,12 +1,9 @@
 import React from 'react';
-import {SafeAreaView,FlatList,TouchableOpacity,ScrollView,Image,ImageBackground,TouchableWithoutFeedback,View,Text, Animated, Dimensions } from 'react-native';
-import MoviePreview from '../moviePreview/MoviePreview';
-import MovieBasicPreview from '../movieBasicPreview/MovieBasicPreview';
+import {SafeAreaView,FlatList,TouchableOpacity,Image,ImageBackground,TouchableWithoutFeedback,View, Animated, StyleSheet } from 'react-native';
+import styles from './Styles';
 import dummyData from '../../assets/moviesDummy';
 
 const CarrouselBasic = ({nav})=>{
-
-    const newSeasonScrollX = React.useRef(new Animated.Value(0)).current;
 
     const handleOnPress = (item)=>{
         nav.navigate('MovieFocus',{title:item.name, idMovie: item.id, imageSource: item.details.coverImage, ratings: item.details.ratings, genre: item.details.genre, age: item.details.age, desc: item.details.desc});
@@ -15,29 +12,33 @@ const CarrouselBasic = ({nav})=>{
     return(
         <Animated.FlatList
         horizontal
-        pagingEnabled
         bounces={false}
-        // snapToAlignment="center"
-        // snapToInterval={width}
         showsHorizontalScrollIndicator={false}
-        // scrollEventThrottle={16}
-        // decelerationRate={0}
-        // contentContainerStyle={{
-        //     marginTop: 10
-        // }}
         data={dummyData.newSeason}
         keyExtractor={item => `${item.id}`}
-        // onScroll={
-        //     Animated.event([{nativeEvent:{contentOffset: {x: newSeasonScrollX}}}],{useNativeDriver:false})
-        // }
 
         // Se renderiza la pelicula
         renderItem={({index,item}) => {
             return(
                 <TouchableOpacity
                 onPress={()=>handleOnPress(item)}
+                style={styles.buttonMovie}
                 >
-                    <MovieBasicPreview src={item.thumbnail} ></MovieBasicPreview>
+                    <View
+                    style={[StyleSheet.absoluteFillObject,{
+                        alignItems:'center',
+                        overflow:'hidden',
+                        justifyContent: 'center',
+                    }]}>
+                        <Image 
+                        source={item.thumbnail}
+                        style={{
+                            width: '100%',
+                            resizeMode:'contain',
+                        }}
+                        >
+                        </Image>
+                    </View>
                 </TouchableOpacity>
             )
         }}>

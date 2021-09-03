@@ -100,7 +100,7 @@ const Carrousel = ({nav})=>{
                         <Animated.View style={
                             [StyleSheet.absoluteFillObject,{
                                 overflow:'hidden', 
-                                borderRadius: 25, 
+                                borderRadius: 15, 
                                 alignItems:'center',
                                 justifyContent:'center', 
                                 transform:[{translateY}]

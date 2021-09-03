@@ -18,8 +18,8 @@ const MoviePreview = ({src})=>{
             <Image 
             source={src}
             style={{
-                width: width*0.6,
-                // height: width*0.90,
+                width: width*0.3,
+                height: width*0.50,
                 resizeMode:'contain',
                 // justifyContent:"flex-end",
                 // borderColor: Colors.secondary,

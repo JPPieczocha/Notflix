@@ -13,8 +13,7 @@ const Search = ()=>{
         <View style={styles.container}>
             <View style={styles.main}>
                 <View style={styles.inputMain}>
-                    <TextInput style={styles.inputText} placeholder={'Busque lo que desee...'}></TextInput>
-                    <Ionicons name={'search'} size={45} color={Colors.inactiveTint}/>
+                    <TextInput style={styles.inputText} placeholder={'Busque lo que desee...'} keyboardType={'web-search'}></TextInput>
                 </View>
 
             </View>
