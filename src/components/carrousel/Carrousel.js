@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {SafeAreaView,FlatList,TouchableOpacity,ScrollView,Image,ImageBackground,TouchableWithoutFeedback,View,Text, Animated, Dimensions,StyleSheet } from 'react-native';
 import MoviePreview from '../moviePreview/MoviePreview';
 import dummyData from '../../assets/moviesDummy';

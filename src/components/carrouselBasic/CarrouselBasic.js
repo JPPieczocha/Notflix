@@ -7,10 +7,8 @@ import dummyData from '../../assets/moviesDummy';
 const CarrouselBasic = ({nav})=>{
 
     const newSeasonScrollX = React.useRef(new Animated.Value(0)).current;
-    const { width, height } = Dimensions.get("window");
 
     const handleOnPress = (item)=>{
-        console.log(item.name);
         nav.navigate('MovieFocus',{title:item.name, idMovie: item.id, imageSource: item.details.coverImage, ratings: item.details.ratings, genre: item.details.genre, age: item.details.age, desc: item.details.desc});
     }
 
