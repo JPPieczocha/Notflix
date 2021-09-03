@@ -55,7 +55,7 @@ const MovieFocus = ({navigation,route})=>{
                             <View style={styles.movieData}>
                                 <Text style={styles.movieDataText}>{age}</Text>
                                 <Text style={styles.movieDataText}>{genre}</Text>
-                                <Text style={styles.movieDataText}>{ratings}</Text>
+                                <Text style={styles.movieDataText}>{ratings}/10</Text>
                             </View>
                             <TouchableOpacity style={styles.playMovie} onPress={()=>navigation.navigate('MoviePlayer',{title:title})}>
                                 <Text style={styles.playMovieText}>Reproducir</Text>

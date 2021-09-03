@@ -11,7 +11,7 @@ const CarrouselBasic = ({nav})=>{
 
     const handleOnPress = (item)=>{
         console.log(item.name);
-        nav.navigate('MovieFocus',{title:item.name, idMovie: item.id, imageSource: item.details.coverImage});
+        nav.navigate('MovieFocus',{title:item.name, idMovie: item.id, imageSource: item.details.coverImage, ratings: item.details.ratings, genre: item.details.genre, age: item.details.age, desc: item.details.desc});
     }
 
     return(
