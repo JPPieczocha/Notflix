@@ -95,7 +95,7 @@ const Carrousel = ({nav})=>{
 
                 return(
                     <TouchableOpacity
-                    onPress={()=>nav.navigate('MovieFocus',{title:item.name, idMovie: item.id, imageSource: item.details.coverImage})}
+                    onPress={()=>nav.navigate('MovieFocus',{title:item.name, idMovie: item.id, imageSource: item.details.coverImage, ratings: item.details.ratings, genre: item.details.genre, age: item.details.age})}
                     style={styles.buttonMovie}>
                         <Animated.View style={
                             [StyleSheet.absoluteFillObject,{

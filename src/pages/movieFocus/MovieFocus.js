@@ -7,7 +7,7 @@ import styles from './Styles';
 
 const MovieFocus = ({navigation,route})=>{
 
-    const {title, idMovie, imageSource} = route.params;
+    const {title, idMovie, imageSource,ratings,genre,age} = route.params;
     //Falta el loading al cargar la pelicula, más adelante
 
     const header = ()=>{
@@ -45,9 +45,12 @@ const MovieFocus = ({navigation,route})=>{
                 <BlurView  intensity={80} tint="dark" style={styles.main}>
                     <View style={styles.mainHeader}>
                         <Text style={styles.titleText}>{title}</Text>
-                        <Text style={styles.titleText}>aca van cosas</Text>
-                        <Text style={styles.titleText}>aca van cosas</Text>
-                        <Text style={styles.titleText}>aca van cosas</Text>
+                        <View style={styles.movieData}>
+                            <Text style={styles.movieDataText}>{age}</Text>
+                            <Text style={styles.movieDataText}>{genre}</Text>
+                            <Text style={styles.movieDataText}>{ratings}</Text>
+                        </View>
+
                     </View>
 
                     <View style={{width:'100%', justifyContent:'center', alignItems:"center"}}>

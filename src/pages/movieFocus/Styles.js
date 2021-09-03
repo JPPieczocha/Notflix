@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
     mainHeader:{
         height: 150,
         width:'100%',
-        justifyContent:"center",
+        // justifyContent:"center",
+        justifyContent:"space-between",
         alignItems:"center"
     },
     titleText:{
@@ -42,6 +43,26 @@ const styles = StyleSheet.create({
 
         alignItems:"center",
         justifyContent:"center"
+    },
+    movieData:{
+        width:'100%',
+        height: 50,
+
+        // backgroundColor: 'red',
+
+        flexDirection:'row',
+        alignItems:"center",
+        justifyContent:"space-around"
+
+    },
+    movieDataText:{
+        color: Colors.white,
+        backgroundColor:Colors.transparentWhite,
+        paddingHorizontal: 20,
+        paddingVertical:10,
+        
+        overflow:'hidden',
+        borderRadius: 15
     }
 });
 
