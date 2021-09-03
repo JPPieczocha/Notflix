@@ -9,40 +9,43 @@ const styles = StyleSheet.create({
         alignItems:"center"
     },
     mainHeader:{
-        height: 150,
+        // height: 100,
         width:'100%',
         // justifyContent:"center",
         justifyContent:"space-between",
-        alignItems:"center"
+        alignItems:"center",
+        marginVertical: 15
     },
     titleText:{
         color: Colors.white,
         fontSize: 30
     },
     playMovie:{
-        height:60,
-        width: '70%',
+        height:40,
+        width: '90%',
 
         backgroundColor:Colors.secondary,
         borderRadius: 25,
 
+        marginTop: 5,
         alignItems:"center",
         justifyContent:"center"
     },
     playMovieText:{
         color: Colors.white,
-        fontSize: 26
+        fontSize: 20
     },
     details:{
         marginTop: 15,
-        height: 60,
-        width: '70%',
+        height: 40,
+        width: '90%',
 
         backgroundColor:Colors.transparentWhite,
         borderRadius: 25,
 
         alignItems:"center",
-        justifyContent:"center"
+        justifyContent:"center",
+        alignSelf:"center"
     },
     movieData:{
         width:'100%',
@@ -63,6 +66,13 @@ const styles = StyleSheet.create({
         
         overflow:'hidden',
         borderRadius: 15
+    },
+    sinopsis:{
+        width:'90%',
+        alignSelf:"center"
+    },
+    sinopsisText:{
+        color: Colors.white
     }
 });
 

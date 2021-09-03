@@ -12,7 +12,8 @@ export const newSeason = [
             season: "SEASON 1",
             currentEpisode: 'S1 : E1 "Episode 1 : Vikings"',
             runningTime: "45m",
-            progress: "0%"
+            progress: "0%",
+	        desc: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
         }
     },
     {
@@ -29,7 +30,8 @@ export const newSeason = [
             season: "SEASON 1",
             currentEpisode: 'S1 : E6 "Episode 6 : Swish"',
             runningTime: "45m",
-            progress: "50%"
+            progress: "50%",
+	        desc: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
         }
     },
     {
@@ -45,7 +47,8 @@ export const newSeason = [
             season: "SEASON 1",
             currentEpisode: 'S1 : E15 "Episode 15 : Bella ciao"',
             runningTime: "45m",
-            progress: "50%"
+            progress: "50%",
+	        desc: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
         }
     },
     {
@@ -61,7 +64,8 @@ export const newSeason = [
             season: "SEASON 1",
             currentEpisode: 'S1 : E1 "Episode 1 : Pilot"',
             runningTime: "45m",
-            progress: "0%"
+            progress: "0%",
+	        desc: "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from 'de Finibus Bonorum et Malorum' by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
         }
     },
 ]
