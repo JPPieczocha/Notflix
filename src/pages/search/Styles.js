@@ -4,7 +4,7 @@ import Colors from '../../constants/colors'
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: Colors.primary,
+		backgroundColor: Colors.primaryv3,
 
         height: '100%',
 		borderTopWidth:2,

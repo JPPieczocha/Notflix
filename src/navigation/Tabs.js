@@ -34,8 +34,7 @@ export default function Tabs({navigation}){
             tabBarStyle:{
                 borderTopColor:Colors.secondary,
                 borderTopWidth:2,
-                // backgroundColor: Colors.primary
-                backgroundColor: Colors.primaryv2
+                backgroundColor: Colors.primaryv3
 
             }
         })}
@@ -50,7 +49,7 @@ export default function Tabs({navigation}){
                 },
                 headerStyle:{
                     // backgroundColor: Colors.primary,
-                    backgroundColor: Colors.primaryv2,
+                    backgroundColor: Colors.primaryv3,
                 },
                 headerTitleAlign:'center'
             }}/>
@@ -64,7 +63,7 @@ export default function Tabs({navigation}){
                     color: 'white'
                 },
                 headerStyle:{
-                    backgroundColor: Colors.primary,
+                    backgroundColor: Colors.primaryv3,
                 },
                 headerTitleAlign:'center'
             }}/>
@@ -78,7 +77,7 @@ export default function Tabs({navigation}){
                     color: 'white'
                 },
                 headerStyle:{
-                    backgroundColor: Colors.primary,
+                    backgroundColor: Colors.primaryv3,
                 },
                 headerTitleAlign:'center'
             }}/>

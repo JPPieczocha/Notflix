@@ -4,7 +4,7 @@ import Colors from '../../constants/colors'
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: Colors.primaryv2,
+		backgroundColor: Colors.primaryv3,
 		// alignItems: 'center',
 		// justifyContent: 'center',
         height: '100%',
