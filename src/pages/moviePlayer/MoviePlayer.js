@@ -38,8 +38,9 @@ const MoviePlayer = ({navigation, route})=>{
 
 	const handleAndroid = (params)=>{
 		if(Platform.OS === 'android'){
-		params.naturalSize.orientation = "landscape";
-		console.log("params---->", params.naturalSize.orientation);
+			params.naturalSize.orientation = "landscape";
+			console.log("params---->", params.naturalSize.orientation);
+		}
 	}
 
 	const handleDismissFullScreen = ()=>{
@@ -113,7 +114,6 @@ const MoviePlayer = ({navigation, route})=>{
 		<View style={styles.container}>
 		<TouchableWithoutFeedback onPress={()=>handleTouchDisplay()}>
 			<View onPress={()=>console.log('TOQUE')}>
-				{/* {videoLayer()} */}
 				<Video
 					ref={video}
 					style={styles.video}
