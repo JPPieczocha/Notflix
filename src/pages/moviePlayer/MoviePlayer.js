@@ -129,7 +129,8 @@ const MoviePlayer = ({navigation, route})=>{
 					useNativeControls={handlePlatformNativeControls()}
 					onLoad={()=>fullScreenPlayback()}
 					onFullscreenUpdate={()=>handleDismissFullScreen()}
-					onReadyForDisplay={params => handleAndroid(params)}
+					// onReadyForDisplay={params => handleAndroid(params)}
+					onReadyForDisplay={params => {params.naturalSize.orientation = "landscape"}}
 				/>
 			</View>
 		</TouchableWithoutFeedback>
