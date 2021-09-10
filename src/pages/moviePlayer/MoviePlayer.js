@@ -1,5 +1,5 @@
 import React,{useState, useRef } from 'react';
-import { View, StyleSheet, Button, Dimensions, TouchableWithoutFeedback, Text, TouchableOpacity,Animated } from 'react-native';
+import { View, StyleSheet, Button, Dimensions, TouchableWithoutFeedback, Text, TouchableOpacity,Animated, Platform } from 'react-native';
 import { Video, AVPlaybackStatus } from 'expo-av';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../../constants/colors';
@@ -9,7 +9,7 @@ const {width, height} = Dimensions.get('window')
 const MoviePlayer = ({navigation, route})=>{
 
 	const {title} = route.params;
-	const [fullScreen,setFullScreen] = useState(true);
+	const [fullScreen,setFullScreen] = useState(false);
 	const [topLayer,setTopLayer] = useState(true);
 	const video = React.useRef(null);
 	const [status, setStatus] = React.useState({});
@@ -26,17 +26,28 @@ const MoviePlayer = ({navigation, route})=>{
 	}
 
 	const fullScreenPlayback = ()=>{
-		video.current.presentFullscreenPlayer()
+		if(Platform.OS === 'ios'){
+			video.current.presentFullscreenPlayer()
+		}
 	}
 
 	const handleDismissFullScreen = ()=>{
-		//jaja me funciona esto, lo pense y dije ??. Funcionó
-		if(fullScreen){
-			setFullScreen(false)
+		if(Platform.OS === 'ios'){
+			if(!fullScreen){
+				setFullScreen(!fullScreen)
+				return;
+			}
+			if(status.isLoaded && fullScreen){
+				navigation.pop();
+			}
 		}
-		if(status.isLoaded && !fullScreen){
-			navigation.pop()
+	}
+
+	const handlePlatformNativeControls = ()=>{
+		if(Platform.OS === 'ios'){
+			return false;
 		}
+		return true;
 	}
 
 	const videoLayer = ()=>{
@@ -99,13 +110,12 @@ const MoviePlayer = ({navigation, route})=>{
 					uri: 'https://es.vid.web.acsta.net/nmedia/34/19/06/03/14//19562331_hd_013.mp4'
 					,}}
 					resizeMode="contain"
-					// onPlaybackStatusUpdate={status => handleChangeStatusTime(() => status)} 
-					// esto de arriba muestra cuánto tiempo va dela peli. No se si lo usemos, aclarado en la funcion
 
 					//Y si lo pongo en pantalla chiquita y doy la chance de que hagan fullscreen?? MMm
 					onPlaybackStatusUpdate={status => setStatus(() => status)}
 					shouldPlay={true}
 					autoplay={true}
+					useNativeControls={handlePlatformNativeControls()}
 					onLoad={()=>fullScreenPlayback()}
 					onFullscreenUpdate={()=>handleDismissFullScreen()}
 				/>
