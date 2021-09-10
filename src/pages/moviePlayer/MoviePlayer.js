@@ -1,6 +1,6 @@
 import React,{useState, useRef } from 'react';
 import { View, StyleSheet, Button, Dimensions, TouchableWithoutFeedback, Text, TouchableOpacity,Animated, Platform } from 'react-native';
-import { Video, AVPlaybackStatus } from 'expo-av';
+import { Video, AVPlaybackStatus, ScreenOrientation } from 'expo-av';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../../constants/colors';
 
@@ -10,6 +10,7 @@ const MoviePlayer = ({navigation, route})=>{
 
 	const {title} = route.params;
 	const [fullScreen,setFullScreen] = useState(false);
+	const [orientationIsLandscape, setOrientationIsLandscape] = useState(false);
 	const [topLayer,setTopLayer] = useState(true);
 	const video = React.useRef(null);
 	const [status, setStatus] = React.useState({});
@@ -28,6 +29,9 @@ const MoviePlayer = ({navigation, route})=>{
 	const fullScreenPlayback = ()=>{
 		if(Platform.OS === 'ios'){
 			video.current.presentFullscreenPlayer()
+		}else{
+			await ScreenOrientation.lockAsync(orientationIsLandscape ? ScreenOrientation.OrientationLock.PORTRAIT : ScreenOrientation.OrientationLock.LANDSCAPE_LEFT,);
+			setOrientationIsLandscape(!orientationIsLandscape);
 		}
 	}
 
