@@ -29,10 +29,17 @@ const MoviePlayer = ({navigation, route})=>{
 	const fullScreenPlayback = ()=>{
 		if(Platform.OS === 'ios'){
 			video.current.presentFullscreenPlayer()
-		}else{
-			await ScreenOrientation.lockAsync(orientationIsLandscape ? ScreenOrientation.OrientationLock.PORTRAIT : ScreenOrientation.OrientationLock.LANDSCAPE_LEFT,);
-			setOrientationIsLandscape(!orientationIsLandscape);
 		}
+		// }else{
+		// 	await ScreenOrientation.lockAsync(orientationIsLandscape ? ScreenOrientation.OrientationLock.PORTRAIT : ScreenOrientation.OrientationLock.LANDSCAPE_LEFT,);
+		// 	setOrientationIsLandscape(!orientationIsLandscape);
+		// }
+	}
+
+	const handleAndroid = (params)=>{
+		if(Platform.OS === 'android'){
+		params.naturalSize.orientation = "landscape";
+		console.log("params---->", params.naturalSize.orientation);
 	}
 
 	const handleDismissFullScreen = ()=>{
@@ -122,6 +129,7 @@ const MoviePlayer = ({navigation, route})=>{
 					useNativeControls={handlePlatformNativeControls()}
 					onLoad={()=>fullScreenPlayback()}
 					onFullscreenUpdate={()=>handleDismissFullScreen()}
+					onReadyForDisplay={params => handleAndroid(params)}
 				/>
 			</View>
 		</TouchableWithoutFeedback>
