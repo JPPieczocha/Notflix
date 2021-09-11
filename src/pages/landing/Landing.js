@@ -110,7 +110,7 @@ const Landing = ({navigation}) => {
     return(
         <View style={styles.container}>
             <ImageBackground
-            source={require('../../assets/landing/PelisOscuras.png')}
+            source={require('../../assets/landing/fondov2.png')}
             style={{width:'100%', height:'100%', backgroundColor: Colors.primaryv3, alignItems:'center'}}
             resizeMode={'cover'}
             >
