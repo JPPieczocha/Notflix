@@ -16,7 +16,7 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator>
-					<Stack.Screen name="SignLogin" component={NavLogSign} options={{headerShown:false}}/>
+					{/* <Stack.Screen name="SignLogin" component={NavLogSign} options={{headerShown:false}}/> */}
 					<Stack.Screen name="Homee" component={Tabs} options={{headerShown:false}}/>
 					<Stack.Screen name="MovieFocus" component={MovieFocus} options={{headerShown:false}}/>
 					<Stack.Screen name="VideoPlayer" component={VideoPlayer} options={{headerShown:false}}/>

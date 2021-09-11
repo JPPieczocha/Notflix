@@ -6,7 +6,11 @@ const Landing = () => {
 
     return(
         <View style={styles.container}>
-            
+            <ImageBackground
+            source={require('./dummyLanding.PNG')}
+            resizeMode={'cover'}>
+
+            </ImageBackground>
             
         </View>
     )

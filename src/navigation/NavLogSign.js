@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from "../constants/colors";
+import Landing from '../pages/landing/Landing';
 
 export default function NavLogSign({navigation}){
 
@@ -12,12 +13,12 @@ export default function NavLogSign({navigation}){
 
     return(
         <Stack.Navigator>
-            <Stack.Screen name="landing"></Stack.Screen>
-            <Stack.Screen name="login"></Stack.Screen>
+            <Stack.Screen name="landing" component={Landing}></Stack.Screen>
+            {/* <Stack.Screen name="login"></Stack.Screen>
             <Stack.Screen name="register"></Stack.Screen>
             <Stack.Screen name="paquetesSelection" ></Stack.Screen>
             <Stack.Screen name="paymentMethod"></Stack.Screen>
-            <Stack.Screen name="summary"></Stack.Screen>
+            <Stack.Screen name="summary"></Stack.Screen> */}
         </Stack.Navigator>
     );
 
