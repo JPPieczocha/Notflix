@@ -13,13 +13,11 @@ export default function NavLogSign({navigation}){
 
     return(
         <Stack.Navigator>
-            <Stack.Screen name="landing" component={Landing}></Stack.Screen>
-            {/* <Stack.Screen name="login"></Stack.Screen>
-            <Stack.Screen name="register"></Stack.Screen>
+            <Stack.Screen name="landing" component={Landing} options={{headerShown:false}}></Stack.Screen>
+            {/* 
             <Stack.Screen name="paquetesSelection" ></Stack.Screen>
             <Stack.Screen name="paymentMethod"></Stack.Screen>
             <Stack.Screen name="summary"></Stack.Screen> */}
         </Stack.Navigator>
     );
-
 }

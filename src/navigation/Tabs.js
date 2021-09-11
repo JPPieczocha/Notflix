@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
@@ -27,7 +27,6 @@ export default function Tabs({navigation}){
                     iconName = 'options';
                 }
                 iconColor = focused ? Colors.secondary : Colors.inactiveTint
-              //Retorno el icono para cada caso
                 return <Ionicons name={iconName} size={24} color={iconColor} />;
             },
             tabBarShowLabel:false,
@@ -35,51 +34,55 @@ export default function Tabs({navigation}){
                 borderTopColor:Colors.secondary,
                 borderTopWidth:2,
                 backgroundColor: Colors.primaryv3
-
-            }
+            },
+            headerTitle: ({focused, size}) =>{
+                if(route.name === 'Home'){
+                    return <Image source={require('../assets/landing/Logo.png')} style={{width:150}} resizeMode={'contain'}></Image>
+                }else if (route.name === 'Search') {
+                    return <Text style={{color: Colors.white, fontSize: 20}}>Buscar</Text>
+                } else if(route.name === 'Settings'){
+                    return <Text style={{color: Colors.white, fontSize: 20}}>Perfil</Text>
+                }
+            },
         })}
         >
             <Tab.Screen 
             name="Home" 
             component={Home} 
             options={{
-                title: 'LOGO',
                 headerTitleStyle:{
-                    color: 'white'
+                    color: 'white',
                 },
                 headerStyle:{
-                    // backgroundColor: Colors.primary,
                     backgroundColor: Colors.primaryv3,
                 },
-                headerTitleAlign:'center'
+                headerTitleAlign:'center',
             }}/>
             
             <Tab.Screen 
             name="Search" 
             component={Search} 
             options={{
-                title: 'Buscar',
                 headerTitleStyle:{
                     color: 'white'
                 },
                 headerStyle:{
                     backgroundColor: Colors.primaryv3,
                 },
-                headerTitleAlign:'center'
+                headerTitleAlign:'center',
             }}/>
             
             <Tab.Screen 
             name="Settings" 
             component={Profile} 
             options={{
-                title: 'Perfil',
                 headerTitleStyle:{
                     color: 'white'
                 },
                 headerStyle:{
                     backgroundColor: Colors.primaryv3,
                 },
-                headerTitleAlign:'center'
+                headerTitleAlign:'center',
             }}/>
         </Tab.Navigator>
     );
