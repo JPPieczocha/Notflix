@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from './Styles'
 import Colors from '../../constants/colors'
 
-export default function Profile({}) {
+export default function Profile({navigation, route}) {
 
     return (
         <View style={styles.container}>
@@ -21,7 +21,7 @@ export default function Profile({}) {
                 
                 <View style={styles.buttonWrapper}>
 
-                    <TouchableOpacity style={styles.buttonStyle}>
+                    <TouchableOpacity style={styles.buttonStyle} onPress={() => {navigation.navigate('Ajustes')}}>
                         <Text style={styles.buttonText}>AJUSTES</Text>
                     </TouchableOpacity>
 

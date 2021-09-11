@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+
 import Colors from "../constants/colors";
 import Home from '../pages/home/Home'
 import Profile from '../pages/profile/Profile'
 import Search from '../pages/search/Search'
+
+import NavSettings from './NavSettings'
 
 export default function Tabs({navigation}){
 
@@ -34,9 +39,11 @@ export default function Tabs({navigation}){
             tabBarStyle:{
                 borderTopColor:Colors.secondary,
                 borderTopWidth:2,
+                display: getFocusedRouteNameFromRoute(route) === 'Ajustes' ? 'none' : 'flex',
                 backgroundColor: Colors.primaryv3
 
-            }
+            },
+            
         })}
         >
             <Tab.Screen 
@@ -70,8 +77,8 @@ export default function Tabs({navigation}){
             
             <Tab.Screen 
             name="Settings" 
-            component={Profile} 
-            options={{
+            component={NavSettings}
+            options={({ route }) => ({
                 title: 'Perfil',
                 headerTitleStyle:{
                     color: 'white'
@@ -79,8 +86,11 @@ export default function Tabs({navigation}){
                 headerStyle:{
                     backgroundColor: Colors.primaryv3,
                 },
+                headerShown: getFocusedRouteNameFromRoute(route) === 'Ajustes' ? false : true, 
                 headerTitleAlign:'center'
-            }}/>
+            })}
+            />
+
         </Tab.Navigator>
     );
 
