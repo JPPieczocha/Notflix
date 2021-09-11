@@ -21,7 +21,7 @@ export default function Profile({navigation, route}) {
                 
                 <View style={styles.buttonWrapper}>
 
-                    <TouchableOpacity style={styles.buttonStyle} onPress={() => {navigation.navigate('Ajustes')}}>
+                    <TouchableOpacity style={styles.buttonStyle} onPress={() => {navigation.navigate('Settings')}}>
                         <Text style={styles.buttonText}>AJUSTES</Text>
                     </TouchableOpacity>
 

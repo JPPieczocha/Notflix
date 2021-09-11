@@ -20,6 +20,7 @@ export default function Tabs({navigation}){
 
     return(
         <Tab.Navigator
+        initialRouteName={'Home'}
         screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, size}) => {
                 let iconName;
@@ -28,7 +29,7 @@ export default function Tabs({navigation}){
                     iconName = 'home-outline';
                 } else if (route.name === 'Search') {
                     iconName = 'search';
-                } else if(route.name === 'Settings'){
+                } else if(route.name === 'Profile'){
                     iconName = 'options';
                 }
                 iconColor = focused ? Colors.secondary : Colors.inactiveTint
@@ -38,7 +39,6 @@ export default function Tabs({navigation}){
             tabBarStyle:{
                 borderTopColor:Colors.secondary,
                 borderTopWidth:2,
-                display: getFocusedRouteNameFromRoute(route) === 'Ajustes' ? 'none' : 'flex',
                 backgroundColor: Colors.primaryv3
             },
             headerTitle: ({focused, size}) =>{
@@ -46,7 +46,7 @@ export default function Tabs({navigation}){
                     return <Image source={require('../assets/landing/Logo_sin_barra.png')} style={{width:150}} resizeMode={'contain'}></Image>
                 }else if (route.name === 'Search') {
                     return <Text style={{color: Colors.white, fontSize: 20}}>Buscar</Text>
-                } else if(route.name === 'Settings'){
+                } else if(route.name === 'Profile'){
                     return <Text style={{color: Colors.white, fontSize: 20}}>Perfil</Text>
                 }
             },
@@ -56,9 +56,6 @@ export default function Tabs({navigation}){
             name="Home" 
             component={Home} 
             options={{
-                headerTitleStyle:{
-                    color: 'white',
-                },
                 headerStyle:{
                     backgroundColor: Colors.primaryv3,
                 },
@@ -69,9 +66,6 @@ export default function Tabs({navigation}){
             name="Search" 
             component={Search} 
             options={{
-                headerTitleStyle:{
-                    color: 'white'
-                },
                 headerStyle:{
                     backgroundColor: Colors.primaryv3,
                 },
@@ -79,19 +73,15 @@ export default function Tabs({navigation}){
             }}/>
             
             <Tab.Screen 
-            name="Settings" 
-            component={NavSettings}
-            options={({ route }) => ({
+            name="Profile" 
+            component={Profile}
+            options={{
                 title: 'Perfil',
-                headerTitleStyle:{
-                    color: 'white'
-                },
                 headerStyle:{
                     backgroundColor: Colors.primaryv3,
                 },
-                headerShown: getFocusedRouteNameFromRoute(route) === 'Ajustes' ? false : true, 
                 headerTitleAlign:'center'
-            })}
+            }}
             />
 
         </Tab.Navigator>

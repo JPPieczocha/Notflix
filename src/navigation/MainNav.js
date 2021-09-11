@@ -3,6 +3,8 @@ import { StyleSheet, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
+import Colors from '../constants/colors';
+import NavSettings from './NavSettings';
 import MovieFocus from '../pages/movieFocus/MovieFocus';
 import VideoPlayer from '../pages/videoPlayer/VideoPlayer';
 import MoviePlayer from '../pages/moviePlayer/MoviePlayer';
@@ -20,6 +22,19 @@ export default function MainNav({navigation}){
             <Stack.Screen name="MovieFocus" component={MovieFocus} options={{headerShown:false}}/>
             <Stack.Screen name="VideoPlayer" component={VideoPlayer} options={{headerShown:false}}/>
             <Stack.Screen name="MoviePlayer" component={MoviePlayer} options={{headerShown:false}}/>
+            <Stack.Screen name="Settings" component={NavSettings} options={{
+                title: 'Ajustes',
+                headerStyle:{
+                    backgroundColor: Colors.primaryv3,
+                },
+                headerTitleAlign:'center',
+                headerShadowVisible:false,
+                headerBackTitle:'Perfil',
+                headerTitleStyle:{
+                    color: Colors.white,
+                    fontSize: 20,
+                }
+            }}/>
         </Stack.Navigator>
     );
 }

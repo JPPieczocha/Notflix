@@ -9,10 +9,7 @@ export default function Settings({navigation, route}) {
     return (
         <View style={styles.container}>
             <View style={styles.mainWrapper}>
-
-                <Text>Hola</Text>
-                
-
+                <Text style={{color: 'white', fontSize:30}}>Hola</Text>
             </View>
         </View>
     );
