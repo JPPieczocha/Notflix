@@ -14,6 +14,8 @@ import MainNav from './src/navigation/MainNav';
 
 const AuthContext = createContext();
 
+
+
 export default function App() {
 
 	const [isLoading, setisLoading] = useState(true)

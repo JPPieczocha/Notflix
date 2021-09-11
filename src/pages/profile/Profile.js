@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from './Styles'
 import Colors from '../../constants/colors'
 
-export default function Profile({}) {
+export default function Profile({navigation, route}) {
 
     return (
         <View style={styles.container}>
@@ -12,48 +12,28 @@ export default function Profile({}) {
 
                 <View style={styles.profileHeader}>
                     {/* Foto de perfil */}
-                    <Image style={styles.profileImage} source={require('../../../src/assets/images/dummy_profile/4.jpg')}></Image>
-                    <Text style={styles.headerProfileText}>Martin Martins</Text>
-                    <Text style={styles.headerPackageText}>Gold</Text>
+                    <TouchableOpacity>
+                        <Image style={styles.profileImage} source={require('../../../src/assets/images/dummy_profile/4.jpg')}></Image>
+                    </TouchableOpacity>
+                    <Text style={styles.headerProfileText}>[Nombre] [Apellido]</Text>
+                    <Text style={styles.packageProfileText}>Paquete [Nombre]</Text>
                 </View>
+                
+                <View style={styles.buttonWrapper}>
 
-                <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
-                    <TouchableOpacity style={styles.buttonStyle}>
-                        <Text style={styles.buttonText}>Modificar Perfil</Text>
-                        <Ionicons name={'arrow-forward'} size={24} color={Colors.inactiveTint}/>
+                    <TouchableOpacity style={styles.buttonStyle} onPress={() => {navigation.navigate('Ajustes')}}>
+                        <Text style={styles.buttonText}>AJUSTES</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.buttonStyle}>
-                        <Text style={styles.buttonText}>Seleccionar Paquete</Text>
-                        <Ionicons name={'arrow-forward'} size={24} color={Colors.inactiveTint}/>
+                    <TouchableOpacity style={styles.buttonStyleLogOut}>
+                            <Text style={styles.buttonTextogOut}>CERRAR SESION</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.buttonStyle}>
-                        <Text style={styles.buttonText}>Modificar Perfil</Text>
-                        <Ionicons name={'arrow-forward'} size={24} color={Colors.inactiveTint}/>
-                    </TouchableOpacity>
+                    <Text style={{color:'grey', position:'absolute', bottom: 5}}>Version: 0.1 - Dev</Text>
+                
+                </View>
+                
 
-                    <TouchableOpacity style={styles.buttonStyle}>
-                        <Text style={styles.buttonText}>Modificar Perfil</Text>
-                        <Ionicons name={'arrow-forward'} size={24} color={Colors.inactiveTint}/>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.buttonStyle}>
-                        <Text style={styles.buttonText}>Modificar Perfil</Text>
-                        <Ionicons name={'arrow-forward'} size={24} color={Colors.inactiveTint}/>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.buttonStyle}>
-                        <Text style={styles.buttonText}>Modificar Perfil</Text>
-                        <Ionicons name={'arrow-forward'} size={24} color={Colors.inactiveTint}/>
-                    </TouchableOpacity>
-                </ScrollView>
-
-                <TouchableOpacity style={styles.buttonStyleLogOut}>
-                        <Text style={styles.buttonTextogOut}>Cerrar Sesion</Text>
-                </TouchableOpacity>
-
-                <Text style={{color:'white', position:'absolute', bottom: 5}}>Version: 0.1 - Dev</Text>
             </View>
         </View>
     );
