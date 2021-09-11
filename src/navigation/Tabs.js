@@ -37,7 +37,7 @@ export default function Tabs({navigation}){
             },
             headerTitle: ({focused, size}) =>{
                 if(route.name === 'Home'){
-                    return <Image source={require('../assets/landing/Logo.png')} style={{width:150}} resizeMode={'contain'}></Image>
+                    return <Image source={require('../assets/landing/Logo_sin_barra.png')} style={{width:150}} resizeMode={'contain'}></Image>
                 }else if (route.name === 'Search') {
                     return <Text style={{color: Colors.white, fontSize: 20}}>Buscar</Text>
                 } else if(route.name === 'Settings'){

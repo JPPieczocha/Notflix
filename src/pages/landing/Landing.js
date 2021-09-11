@@ -116,7 +116,7 @@ const Landing = ({navigation}) => {
             >
             <View style={styles.logoWrapper}>
                 <Animated.Image
-                source={require('../../assets/landing/Logo.png')}
+                source={require('../../assets/landing/Logo_final.png')}
                 resizeMode={'contain'}
                 style={{width:'70%',position: 'relative',height:150,top: yScrollLogo}}>
                 </Animated.Image>
