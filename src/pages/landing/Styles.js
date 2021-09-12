@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     },
     button:{
         height: 50,
-        width:'80%',
+        width:'90%',
 
         backgroundColor: colors.secondary,
         marginVertical: 10,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     },
     buttonSignUp:{
         height: 50,
-        width:'80%',
+        width:'90%',
 
         backgroundColor: colors.transparentWhite,
         marginBottom: 10,
@@ -54,11 +54,11 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
 
+        width:'100%',
         marginTop:5,
-        marginBottom: 50,
     },
     input:{
-        width:'80%',
+        width:'90%',
         height: 50,
 
         marginVertical: 10,

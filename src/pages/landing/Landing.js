@@ -10,6 +10,14 @@ const Landing = ({navigation}) => {
 
     const [loginStatus, setLogInStatus] = useState(false);
     const [registerStatus, setregisterStatus] = useState(false);
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [date, setDate] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+
+
 
     const yScrollLogo = useRef(new Animated.Value(0)).current;
     const yScrollButtons = useRef(new Animated.Value((height.valueOf())-(height.valueOf()*0.8))).current;
@@ -66,7 +74,7 @@ const Landing = ({navigation}) => {
     const login = ()=>{
             return(
                 <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTest, Index: 100}}>
-                    <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%'}}>
+                    <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%',justifyContent:'space-around', alignItems:'center'}}>
                         <View style={styles.inputWrapper}>
                             <TextInput placeholder={'Mail'} style={styles.input} keyboardType={'ascii-capable'}></TextInput>
                             <TextInput placeholder={'Contraseña'} style={styles.input} keyboardType={'ascii-capable'}></TextInput>
@@ -87,12 +95,13 @@ const Landing = ({navigation}) => {
     const register = ()=>{
         return(
             <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTestRegister, Index: 100}}>
-                <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%'}}>
+                <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
                     <View style={styles.inputWrapper}>
-                        <TextInput placeholder={'Mail'} style={styles.input} keyboardType={'ascii-capable'}></TextInput>
-                        <TextInput placeholder={'Contraseña'} style={styles.input} keyboardType={'ascii-capable'}></TextInput>
-                        <TextInput placeholder={'Contraseña'} style={styles.input} keyboardType={'ascii-capable'}></TextInput>
-                        <TextInput placeholder={'Contraseña'} style={styles.input} keyboardType={'ascii-capable'}></TextInput>
+                        <TextInput placeholder={'Nombre'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={(text)=>setName(text)}></TextInput>
+                        <TextInput placeholder={'Apellido'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={(text)=>setSurname(text)}></TextInput>
+                        <TextInput placeholder={'Fecha de nacimiento'} style={styles.input} keyboardType={'default'} onChangeText={(text)=>setDate(text)}></TextInput>
+                        <TextInput placeholder={'Correo electrónico'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={(text)=>setEmail(text)}></TextInput>
+                        <TextInput placeholder={'Contraseña'} style={styles.input} keyboardType={'visible-password'} onChangeText={(text)=>setPassword(text)}></TextInput>
                     </View>
                     <View style={styles.buttonsWrapper}>
                         <TouchableOpacity style={styles.button}>
@@ -105,7 +114,8 @@ const Landing = ({navigation}) => {
             </BlurView>
             </Animated.View>
         )
-}
+    }
+
 
     return(
         <View style={styles.container}>
