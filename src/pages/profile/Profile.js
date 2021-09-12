@@ -21,7 +21,11 @@ export default function Profile({navigation, route}) {
                 
                 <View style={styles.buttonWrapper}>
 
-                    <TouchableOpacity style={styles.buttonStyle} onPress={() => {navigation.navigate('Settings')}}>
+                    <TouchableOpacity style={styles.buttonStyle} onPress={() => console.log("FACTURACION")}>
+                        <Text style={styles.buttonText}>FACTURACION</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.buttonStyle} onPress={() => navigation.navigate('Settings')}>
                         <Text style={styles.buttonText}>AJUSTES</Text>
                     </TouchableOpacity>
 

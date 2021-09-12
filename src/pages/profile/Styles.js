@@ -47,12 +47,13 @@ const styles = StyleSheet.create({
 
 	buttonWrapper: {
 		alignItems:"center",
-		justifyContent:"center",
+		justifyContent:"space-between",
+		height: '55%'
 	},
 
 	buttonStyle:{
 		width:'90%',
-		height: '25%',
+		height: '19%',
 
 		flexDirection:'row',
 		justifyContent:"space-around",
@@ -60,6 +61,9 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		borderColor: Colors.inactiveTint,
 		borderRadius: 5,
+
+		marginTop: '5%',
+		
 	},
 
 	buttonText:{
@@ -69,9 +73,8 @@ const styles = StyleSheet.create({
 	},
 
 	buttonStyleLogOut:{
-		marginTop: 20,
 		width:'90%',
-		height: '25%',
+		height: '12%',
 
 		flexDirection:'row',
 		justifyContent:"space-around",
@@ -79,11 +82,14 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		borderColor: Colors.logOut,
 		borderRadius: 5,
+		
+		marginTop: '5%',
+		marginBottom: '10%',
 	},
 
 	buttonTextogOut:{
 		color: Colors.logOut,
-		fontSize: 32,
+		fontSize: 24,
 		alignSelf: "center",
 	}
 
