@@ -19,22 +19,28 @@ export default function MainNav({navigation}){
     return(
         <Stack.Navigator>
             <Stack.Screen name="Homee" component={Tabs} options={{headerShown:false}}/>
+
             <Stack.Screen name="MovieFocus" component={MovieFocus} options={{headerShown:false}}/>
+            
             <Stack.Screen name="VideoPlayer" component={VideoPlayer} options={{headerShown:false}}/>
+            
             <Stack.Screen name="MoviePlayer" component={MoviePlayer} options={{headerShown:false}}/>
+            
             <Stack.Screen name="Settings" component={NavSettings} options={{
-                title: 'Ajustes',
+                title: 'AJUSTES',
                 headerStyle:{
                     backgroundColor: Colors.primaryv3,
                 },
-                headerTitleAlign:'center',
                 headerShadowVisible:false,
                 headerBackTitle:'Perfil',
+                headerTintColor: Colors.inactiveTint,
+                headerTitleAlign:'left',
                 headerTitleStyle:{
-                    color: Colors.white,
+                    color: Colors.inactiveTint,
                     fontSize: 20,
-                }
+                },
             }}/>
+            
         </Stack.Navigator>
     );
 }

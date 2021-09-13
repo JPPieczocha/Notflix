@@ -20,7 +20,7 @@ export default function NavSettings({navigation}){
                 name="Ajustes"
                 component={Settings}
                 options={{
-                    headerShown: false
+                    headerShown: false,
                 }}   
             />
 
@@ -28,20 +28,3 @@ export default function NavSettings({navigation}){
     );
 
 }
-
-/*
-<Tab.Screen 
-    name="Home" 
-    component={Home} 
-    options={{
-        title: 'LOGO',
-        headerTitleStyle:{
-            color: 'white'
-        },
-        headerStyle:{
-            // backgroundColor: Colors.primary,
-            backgroundColor: Colors.primaryv3,
-        },
-        headerTitleAlign:'center'
-}}/>
-*/
