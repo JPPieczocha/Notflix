@@ -6,7 +6,7 @@ const {width, height} = Dimensions.get('window')
 
 const MoviePlayer = ({navigation, route})=>{
 
-	const {title} = route.params;
+	const {title, fileURL} = route.params;
 	const [fullScreen,setFullScreen] = useState(false);
 	const [status, setStatus] = React.useState({});
 
@@ -47,7 +47,10 @@ const MoviePlayer = ({navigation, route})=>{
 				<Video
 					ref={video}
 					style={styles.video}
-					source={{uri: 'https://es.vid.web.acsta.net/nmedia/34/19/06/03/14//19562331_hd_013.mp4',}}
+					source={{uri: fileURL,}}
+					// source={{uri: 'https://es.vid.web.acsta.net/nmedia/34/19/06/03/14//19562331_hd_013.mp4',}}
+
+					onError={()=>console.log('Error')}
 					resizeMode="contain"
 
 					//Y si lo pongo en pantalla chiquita y doy la chance de que hagan fullscreen?? MMm

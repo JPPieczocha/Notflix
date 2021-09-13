@@ -26,7 +26,7 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator>
-					{!logueado ? 
+					{logueado ? 
 						<Stack.Screen name="SignLogin" component={NavLogSign} options={{headerShown:false}}/> 
 						: 
 						<Stack.Screen name="MainNavigator" component={MainNav} options={{headerShown:false}}/>
