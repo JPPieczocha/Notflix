@@ -64,7 +64,7 @@ const MovieFocus = ({navigation,route})=>{
                         <View style={styles.sinopsis}>
                                 <Text style={styles.sinopsisText}>{desc}</Text>
                         </View>
-                        <TouchableOpacity style={styles.details}>
+                        <TouchableOpacity style={styles.details} onPress={()=>navigation.navigate('MovieDetails',{title:title})}>
                                 <Text style={styles.playMovieText}>Más detalles</Text>
                         </TouchableOpacity>
 
