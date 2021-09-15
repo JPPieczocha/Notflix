@@ -10,6 +10,7 @@ import VideoPlayer from './src/pages/videoPlayer/VideoPlayer';
 import MoviePlayer from './src/pages/moviePlayer/MoviePlayer'
 import NavLogSign from './src/navigation/NavLogSign';
 import MainNav from './src/navigation/MainNav';
+import LoadingPage from './src/components/loadingPage/LoadingPage';
 
 
 const AuthContext = createContext();
@@ -26,8 +27,10 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator>
-					{logueado ? 
+					{!logueado ? 
+						// <Stack.Screen name="SignLogin" component={LoadingPage} options={{headerShown:false}}/> 
 						<Stack.Screen name="SignLogin" component={NavLogSign} options={{headerShown:false}}/> 
+
 						: 
 						<Stack.Screen name="MainNavigator" component={MainNav} options={{headerShown:false}}/>
 					}
