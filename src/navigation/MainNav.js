@@ -26,20 +26,7 @@ export default function MainNav({navigation}){
             
             <Stack.Screen name="MoviePlayer" component={MoviePlayer} options={{headerShown:false}}/>
             
-            <Stack.Screen name="Settings" component={NavSettings} options={{
-                title: 'AJUSTES',
-                headerStyle:{
-                    backgroundColor: Colors.primaryv3,
-                },
-                headerShadowVisible:false,
-                headerBackTitle:'Perfil',
-                headerTintColor: Colors.inactiveTint,
-                headerTitleAlign:'left',
-                headerTitleStyle:{
-                    color: Colors.inactiveTint,
-                    fontSize: 20,
-                },
-            }}/>
+            <Stack.Screen name="Settings" component={NavSettings} options={{headerShown: false}}/>
             
         </Stack.Navigator>
     );

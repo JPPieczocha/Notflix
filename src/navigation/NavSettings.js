@@ -4,8 +4,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Colors from "../constants/colors";
 
-import Profile from './../pages/profile/Profile'
 import Settings from '../pages/settings/Settings'
+import ChangeMail from './../pages/settings/ChangeMail'
+import ChangePassword from './../pages/settings/ChangePassword'
 
 export default function NavSettings({navigation}){
 
@@ -20,7 +21,56 @@ export default function NavSettings({navigation}){
                 name="Ajustes"
                 component={Settings}
                 options={{
-                    headerShown: false,
+                    title: 'AJUSTES',
+                    headerStyle:{
+                        backgroundColor: Colors.primaryv3,
+                    },
+                    headerShadowVisible:false,
+                    headerBackTitle:'Perfil',
+                    headerTintColor: Colors.inactiveTint,
+                    headerTitleAlign:'left',
+                    headerTitleStyle:{
+                        color: Colors.inactiveTint,
+                        fontSize: 20,
+                    },
+                }}   
+            />
+
+            <Stack.Screen
+                name="ChangeMail"
+                component={ChangeMail}
+                options={{
+                    title: 'CAMBIAR CORREO',
+                    headerStyle:{
+                        backgroundColor: Colors.primaryv3,
+                    },
+                    headerShadowVisible:false,
+                    headerBackTitle:'Ajustes',
+                    headerTintColor: Colors.inactiveTint,
+                    headerTitleAlign:'left',
+                    headerTitleStyle:{
+                        color: Colors.inactiveTint,
+                        fontSize: 20,
+                    },
+                }}   
+            />
+
+            <Stack.Screen
+                name="ChangeContraseña"
+                component={ChangePassword}
+                options={{
+                    title: 'CAMBIAR CONTRASEÑA',
+                    headerStyle:{
+                        backgroundColor: Colors.primaryv3,
+                    },
+                    headerShadowVisible:false,
+                    headerBackTitle:'Ajustes',
+                    headerTintColor: Colors.inactiveTint,
+                    headerTitleAlign:'left',
+                    headerTitleStyle:{
+                        color: Colors.inactiveTint,
+                        fontSize: 20,
+                    },
                 }}   
             />
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import {Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import styles from './Styles'
 import { Feather } from '@expo/vector-icons';
 import Colors from '../../constants/colors'
@@ -15,12 +15,12 @@ export default function Settings({navigation, route}) {
                         <Text style={styles.headerOptionText}>DETALLES DE LA CUENTA</Text>
                     </View>
 
-                    <TouchableOpacity style={styles.optionButton}>
+                    <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate("ChangeMail")}>
                         <Text style={styles.opcionText}>Correo: micorreo@correo.com</Text>
                         <Feather name="edit-2" size={24} color={Colors.secondary} style={styles.opcionIcon} />
                     </TouchableOpacity>
                     
-                    <TouchableOpacity style={styles.optionButton}>
+                    <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate("ChangeContraseña")}>
                         <Text style={styles.opcionText} >Contraseña: ********</Text>
                         <Feather name="edit-2" size={24} color={Colors.secondary} style={styles.opcionIcon} />
                     </TouchableOpacity>

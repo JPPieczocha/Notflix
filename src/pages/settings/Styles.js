@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 
     scrollView: {
         width: '100%',
-        height: '100%'
+        height: '100%',
     },
 
     headerOption: {
@@ -60,6 +60,49 @@ const styles = StyleSheet.create({
         position:'absolute',
         right: 15,
         alignSelf: 'center',
+    },
+
+    input: {
+        width:'90%',
+        height: 50,
+
+        marginVertical: 10,
+
+        backgroundColor: Colors.white,
+
+        borderRadius: 15,
+        padding: 10
+    },
+
+    boton: {
+        height: 50,
+        width:'90%',
+
+        backgroundColor: Colors.secondary,
+        marginVertical: 10,
+
+        borderRadius: 25,
+        
+        justifyContent: 'center',
+        alignItems:'center'
+    },
+    
+    buttonText:{
+        color: Colors.white,
+        fontSize: 20
+    },
+
+    botonCancel: {
+        height: 50,
+        width:'75%',
+
+        backgroundColor: Colors.logOut,
+        marginVertical: 30,
+
+        borderRadius: 25,
+        
+        justifyContent: 'center',
+        alignItems:'center'
     }
 
 })
