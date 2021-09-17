@@ -29,12 +29,12 @@ export default function Settings({navigation, route}) {
                         <Text style={styles.headerOptionText}>SUSCRIPCION</Text>
                     </View>
 
-                    <TouchableOpacity style={styles.optionButton}>
+                    <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate("ChangePaquete")}>
                         <Text style={styles.opcionText}>Paquete Actual: Paquete [Nombre]</Text>
                         <Feather name="edit-2" size={24} color={Colors.secondary} style={styles.opcionIcon} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.optionButton}>
+                    <TouchableOpacity style={styles.optionButton} onPress={() => navigation.navigate("ChangeTarjeta")}>
                         <Text style={styles.opcionText}>Tarjeta: ****-****-****-1234</Text>
                         <Feather name="edit-2" size={24} color={Colors.secondary} style={styles.opcionIcon} />
                     </TouchableOpacity>
