@@ -4,10 +4,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Colors from './src/constants/colors'
-import Tabs from './src/navigation/Tabs'
-import MovieFocus from './src/pages/movieFocus/MovieFocus';
-import VideoPlayer from './src/pages/videoPlayer/VideoPlayer';
-import MoviePlayer from './src/pages/moviePlayer/MoviePlayer'
 import NavLogSign from './src/navigation/NavLogSign';
 import MainNav from './src/navigation/MainNav';
 import LoadingPage from './src/components/loadingPage/LoadingPage';
@@ -28,8 +24,8 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Stack.Navigator>
-				{isLoading ? <Stack.Screen name="Loading" component={LoadingPage} options={{headerShown:false}}/> : null}
-					{!logueado ? 
+				{!isLoading ? <Stack.Screen name="Loading" component={LoadingPage} options={{headerShown:false}}/> : null}
+					{logueado ? 
 						// <Stack.Screen name="SignLogin" component={LoadingPage} options={{headerShown:false}}/> 
 						<Stack.Screen name="SignLogin" component={NavLogSign} options={{headerShown:false}}/> 
 
