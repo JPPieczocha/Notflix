@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import colors from '../../constants/colors';
 import Colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
@@ -14,14 +13,16 @@ const styles = StyleSheet.create({
         top:0,
         left: 0,
 
-        backgroundColor: Colors.primaryv3
+        backgroundColor: Colors.primaryv3,
+
+        zIndex: 1000
     },
     image:{
-        width: 200,
-        height:200,
         resizeMode: 'contain',
-
-        backgroundColor:'red'
+        width: '80%',
+        backgroundColor:Colors.primaryv3,
+        height:'7%',
+        zIndex: 1000
     }
 
 })

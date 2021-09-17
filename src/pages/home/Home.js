@@ -6,6 +6,7 @@ import HomeHeader from '../../components/homeHeader/HomeHeader';
 import Carrousel from '../../components/carrousel/Carrousel';
 import CarrouselBasic from '../../components/carrouselBasic/CarrouselBasic';
 import { getAllMovies } from '../../controllers/MoviesController';
+import LoadingPage from '../../components/loadingPage/LoadingPage';
 
 
 const Home = ({navigation})=>{
@@ -14,26 +15,24 @@ const Home = ({navigation})=>{
 	const [busy,setBusy] = useState(true);
 	const [reload,setReload] = useState(false);
 
-	useEffect( async() => {
-		const response = await getAllMovies();
-		if(response === undefined){
-			console.log('Nada xd');
-		}else{
-			setMovies(response.categories)
-			setBusy(false)
-
+	useEffect(() => {
+		const fetchMovies = async () => {
+			const response = await getAllMovies();
+			if(response === undefined){
+				console.log('Nada xd');
+			}else{
+				setMovies(response.categories)
+				setBusy(false)
+			}
 		}
-
-		
-		// return () => {
-			
-		// }
+		fetchMovies();
 	}, [reload])
 
 
   // Voy a crear tantos carrousels como cap haya
     return (
 		<View style={styles.container}>
+			{busy ? <LoadingPage/> : null}
 			<View style={styles.mainWrapper}>
 				<ScrollView style={{width: '100%', height: '100%'}}>
 					<Text style={{color:'white', fontSize: 20, paddingLeft: 15, marginTop: 10, marginBottom: 10}}>What's next?</Text>

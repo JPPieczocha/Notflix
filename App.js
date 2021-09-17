@@ -24,9 +24,11 @@ export default function App() {
 	//lo de arriba (logueado) se va, es un dummy, demostrará si me en cuentro logueado o no a la hora de qué pantallas mostrar
 
 	const Stack = createNativeStackNavigator();
+	
 	return (
 		<NavigationContainer>
 			<Stack.Navigator>
+				{isLoading ? <Stack.Screen name="Loading" component={LoadingPage} options={{headerShown:false}}/> : null}
 					{!logueado ? 
 						// <Stack.Screen name="SignLogin" component={LoadingPage} options={{headerShown:false}}/> 
 						<Stack.Screen name="SignLogin" component={NavLogSign} options={{headerShown:false}}/> 
