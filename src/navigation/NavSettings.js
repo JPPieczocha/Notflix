@@ -33,6 +33,7 @@ export default function NavSettings({navigation}){
                         color: Colors.inactiveTint,
                         fontSize: 20,
                     },
+                    headerShown:false
                 }}   
             />
 
@@ -52,6 +53,7 @@ export default function NavSettings({navigation}){
                         color: Colors.inactiveTint,
                         fontSize: 20,
                     },
+                    headerShown:false
                 }}   
             />
 
@@ -71,6 +73,7 @@ export default function NavSettings({navigation}){
                         color: Colors.inactiveTint,
                         fontSize: 20,
                     },
+                    headerShown:false
                 }}   
             />
 

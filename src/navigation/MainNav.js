@@ -26,6 +26,7 @@ export default function MainNav({navigation}){
                     <Stack.Screen name="MovieFocus" component={MovieFocus} options={{headerShown:false}}/>
                     <Stack.Screen name="VideoPlayer" component={VideoPlayer} options={{headerShown:false}}/>
                     <Stack.Screen name="MoviePlayer" component={MoviePlayer} options={{headerShown:false}}/>
+                    <Stack.Screen name="MovieDetails" component={MovieDetails} options={{headerShown:false}}/>
                     <Stack.Screen name="Settings" component={NavSettings} options={{
                         title: 'Ajustes',
                         headerStyle:{

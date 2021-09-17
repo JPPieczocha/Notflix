@@ -33,7 +33,7 @@ export default function Profile({navigation, route}) {
                             <Text style={styles.buttonText}>CERRAR SESION</Text>
                     </TouchableOpacity>
 
-                    <Text style={{color:'grey', position:'absolute', bottom: 5}}>Version: 0.1 - Dev</Text>
+                    <Text style={{color:'grey', position:'absolute', bottom: 5}}>Version: 0.85 - Dev</Text>
                 
                 </View>
                 
