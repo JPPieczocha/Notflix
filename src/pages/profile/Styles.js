@@ -48,44 +48,40 @@ const styles = StyleSheet.create({
 	buttonWrapper: {
 		alignItems:"center",
 		justifyContent:"center",
+		height: '55%'
 	},
 
 	buttonStyle:{
-		width:'90%',
-		height: '25%',
+		height: 50,
+        width:'90%',
 
-		flexDirection:'row',
-		justifyContent:"space-around",
+        backgroundColor: Colors.secondary,
+        marginVertical: 10,
 
-		borderWidth: 2,
-		borderColor: Colors.inactiveTint,
-		borderRadius: 5,
+        borderRadius: 25,
+        
+        justifyContent: 'center',
+        alignItems:'center'
+		
 	},
 
 	buttonText:{
 		color: Colors.white,
-		fontSize: 32,
-		alignSelf: "center",
+        fontSize: 20
 	},
 
 	buttonStyleLogOut:{
-		marginTop: 20,
-		width:'90%',
-		height: '25%',
+		height: 50,
+        width:'75%',
 
-		flexDirection:'row',
-		justifyContent:"space-around",
+        backgroundColor: Colors.logOut,
+        marginVertical: 30,
 
-		borderWidth: 2,
-		borderColor: Colors.logOut,
-		borderRadius: 5,
+        borderRadius: 25,
+        
+        justifyContent: 'center',
+        alignItems:'center'
 	},
-
-	buttonTextogOut:{
-		color: Colors.logOut,
-		fontSize: 32,
-		alignSelf: "center",
-	}
 
 
 });

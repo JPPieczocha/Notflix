@@ -20,13 +20,17 @@ export default function Profile({navigation, route}) {
                 </View>
                 
                 <View style={styles.buttonWrapper}>
-
-                    <TouchableOpacity style={styles.buttonStyle} onPress={() => {navigation.navigate('Settings')}}>
+                    
+                    <TouchableOpacity style={styles.buttonStyle} onPress={() => navigation.navigate('Settings')}>
                         <Text style={styles.buttonText}>AJUSTES</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.buttonStyleLogOut}>
-                            <Text style={styles.buttonTextogOut}>CERRAR SESION</Text>
+                    <TouchableOpacity style={styles.buttonStyle} onPress={() => console.log("FACTURACION")}>
+                        <Text style={styles.buttonText}>FACTURACION</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.buttonStyleLogOut} onPress={() => console.log("CERRAR SESIÓN")}>
+                            <Text style={styles.buttonText}>CERRAR SESION</Text>
                     </TouchableOpacity>
 
                     <Text style={{color:'grey', position:'absolute', bottom: 5}}>Version: 0.1 - Dev</Text>

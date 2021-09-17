@@ -8,6 +8,7 @@ import VideoPlayer from '../pages/videoPlayer/VideoPlayer';
 import MoviePlayer from '../pages/moviePlayer/MoviePlayer';
 import Tabs from './Tabs';
 import { UserContext } from '../components/context/authContext';
+import MovieDetails from '../pages/movieDetails/MovieDetails';
 
 
 export default function MainNav({navigation}){
