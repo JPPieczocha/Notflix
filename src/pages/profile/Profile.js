@@ -6,6 +6,8 @@ import Colors from '../../constants/colors'
 
 export default function Profile({navigation, route}) {
 
+    const {value} = route.params;
+
     return (
         <View style={styles.container}>
             <View style={styles.mainWrapper}>
@@ -15,7 +17,7 @@ export default function Profile({navigation, route}) {
                     <TouchableOpacity>
                         <Image style={styles.profileImage} source={require('../../../src/assets/images/dummy_profile/4.jpg')}></Image>
                     </TouchableOpacity>
-                    <Text style={styles.headerProfileText}>[Nombre] [Apellido]</Text>
+                    <Text style={styles.headerProfileText}>{value.nombre + " " + value.apellido}</Text>
                     <Text style={styles.packageProfileText}>Paquete [Nombre]</Text>
                 </View>
                 

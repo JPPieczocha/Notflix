@@ -29,14 +29,13 @@ export default function App() {
 				 console.log('Dentro de carch: '+e);
 			}
 			if(userToken === null){ //cambiar a ver si está iniciada la sesión
-				setUserData({nombre: 'Nicolas', apellido: 'ASDASDASD', mail:'nm@gmail.com'})
+				setUserData({nombre: 'Brian', apellido: 'Rodriguez', mail:'nm@gmail.com', id: 1})
 				setLogueado(!logueado)
 				setisLoading(!isLoading)
 			}else{
-				setUserData({nombre: 'Nicolas', apellido: 'ASDASDASD', mail:'nm@gmail.com'})
+				setUserData({nombre: 'Brian', apellido: 'Rodriguez', mail:'nm@gmail.com',id: 1})
 				setisLoading(!isLoading)
 			}
-
 		}
 		// After restoring token, we may need to validate it in production apps
 
@@ -59,10 +58,6 @@ export default function App() {
 						: 
 						<Stack.Screen name="MainNavigator" component={MainNav} options={{headerShown:false}}/>
 					}
-					{/* <Stack.Screen name="Homee" component={Tabs} options={{headerShown:false}}/>
-					<Stack.Screen name="MovieFocus" component={MovieFocus} options={{headerShown:false}}/>
-					<Stack.Screen name="VideoPlayer" component={VideoPlayer} options={{headerShown:false}}/>
-					<Stack.Screen name="MoviePlayer" component={MoviePlayer} options={{headerShown:false}}/> */}
 			</Stack.Navigator>
 			</UserContext.Provider>
 		</NavigationContainer>
