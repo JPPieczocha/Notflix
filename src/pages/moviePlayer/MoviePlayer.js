@@ -1,6 +1,7 @@
 import React,{useState, useRef } from 'react';
 import { View, StyleSheet, Dimensions, Platform } from 'react-native';
-import { Video, AVPlaybackStatus, ScreenOrientation } from 'expo-av';
+import { Video, AVPlaybackStatus } from 'expo-av';
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 const {width, height} = Dimensions.get('window')
 
@@ -15,8 +16,11 @@ const MoviePlayer = ({navigation, route})=>{
 	const fullScreenPlayback = ()=>{
 		if(Platform.OS === 'ios'){
 			video.current.presentFullscreenPlayer()
-		}else{
-
+		}else if(Platform.OS === 'android'){
+			ScreenOrientation.unlockAsync()
+			video.current.presentFullscreenPlayer()
+		}
+		else{
 		}
 	}
 
@@ -30,7 +34,6 @@ const MoviePlayer = ({navigation, route})=>{
 				navigation.pop();
 			}
 		}else{
-
 		}
 	}
 
@@ -72,7 +75,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
-		backgroundColor: 'rgba(0,0,0,0)',
+		backgroundColor: 'black',
 	},
 	video: {
 		alignSelf: 'center',
