@@ -1,18 +1,23 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useContext} from 'react'
 import { View, Text, ImageBackground,Platform, TouchableOpacity, Image, Animated, Dimensions, TextInput } from 'react-native';
 import { BlurView } from 'expo-blur';
 import styles from './Styles'
 import Colors from '../../constants/colors';
 import LoadingPage from '../../components/loadingPage/LoadingPage';
+import { UserContext } from '../../components/context/authContext';
 
 const Landing = ({navigation}) => {
 
-    const {height, width} = Dimensions.get('window')
+    const {height, width} = Dimensions.get('window');
+    const {signIn} = useContext(UserContext);
+    //Lo de arriba es prueba, solo el context
 
     const [loginStatus, setLogInStatus] = useState(false);
     const [registerStatus, setregisterStatus] = useState(false);
     const [registerPackage, setregisterPackage] = useState(false);
     const [registerCard, setregisterCard] = useState(false);
+    const [emailLOGIN, setemailOGIN] = useState('');
+    const [passwordLOGIN, setpasswordLOGIN] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
     const [date, setDate] = useState('');
@@ -25,8 +30,6 @@ const Landing = ({navigation}) => {
     const yScrollTestRegister = useRef(new Animated.Value(height.valueOf()+200)).current; //El animation del registro
     const yScrollTestPackage = useRef(new Animated.Value(height.valueOf()+200)).current; //El animation del paquetes
     const yScrollTestCard = useRef(new Animated.Value(height.valueOf()+200)).current; //El animation del tarjeta
-
-
 
     const handleShowLogin = () =>{
         Animated.parallel([
@@ -121,11 +124,11 @@ const Landing = ({navigation}) => {
                 <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTest, Index: 100}}>
                     <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%',justifyContent:'space-around', alignItems:'center'}}>
                         <View style={styles.inputWrapper}>
-                            <TextInput placeholder={'Mail'} style={styles.input} keyboardType={'ascii-capable'}></TextInput>
-                            <TextInput placeholder={'Contraseña'} style={styles.input} keyboardType={'ascii-capable'}></TextInput>
+                            <TextInput placeholder={'Mail'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={text => setemailOGIN(text)}></TextInput>
+                            <TextInput placeholder={'Contraseña'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={text => setpasswordLOGIN(text)}></TextInput>
                         </View>
                         <View style={styles.buttonsWrapper}>
-                            <TouchableOpacity style={styles.button}>
+                            <TouchableOpacity style={styles.button} onPress={()=> signIn({emailLOGIN,passwordLOGIN})}>
                                 <Text style={styles.buttonText}>Iniciar Sesión</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.buttonSignUp} onPress={()=>handleShowLogin()}>

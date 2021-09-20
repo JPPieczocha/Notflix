@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import styles from './Styles'
-import Colors from '../../constants/colors'
+import Colors from '../../constants/colors';
+import { UserContext } from '../../components/context/authContext';
 
 export default function Profile({navigation, route}) {
 
     const {value} = route.params;
+
+    const {signOut} = useContext(UserContext);
 
     return (
         <View style={styles.container}>
@@ -31,7 +34,7 @@ export default function Profile({navigation, route}) {
                         <Text style={styles.buttonText}>FACTURACION</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.buttonStyleLogOut} onPress={() => console.log("CERRAR SESIÓN")}>
+                    <TouchableOpacity style={styles.buttonStyleLogOut} onPress={() => signOut()}>
                             <Text style={styles.buttonText}>CERRAR SESION</Text>
                     </TouchableOpacity>
 
