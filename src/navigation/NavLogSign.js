@@ -11,13 +11,12 @@ export default function NavLogSign({navigation}){
     const Stack = createNativeStackNavigator();
     // El navigation container está abstraido en el App.js
 
+    //DE MOMENTO SIN USO
+    //TODO: Delete file
+
     return(
         <Stack.Navigator>
             <Stack.Screen name="landing" component={Landing} options={{headerShown:false}}></Stack.Screen>
-            {/* 
-            <Stack.Screen name="paquetesSelection" ></Stack.Screen>
-            <Stack.Screen name="paymentMethod"></Stack.Screen>
-            <Stack.Screen name="summary"></Stack.Screen> */}
         </Stack.Navigator>
     );
 }

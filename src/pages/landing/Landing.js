@@ -9,9 +9,7 @@ import { UserContext } from '../../components/context/authContext';
 const Landing = ({navigation}) => {
 
     const {height, width} = Dimensions.get('window');
-    const {signIn,signUp} = useContext(UserContext);
-    //Lo de arriba es prueba, solo el context
-
+ 
     const [loginStatus, setLogInStatus] = useState(false);
     const [registerStatus, setregisterStatus] = useState(false);
     const [registerPackage, setregisterPackage] = useState(false);
@@ -30,9 +28,9 @@ const Landing = ({navigation}) => {
     const yScrollTestPackage = useRef(new Animated.Value(height.valueOf()+200)).current; //El animation del paquetes
     const yScrollTestCard = useRef(new Animated.Value(height.valueOf()+200)).current; //El animation del tarjeta
 
-    const handleRegister = () =>{
-        console.log('ME REGISTRO. DESCOMENTAR');
-        // signUp({email,name,surname,password})
+    const handleRegister = (value) =>{
+        //TODO: Manejo de paquetes y tarjeta
+        value.authContext.signUp({email,name,surname,password})
     }
 
     const handleShowLogin = () =>{
@@ -125,22 +123,25 @@ const Landing = ({navigation}) => {
 
     const login = ()=>{
             return(
-                <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTest, Index: 100}}>
-                    <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%',justifyContent:'space-around', alignItems:'center'}}>
-                        <View style={styles.inputWrapper}>
-                            <TextInput autoCapitalize={'none'} placeholder={'Mail'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={text => setemailOGIN(text)}></TextInput>
-                            <TextInput autoCapitalize={'none'} placeholder={'Contraseña'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={text => setpasswordLOGIN(text)}></TextInput>
-                        </View>
-                        <View style={styles.buttonsWrapper}>
-                            <TouchableOpacity style={styles.button} onPress={()=> signIn({emailLOGIN,passwordLOGIN})}>
-                                <Text style={styles.buttonText}>Iniciar Sesión</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.buttonSignUp} onPress={()=>handleShowLogin()}>
-                                <Text style={styles.buttonText}>Atrás</Text>
-                            </TouchableOpacity>
-                        </View>
-                </BlurView>
-                </Animated.View>
+                <UserContext.Consumer>
+                    {value => (
+                        <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTest, Index: 100}}>
+                            <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%',justifyContent:'space-around', alignItems:'center'}}>
+                                <View style={styles.inputWrapper}>
+                                    <TextInput autoCapitalize={'none'} placeholder={'Mail'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={text => setemailOGIN(text)}></TextInput>
+                                    <TextInput autoCapitalize={'none'} placeholder={'Contraseña'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={text => setpasswordLOGIN(text)}></TextInput>
+                                </View>
+                                <View style={styles.buttonsWrapper}>
+                                    <TouchableOpacity style={styles.button} onPress={()=> value.authContext.signIn({emailLOGIN,passwordLOGIN})}>
+                                        <Text style={styles.buttonText}>Iniciar Sesión</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.buttonSignUp} onPress={()=>handleShowLogin()}>
+                                        <Text style={styles.buttonText}>Atrás</Text>
+                                    </TouchableOpacity>
+                                </View>
+                        </BlurView>
+                        </Animated.View>
+                )}</UserContext.Consumer>
             )
     }
 
@@ -173,8 +174,6 @@ const Landing = ({navigation}) => {
                 <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
                     <View style={styles.inputWrapper}>
                         <TextInput placeholder={'Nombre'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={(text)=>setName(text)}></TextInput>
-                        {/* <TextInput placeholder={'Apellido'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={(text)=>setSurname(text)}></TextInput>
-                        <TextInput placeholder={'Fecha de nacimiento'} style={styles.input} keyboardType={'default'} onChangeText={(text)=>setDate(text)}></TextInput> */}
                         <TextInput placeholder={'Correo electrónico'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={(text)=>setEmail(text)}></TextInput>
                         <TextInput placeholder={'Contraseña'} style={styles.input} keyboardType={'visible-password'} onChangeText={(text)=>setPassword(text)}></TextInput>
                     </View>
@@ -193,25 +192,25 @@ const Landing = ({navigation}) => {
 
     const cardDeclarer = ()=>{
         return(
-            <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTestCard, Index: 100}}>
-                <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
-                    <View style={styles.inputWrapper}>
-                        <TextInput placeholder={'Nombre'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={(text)=>setName(text)}></TextInput>
-                        {/* <TextInput placeholder={'Apellido'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={(text)=>setSurname(text)}></TextInput>
-                        <TextInput placeholder={'Fecha de nacimiento'} style={styles.input} keyboardType={'default'} onChangeText={(text)=>setDate(text)}></TextInput> */}
-                        {/* <TextInput placeholder={'Correo electrónico'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={(text)=>setEmail(text)}></TextInput> */}
-                        <TextInput placeholder={'Contraseña'} style={styles.input} keyboardType={'visible-password'} onChangeText={(text)=>setPassword(text)}></TextInput>
-                    </View>
-                    <View style={styles.buttonsWrapper}>
-                        <TouchableOpacity style={styles.button} onPress={()=>handleRegister()}>
-                            <Text style={styles.buttonText}>Registrarse</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonSignUp} onPress={()=>handleShowCard()}>
-                            <Text style={styles.buttonText}>Atrás</Text>
-                        </TouchableOpacity>
-                    </View>
-            </BlurView>
-            </Animated.View>
+            <UserContext.Consumer>
+                {value => (
+                    <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTestCard, Index: 100}}>
+                        <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
+                            <View style={styles.inputWrapper}>
+                                <TextInput placeholder={'Nombre'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={(text)=>setName(text)}></TextInput>
+                                <TextInput placeholder={'Contraseña'} style={styles.input} keyboardType={'visible-password'} onChangeText={(text)=>setPassword(text)}></TextInput>
+                            </View>
+                            <View style={styles.buttonsWrapper}>
+                                <TouchableOpacity style={styles.button} onPress={()=>handleRegister(value)}>
+                                    <Text style={styles.buttonText}>Registrarse</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.buttonSignUp} onPress={()=>handleShowCard()}>
+                                    <Text style={styles.buttonText}>Atrás</Text>
+                                </TouchableOpacity>
+                            </View>
+                    </BlurView>
+                    </Animated.View>
+            )}</UserContext.Consumer>
         )
     }
 

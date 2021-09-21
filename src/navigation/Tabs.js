@@ -9,16 +9,12 @@ import Home from '../pages/home/Home'
 import Profile from '../pages/profile/Profile'
 import Search from '../pages/search/Search'
 
-import { UserContext } from '../components/context/authContext';
-
 export default function Tabs({navigation}){
 
     const Tab = createBottomTabNavigator();
     // El navigation container está abstraido en el App.js
 
     return(
-        <UserContext.Consumer>
-            {value => (
         <Tab.Navigator
         initialRouteName={'Home'}
         screenOptions={({ route }) => ({
@@ -82,12 +78,7 @@ export default function Tabs({navigation}){
                 },
                 headerTitleAlign:'center'
             }}
-            initialParams = {{value}}
             />
-
         </Tab.Navigator>
-        )}
-        </UserContext.Consumer>
     );
-
 }
