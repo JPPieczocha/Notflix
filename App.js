@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, createContext, useMemo, useEffect} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import JWT from 'expo-jwt';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Colors from './src/constants/colors'
@@ -84,7 +85,7 @@ export default function App() {
 			try{
 				const iniciarSesion = await login(userData);
 				const saveKeyStore =  await SecureStore.setItemAsync('userToken', iniciarSesion.token);
-				console.log(iniciarSesion);
+				console.log(JWT.decode(iniciarSesion.token,'$2a$08$sxsFC91y2xGJxlq.ZZZHEO'));
 				dispatch({ type: 'SIGN_IN', token: iniciarSesion.token });
 
 			}catch (e){
