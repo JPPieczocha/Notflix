@@ -83,6 +83,11 @@ export default function App() {
 			let user;
 			try{
 				const iniciarSesion = await login(userData);
+				//---------------------
+				if(iniciarSesion === 401){
+					return iniciarSesion;
+				}
+				//---------------------
 				const saveKeyStore =  await SecureStore.setItemAsync('userToken', iniciarSesion.token);
 				user = JWT.decode(iniciarSesion.token, '$2a$08$sxsFC91y2xGJxlq.ZZZHEO');
 				dispatch({ type: 'SIGN_IN', token: iniciarSesion.token, userdata: user});

@@ -6,8 +6,8 @@ export const login = async (data)=>{
         const json = await response.json();
         return json;
     }else{
-        console.log('ERROR en login');
-        console.log(response.status);
+        console.log('BadLogin into UsersController');
+        return response.status
     }
 }
 
@@ -17,7 +17,7 @@ export const registro = async (data)=>{
         const json = await response.json();
         return json;
     }else{
-        console.log('ERROR en login');
-        console.log(response.status);
+        console.log('BadRegister into UsersController');
+        return response.status;
     }
 }
