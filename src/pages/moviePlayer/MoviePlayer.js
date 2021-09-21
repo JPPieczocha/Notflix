@@ -1,6 +1,6 @@
 import React,{useState, useRef } from 'react';
 import { View, StyleSheet, Dimensions, Platform } from 'react-native';
-import { Video, AVPlaybackStatus, ScreenOrientation } from 'expo-av';
+import { Video, AVPlaybackStatus } from 'expo-av';
 import * as ScreenOrientation from 'expo-screen-orientation';
 
 import LoadingPage from '../../components/loadingPage/LoadingPage';
