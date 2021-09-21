@@ -21,9 +21,11 @@ const MoviePlayer = ({navigation, route})=>{
 		setIsLoading(false)
 		if(Platform.OS === 'ios'){
 			video.current.presentFullscreenPlayer()
-		}else{
+		}else if(Platform.OS === 'android'){
 			ScreenOrientation.unlockAsync()
 			video.current.presentFullscreenPlayer()
+		}
+		else{
 		}
 	}
 
@@ -37,7 +39,6 @@ const MoviePlayer = ({navigation, route})=>{
 				navigation.pop();
 			}
 		}else{
-
 		}
 	}
 
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
-		backgroundColor: Colors.primaryv3,
+		backgroundColor: 'black',
 	},
 	video: {
 		alignSelf: 'center',
