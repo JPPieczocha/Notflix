@@ -11,6 +11,12 @@ export default function Profile({navigation, route}) {
 
     const {signOut} = useContext(UserContext);
 
+
+    const handleFacturacion = () =>{
+        console.log(UserContext);
+        console.log("FACTURACION-------------")
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.mainWrapper}>
@@ -30,7 +36,7 @@ export default function Profile({navigation, route}) {
                         <Text style={styles.buttonText}>AJUSTES</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.buttonStyle} onPress={() => console.log("FACTURACION")}>
+                    <TouchableOpacity style={styles.buttonStyle} onPress={() => handleFacturacion()}>
                         <Text style={styles.buttonText}>FACTURACION</Text>
                     </TouchableOpacity>
 

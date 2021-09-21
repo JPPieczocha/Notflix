@@ -9,10 +9,10 @@ import MainNav from './src/navigation/MainNav';
 import LoadingPage from './src/components/loadingPage/LoadingPage';
 import * as SecureStore from 'expo-secure-store';
 import { UserContext } from './src/components/context/authContext';
+import { login, registro } from './src/controllers/UsersController';
 
 export default function App() {
 
-	const [userData, setUserData] = useState({});
 	const [isLoading, setisLoading] = useState(true)
 	const [logueado, setLogueado] = useState(false)
 	//lo de arriba (logueado) se va, es un dummy, demostrará si me en cuentro logueado o no a la hora de qué pantallas mostrar
@@ -73,57 +73,64 @@ export default function App() {
 
 	const authContext = useMemo(() => ({
 		signIn: async data => {
+
+			//DATA VA A TENER: MAIL Y CONTRASEÑA
+			let userData = {
+				email: data.emailLOGIN,
+				password: data.passwordLOGIN,
+				tenant: 'mobile'
+			}
+
+			try{
+				const iniciarSesion = await login(userData);
+				const saveKeyStore =  await SecureStore.setItemAsync('userToken', iniciarSesion.token);
+				console.log(iniciarSesion);
+				dispatch({ type: 'SIGN_IN', token: iniciarSesion.token });
+
+			}catch (e){
+				console.log('ERROR EN useMeMO SignIN');
+				console.log(e);
+			}
+
 			// In a production app, we need to send some data (usually username, password) to server and get a token
 			// We will also need to handle errors if sign in failed
 			// After getting token, we need to persist the token using `SecureStore`
 			// In the example, we'll use a dummy token
-			dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
 		},
-		signOut: () => dispatch({ type: 'SIGN_OUT' }),
+		signOut: async() => {
+			const deleteKeyStore = await SecureStore.deleteItemAsync('userToken')
+			dispatch({ type: 'SIGN_OUT' });
+		},
 		signUp: async data => {
+
+			let registerData = {
+				email: data.email,
+				password: data.password,
+				name: data.name,
+				last_name: data.surname,
+				admin:false,
+				tenant: 'mobile'
+			}
+
+			//NO PROBAR TODAVIA
+
+			try{
+				const registrarse = await registro(registerData);
+				const saveKeyStore =  await SecureStore.setItemAsync('userToken', registrarse.token);
+				dispatch({ type: 'SIGN_IN', token: registrarse.token });
+			}catch (e){
+				console.log('ERROR EN CREAR USUARIO. USEMEMO');
+			}
+			
 			// In a production app, we need to send user data to server and get a token
 			// We will also need to handle errors if sign up failed
 			// After getting token, we need to persist the token using `SecureStore`
 			// In the example, we'll use a dummy token
 	
-			dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
 		},
 		}),
 		[]
 	);
-
-
-	//-------------------FIN PRUEBA NO TOCAR--------------------------------------------
-
-	// useEffect(() => {
-
-	// 	const getTokenAsync = async () =>{
-	// 		//Solo si la sesión ya se encuentra iniciada.
-	// 		let userToken;
-	// 		try{
-	// 			userToken = await SecureStore.getItemAsync('userToken');
-	// 		}catch (e){
- 	// 			// Restoring token failed
-	// 			 console.log('Dentro de carch: '+e);
-	// 		}
-	// 		if(userToken === null){ //cambiar a ver si está iniciada la sesión
-	// 			setUserData({nombre: 'Brian', apellido: 'Rodriguez', mail:'nm@gmail.com', id: 1})
-	// 			setLogueado(!logueado)
-	// 			setisLoading(!isLoading)
-	// 		}else{
-	// 			setUserData({nombre: 'Brian', apellido: 'Rodriguez', mail:'nm@gmail.com',id: 1})
-	// 			setisLoading(!isLoading)
-	// 		}
-	// 	}
-	// 	// After restoring token, we may need to validate it in production apps
-
-    //  	// This will switch to the App screen or Auth screen and this loading
-    //   	// screen will be unmounted and thrown away.
-	// 	  getTokenAsync()
-	// }, [])
-
-	//Lo de arriba funciona bien. No es de prueba.
-
 
 	const Stack = createNativeStackNavigator();
 	
