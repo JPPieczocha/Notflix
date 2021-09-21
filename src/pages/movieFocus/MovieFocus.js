@@ -31,7 +31,7 @@ const MovieFocus = ({navigation,route})=>{
     }
 
     return(
-        <View style={{height:'100%', width:'100%'}}>
+        <View style={{height:'100%', width:'100%', backgroundColor: Colors.primaryv3}}>
             {/* <Text>HOLA</Text> */}
             <ImageBackground 
             resizeMode='stretch' 
