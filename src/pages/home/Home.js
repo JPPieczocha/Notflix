@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, FlatList, ScrollView } from 'react-native';
 import Colors from '../../constants/colors'
 import styles from './Styles';
-import HomeHeader from '../../components/homeHeader/HomeHeader';
 import Carrousel from '../../components/carrousel/Carrousel';
 import CarrouselBasic from '../../components/carrouselBasic/CarrouselBasic';
 import { getAllMovies } from '../../controllers/MoviesController';

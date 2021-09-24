@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Colors from '../constants/colors';
 import NavSettings from './NavSettings';
 import MovieFocus from '../pages/movieFocus/MovieFocus';
-import VideoPlayer from '../pages/videoPlayer/VideoPlayer';
 import MoviePlayer from '../pages/moviePlayer/MoviePlayer';
 import Tabs from './Tabs';
 import { UserContext } from '../components/context/authContext';
@@ -23,7 +22,6 @@ export default function MainNav({navigation}){
                 <Stack.Navigator>
                         <Stack.Screen name="Homee" component={Tabs} options={{headerShown:false}}/>
                         <Stack.Screen name="MovieFocus" component={MovieFocus} options={{headerShown:false}}/>
-                        <Stack.Screen name="VideoPlayer" component={VideoPlayer} options={{headerShown:false}}/>
                         <Stack.Screen name="MoviePlayer" component={MoviePlayer} options={{headerShown:false}}/>
                         <Stack.Screen name="MovieDetails" component={MovieDetails} options={{headerShown:false}}/>
                         <Stack.Screen name="Settings" component={NavSettings} options={{
