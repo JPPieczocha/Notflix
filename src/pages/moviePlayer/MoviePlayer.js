@@ -1,22 +1,31 @@
 import React,{useState, useRef } from 'react';
 import { View, StyleSheet, Dimensions, Platform } from 'react-native';
-import { Video, AVPlaybackStatus, ScreenOrientation } from 'expo-av';
+import { Video, AVPlaybackStatus } from 'expo-av';
+import * as ScreenOrientation from 'expo-screen-orientation';
+
+import LoadingPage from '../../components/loadingPage/LoadingPage';
+import Colors from '../../constants/colors';
 
 const {width, height} = Dimensions.get('window')
 
 const MoviePlayer = ({navigation, route})=>{
 
-	const {title} = route.params;
+	const {title, fileURL} = route.params;
 	const [fullScreen,setFullScreen] = useState(false);
 	const [status, setStatus] = React.useState({});
+	const [isLoading,setIsLoading] = useState(true);
 
 	const video = React.useRef(null);
 
 	const fullScreenPlayback = ()=>{
+		setIsLoading(false)
 		if(Platform.OS === 'ios'){
 			video.current.presentFullscreenPlayer()
-		}else{
-
+		}else if(Platform.OS === 'android'){
+			ScreenOrientation.unlockAsync()
+			video.current.presentFullscreenPlayer()
+		}
+		else{
 		}
 	}
 
@@ -30,7 +39,6 @@ const MoviePlayer = ({navigation, route})=>{
 				navigation.pop();
 			}
 		}else{
-
 		}
 	}
 
@@ -43,11 +51,13 @@ const MoviePlayer = ({navigation, route})=>{
 
 	return (
 		<View style={styles.container}>
+			{isLoading ? <LoadingPage/> : null}
 			<View onPress={()=>console.log('TOQUE')}>
 				<Video
 					ref={video}
 					style={styles.video}
-					source={{uri: 'https://es.vid.web.acsta.net/nmedia/34/19/06/03/14//19562331_hd_013.mp4',}}
+					source={{uri: fileURL,}}
+					onError={()=>console.log('Error')}
 					resizeMode="contain"
 
 					//Y si lo pongo en pantalla chiquita y doy la chance de que hagan fullscreen?? MMm
@@ -69,7 +79,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
-		backgroundColor: 'rgba(0,0,0,0)',
+		backgroundColor: 'black',
 	},
 	video: {
 		alignSelf: 'center',

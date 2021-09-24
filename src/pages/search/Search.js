@@ -14,7 +14,13 @@ const Search = ()=>{
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.main}>
                 <View style={styles.inputMain}>
-                    <TextInput style={styles.inputText} placeholder={'Busque lo que desee...'} keyboardType={'web-search'}></TextInput>
+                    <TextInput style={styles.inputText} 
+                    placeholder={'Busque lo que desee...'} 
+                    keyboardType={'web-search'} 
+                    onSubmitEditing={(event)=>{
+                        console.log(event.nativeEvent.text);
+                        setTextSearch(event.nativeEvent.text)
+                    }}></TextInput>
                 </View>
             </View>
             </TouchableWithoutFeedback>

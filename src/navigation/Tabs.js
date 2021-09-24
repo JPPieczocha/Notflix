@@ -4,14 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-
 import Colors from "../constants/colors";
 import Home from '../pages/home/Home'
 import Profile from '../pages/profile/Profile'
 import Search from '../pages/search/Search'
-
-import NavSettings from './NavSettings'
 
 export default function Tabs({navigation}){
 
@@ -83,8 +79,6 @@ export default function Tabs({navigation}){
                 headerTitleAlign:'center'
             }}
             />
-
         </Tab.Navigator>
     );
-
 }

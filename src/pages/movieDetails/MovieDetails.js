@@ -66,12 +66,13 @@ const MovieDetails = ({navigation,route})=>{
 
     return(
         <View style={styles.container}>
-            <ScrollView style={{marginTop:150}}>
-                <Text style={{color:"#fff",fontSize:20,fontWeight:'bold',justifyContent:'center',marginHorizontal:130,marginBottom:20}}>{route.params.title}</Text>
+            <ScrollView style={{marginTop:150}} bounces={false}>
+            <Text style={{color:"#fff",fontSize:23,fontWeight:'bold',marginLeft:10,marginBottom:20}}>{route.params.title}</Text>
                 <Text style={{color:"#fff",fontSize:20,fontWeight:'bold',marginBottom:20,marginHorizontal:15}}>Reparto</Text>
                 <FlatList
                     //contentContainerStyle={gStyle.pHHalf}
                     data={dataArray}
+                    bounces={false}
                     horizontal
                     keyExtractor={({ id }) => id.toString()}
                     renderItem={({ item }) => {
