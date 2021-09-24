@@ -92,7 +92,7 @@ export default function NavSettings({navigation}){
                     headerTitleStyle:{
                         color: Colors.inactiveTint,
                         fontSize: 20,
-                    },
+                    }
                 }}   
             />
 

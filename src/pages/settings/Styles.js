@@ -105,6 +105,12 @@ const styles = StyleSheet.create({
         
         justifyContent: 'center',
         alignItems:'center'
+    },
+
+    creditCard: {
+        backgroundColor: 'green',
+        height: '50%',
+        top: '20%'
     }
 
 })

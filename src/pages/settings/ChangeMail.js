@@ -15,14 +15,14 @@ export default function ChangeMail({navigation, route}) {
                 
                 <TextInput 
                     placeholder = "Correo nuevo"
-                    keyboardType = {"ascii-capable"}
+                    keyboardType = {"email-address"}
                     onChangeText = {(text) => setnewMail(text)}
                     style = {styles.input}
                 />
 
                 <TextInput 
                     placeholder = "Confirmar correo"
-                    keyboardType = {"ascii-capable"}
+                    keyboardType = {"email-address"}
                     onChangeText = {(text) => setconfirmMail(text)}
                     style = {styles.input}
                 />
