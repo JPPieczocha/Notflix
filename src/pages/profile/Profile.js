@@ -5,10 +5,12 @@ import styles from './Styles'
 import Colors from '../../constants/colors';
 import { UserContext } from '../../components/context/authContext';
 
+import * as Linking from 'expo-linking'
+
 export default function Profile({navigation}) {
 
     const handleFacturacion = () =>{
-        console.log("FACTURACION-------------")
+        Linking.openURL('http://facturacion-front.vercel.app/?from=mobile&token=?') //AGREGAR TOKEN
     }
 
     return (

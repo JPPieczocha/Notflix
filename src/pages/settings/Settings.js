@@ -1,12 +1,17 @@
 import React from 'react';
 import {Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import * as Linking from 'expo-linking'
 
 import styles from './Styles'
 import Colors from '../../constants/colors'
 import {UserContext} from '../../components/context/authContext'
 
 export default function Settings({navigation, route}) {
+
+    const redirectLegal = () => {
+        Linking.openURL('https://www.termsfeed.com/public/uploads/2019/04/terms-and-conditions-template.pdf')
+    }
 
     return (
         <UserContext.Consumer>
@@ -47,7 +52,7 @@ export default function Settings({navigation, route}) {
                                 <Text style={styles.headerOptionText}>LEGAL</Text>
                             </View>
 
-                            <TouchableOpacity style={styles.optionButton}>
+                            <TouchableOpacity style={styles.optionButton} onPress={redirectLegal}>
                                 <Text style={styles.opcionText}>Condiciones de Uso</Text>
                                 <Feather name="info" size={24} color={Colors.secondary} style={styles.opcionIcon}/>
                             </TouchableOpacity>
