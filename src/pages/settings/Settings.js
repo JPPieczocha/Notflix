@@ -53,7 +53,7 @@ export default function Settings({navigation, route}) {
                             </View>
 
                             <TouchableOpacity style={styles.optionButton} onPress={redirectLegal}>
-                                <Text style={styles.opcionText}>Condiciones de Uso</Text>
+                                <Text style={styles.opcionText}>Términos y Condiciones de Uso</Text>
                                 <Feather name="info" size={24} color={Colors.secondary} style={styles.opcionIcon}/>
                             </TouchableOpacity>
                             

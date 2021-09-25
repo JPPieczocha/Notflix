@@ -6,6 +6,8 @@ import Colors from '../../constants/colors';
 import LoadingPage from '../../components/loadingPage/LoadingPage';
 import { UserContext } from '../../components/context/authContext';
 
+import { LiteCreditCardInput } from "react-native-credit-card-input-view";
+
 const Landing = ({navigation}) => {
 
     const {height, width} = Dimensions.get('window');
@@ -214,9 +216,11 @@ const Landing = ({navigation}) => {
                 {value => (
                     <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTestCard, Index: 100}}>
                         <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
-                            <View style={styles.inputWrapper}>
-                                <TextInput placeholder={'Nombre'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={(text)=>setName(text)}></TextInput>
-                                <TextInput placeholder={'Contraseña'} style={styles.input} keyboardType={'visible-password'} onChangeText={(text)=>setPassword(text)}></TextInput>
+                            <Text style={styles.buttonText}>Ingrese su Método de Pago</Text>
+                            <View style={[styles.inputWrapper]}>
+                                <View style={[styles.input, {justifyContent: 'center', alignItems: 'center'}]}>
+                                    <LiteCreditCardInput  />
+                                </View>
                             </View>
                             <View style={styles.buttonsWrapper}>
                                 <TouchableOpacity style={styles.button} onPress={()=>handleRegister(value)}>
