@@ -4,7 +4,7 @@ import styles from './Styles'
 
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input-view";
 
-
+import Colors from '../../constants/colors'
 
 export default function ChangeCreditCard({navigation, route}) {    
 
@@ -40,17 +40,27 @@ export default function ChangeCreditCard({navigation, route}) {
             <View style={[styles.mainWrapper, {justifyContent: 'flex-start'}]}>
 
                 <View style={styles.creditCard}>
-                    <CreditCardInput requiresName={true} onChange={setCreditCardData}/>
+                    <CreditCardInput
+                        requiresName={true}
+                        allowScroll={true}
+                        cardScale={0.75}
+                        allowScroll
+                        labels={{name: 'NOMBRE COMPLETO', number: 'NÚMERO TARJETA', expiry: 'EXPIRA', cvc: 'CCV'}}
+                        placeholders= {{name: 'NOMBRE COMPLETO', number: 'NÚMERO TARJETA', expiry: 'EXPIRA', cvc: 'CCV'}}
+                        inputContainerStyle = {{borderBottomWidth: 1, borderBottomColor: Colors.inactiveTint}}
+                        
+                        labelStyle={{color: Colors.inactiveTint}}
+                        inputStyle={{color: Colors.inactiveTint}}
+                        
+                        onChange={setCreditCardData}
+                        
+                    />
+
+
+                    <TouchableOpacity style={[styles.boton, {alignSelf: 'center'}]} onPress={handleCreditCard}>
+                        <Text style={styles.buttonText}>ACTUALIZAR TARJETA</Text>
+                    </TouchableOpacity>
                 </View>
-                
-                <TouchableOpacity style={[styles.boton, {bottom: 2}]} onPress={handleCreditCard}>
-                    <Text style={styles.buttonText}>CONFIRMAR CAMBIO</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={[styles.botonCancel, {bottom: 2}]} onPress={() => navigation.goBack()}>
-                    <Text style={styles.buttonText}>CANCELAR</Text>
-                </TouchableOpacity>
-
 
             </View>
         </View>

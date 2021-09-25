@@ -108,9 +108,9 @@ const styles = StyleSheet.create({
     },
 
     creditCard: {
-        backgroundColor: 'green',
-        height: '50%',
-        top: '20%'
+        width: '100%',
+        top: '25%',
+        height: '7.5%'
     }
 
 })
