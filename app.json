@@ -4,7 +4,7 @@
     "slug": "iapp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/splash/Splash3.png",
     "splash": {
       "image": "./src/assets/splash/Splash2.png",
       "resizeMode": "contain",

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Text, View, TouchableOpacity, TextInput } from 'react-native';
+import {Text, View, TouchableOpacity, TextInput, Keyboard } from 'react-native';
 import styles from './Styles'
 
 import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input-view";
@@ -10,7 +10,20 @@ export default function ChangeCreditCard({navigation, route}) {
 
     const [creditCardData, setCreditCardData] = useState({})
 
-    const handleCreditCard = () => console.log(creditCardData)
+    const handleCreditCard = () => {
+        console.log(creditCardData)
+
+        //TODO: Acá faltaría el manejo intermedio. Es decir, actualizar en la app y en el storage, el cambio de tarjeta
+        //2do Sprint
+
+        navigation.pop()
+    }
+
+    const handleKeyboard = ()=>{
+        if(Keyboard.addListener('keyboardDidShow')){
+            Keyboard.dismiss()
+        }
+    }
 
     // will print:
     // {
@@ -36,7 +49,7 @@ export default function ChangeCreditCard({navigation, route}) {
     // cvc, name, & postalCode will only be available when the respective props is enabled (e.g. requiresName, requiresCVC)
 
     return (
-        <View style={[styles.container, {justifyContent: 'flex-start'}]}>
+        <View style={[styles.container, {justifyContent: 'flex-start'}]} onTouchStart={()=>handleKeyboard()}>
             <View style={[styles.mainWrapper, {justifyContent: 'flex-start'}]}>
 
                 <View style={styles.creditCard}>
@@ -51,13 +64,12 @@ export default function ChangeCreditCard({navigation, route}) {
                         
                         labelStyle={{color: Colors.inactiveTint}}
                         inputStyle={{color: Colors.inactiveTint}}
-                        
+
                         onChange={setCreditCardData}
-                        
                     />
 
 
-                    <TouchableOpacity style={[styles.boton, {alignSelf: 'center'}]} onPress={handleCreditCard}>
+                    <TouchableOpacity style={[styles.boton, {alignSelf: 'center'}]} onPress={()=>handleCreditCard()}>
                         <Text style={styles.buttonText}>ACTUALIZAR TARJETA</Text>
                     </TouchableOpacity>
                 </View>

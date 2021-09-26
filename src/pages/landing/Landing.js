@@ -1,5 +1,5 @@
 import React, {useState, useRef, useContext} from 'react'
-import { View, Text, ImageBackground,Platform, TouchableOpacity, Image, Animated, Dimensions, TextInput } from 'react-native';
+import { View, Text, ImageBackground,Platform, TouchableOpacity, Image, Animated, Dimensions, TextInput,Keyboard } from 'react-native';
 import { BlurView } from 'expo-blur';
 import styles from './Styles'
 import Colors from '../../constants/colors';
@@ -23,6 +23,7 @@ const Landing = ({navigation}) => {
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [credit, setCredit] = useState();
 
     const yScrollLogo = useRef(new Animated.Value(0)).current;
     const yScrollButtons = useRef(new Animated.Value((height.valueOf())-(height.valueOf()*0.8))).current;
@@ -33,7 +34,8 @@ const Landing = ({navigation}) => {
 
     const handleRegister = (value) =>{
         //TODO: Manejo de paquetes y tarjeta
-        value.authContext.signUp({email,name,surname,password})
+        console.log(credit);
+        // value.authContext.signUp({email,name,surname,password})
     }
 
     const handleShowLogin = () =>{
@@ -142,7 +144,7 @@ const Landing = ({navigation}) => {
             return(
                 <UserContext.Consumer>
                     {value => (
-                        <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTest, Index: 100}}>
+                        <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTest, Index: 100}} onTouchStart={()=>handleKeyboard()}>
                             <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%',justifyContent:'space-around', alignItems:'center'}}>
                                 <View style={styles.inputWrapper}>
                                     {badLogin === 3 ? <Text style={{color: 'red', fontSize: 20}}>Error, datos incorrectos</Text> : null}
@@ -150,7 +152,6 @@ const Landing = ({navigation}) => {
                                     <TextInput autoCapitalize={'none'} placeholder={'Contraseña'} style={[styles.input, {borderColor:'red', borderWidth: badLogin}]} keyboardType={'default'} secureTextEntry={true} onChangeText={text => setpasswordLOGIN(text)}></TextInput>
                                 </View>
                                 <View style={styles.buttonsWrapper}>
-                                    {/* <TouchableOpacity style={styles.button} onPress={()=> value.authContext.signIn({emailLOGIN,passwordLOGIN})}> */}
                                     <TouchableOpacity style={styles.button} onPress={()=>handleLogin(value)}>
 
                                         <Text style={styles.buttonText}>Iniciar Sesión</Text>
@@ -210,16 +211,22 @@ const Landing = ({navigation}) => {
         )
     }
 
+    const handleKeyboard = ()=>{
+        if(Keyboard.addListener('keyboardDidShow')){
+            Keyboard.dismiss()
+        }
+    }
+
     const cardDeclarer = ()=>{
         return(
             <UserContext.Consumer>
                 {value => (
                     <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTestCard, Index: 100}}>
-                        <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
+                        <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}} onTouchStart={()=>handleKeyboard()}>
                             <Text style={styles.buttonText}>Ingrese su Método de Pago</Text>
                             <View style={[styles.inputWrapper]}>
                                 <View style={[styles.input, {justifyContent: 'center', alignItems: 'center'}]}>
-                                    <LiteCreditCardInput  />
+                                    <LiteCreditCardInput onChange={data => setCredit(data)}/>
                                 </View>
                             </View>
                             <View style={styles.buttonsWrapper}>

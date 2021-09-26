@@ -9,8 +9,8 @@ import * as Linking from 'expo-linking'
 
 export default function Profile({navigation}) {
 
-    const handleFacturacion = () =>{
-        Linking.openURL('http://facturacion-front.vercel.app/?from=mobile&token=?') //AGREGAR TOKEN
+    const handleFacturacion = (value) =>{
+        Linking.openURL(`http://facturacion-front.vercel.app/?from=mobile&token=${value.state.userToken}`)
     }
 
     return (
@@ -33,7 +33,7 @@ export default function Profile({navigation}) {
                                 <Text style={styles.buttonText}>AJUSTES</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity style={styles.buttonStyle} onPress={() => handleFacturacion()}>
+                            <TouchableOpacity style={styles.buttonStyle} onPress={() => handleFacturacion(value)}>
                                 <Text style={styles.buttonText}>FACTURACION</Text>
                             </TouchableOpacity>
 
@@ -41,7 +41,7 @@ export default function Profile({navigation}) {
                                     <Text style={styles.buttonText}>CERRAR SESION</Text>
                             </TouchableOpacity>
 
-                            <Text style={{color:'grey', position:'absolute', bottom: 5}}>Version: 0.85 - Dev</Text>
+                            <Text style={{color:'grey', position:'absolute', bottom: 5}}>Version: 0.9 - Pre-Alpha</Text>
                         </View>
                     </View>
                 </View>

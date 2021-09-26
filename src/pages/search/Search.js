@@ -11,7 +11,7 @@ const Search = ()=>{
 
     return (
         <View style={styles.container}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
             <View style={styles.main}>
                 <View style={styles.inputMain}>
                     <TextInput style={styles.inputText} 
