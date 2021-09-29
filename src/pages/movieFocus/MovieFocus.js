@@ -8,7 +8,6 @@ import styles from './Styles';
 const MovieFocus = ({navigation,route})=>{
 
     const {title, idMovie, imageSource,ratings,genre,age, desc, urlFile} = route.params;
-    //Falta el loading al cargar la pelicula, más adelante
 
     const header = ()=>{
         return(
@@ -32,7 +31,6 @@ const MovieFocus = ({navigation,route})=>{
 
     return(
         <View style={{height:'100%', width:'100%', backgroundColor: Colors.primaryv3}}>
-            {/* <Text>HOLA</Text> */}
             <ImageBackground 
             resizeMode='stretch' 
             style={{
@@ -40,7 +38,6 @@ const MovieFocus = ({navigation,route})=>{
                 width:'100%',
                 justifyContent:'flex-end'
             }} 
-            // source={require("../../assets/images/images/series/money_heist/money_heist_cover.jpg")}
             source={{
                 uri:  imageSource,
               }}
@@ -53,7 +50,6 @@ const MovieFocus = ({navigation,route})=>{
                     bounces={false}
                     bouncesZoom={false}
                     style={{width:'100%'}}>
-                        {/* Pongo Scroll view por si la pantalla es más chiquita */}
                         <View style={styles.mainHeader}>
                             <Text style={styles.titleText}>{title}</Text>
                             <View style={styles.movieData}>
@@ -68,27 +64,15 @@ const MovieFocus = ({navigation,route})=>{
                         <View style={styles.sinopsis}>
                                 <Text style={styles.sinopsisText}>{desc}</Text>
                         </View>
-                        <TouchableOpacity style={styles.details} onPress={()=>navigation.navigate('MovieDetails',{title:title})}>
+                        <TouchableOpacity style={styles.details} onPress={()=>navigation.navigate('MovieDetails',{title:title, ratings:ratings})}>
                                 <Text style={styles.playMovieText}>Más detalles</Text>
                         </TouchableOpacity>
-
-                        {/* <View style={{width:'100%', justifyContent:'center', alignItems:"center"}}>
-                            <TouchableOpacity style={styles.playMovie} onPress={()=>navigation.navigate('MoviePlayer',{title:title})}>
-                                <Text style={styles.playMovieText}>Reproducir</Text>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity style={styles.details}>
-                                <Text style={styles.playMovieText}>Más detalles</Text>
-                            </TouchableOpacity>
-                        </View> */}
                     </ScrollView>
                 </BlurView>
 
 
             </ImageBackground>
             {header()}
-            
-
         </View>
     )
 }

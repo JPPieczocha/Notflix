@@ -8,6 +8,19 @@ const styles = StyleSheet.create({
         height: '100%',
 		borderTopWidth:2,
 	},
+    header:{
+        height:100,
+        width:'100%', 
+
+        justifyContent:'space-around', 
+        alignItems:'center', 
+        flexDirection:'row',
+
+        paddingTop: 40, 
+        
+        borderBottomColor: Colors.secondary,
+        borderBottomWidth: 2
+    },
     mainWrapper: {
 		// alignItems: 'center',
 		// justifyContent: 'center',
@@ -21,6 +34,25 @@ const styles = StyleSheet.create({
     },
     item:{
         padding:1,
+    },
+    detailText:{
+        color:Colors.white,
+        fontSize:20,
+        fontWeight:'bold',
+        marginBottom:10,
+        marginHorizontal:15,
+        marginTop:15
+    },
+    actorsItem:{
+        backgroundColor:Colors.transparentWhite,
+        marginHorizontal: 5,
+        paddingVertical: 5,
+        paddingHorizontal: 5,
+
+        justifyContent:"center",
+        alignItems:"center",
+
+        borderRadius: 15
     }
 });
 
