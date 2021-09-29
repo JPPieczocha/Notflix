@@ -61,8 +61,14 @@ export default function App() {
 				}
 			} catch (e) {
 				// Restoring token failed
-				console.log('ERRRRRO');
+				console.log('Error en userToken / JWT');
 				console.log(e);
+				if(user === undefined){
+					console.log('CREDENCIALES VENCIDAS, CERRANDO SESION...');
+					const deleteKeyStore = await SecureStore.deleteItemAsync('userToken')
+					dispatch({ type: 'SIGN_OUT'});
+				}
+				
 			}
 			// After restoring token, we may need to validate it in production apps
 			// This will switch to the App screen or Auth screen and this loading
@@ -89,7 +95,7 @@ export default function App() {
 				}
 				//---------------------
 				const saveKeyStore =  await SecureStore.setItemAsync('userToken', iniciarSesion.token);
-				user = JWT.decode(iniciarSesion.token, '$2a$08$sxsFC91y2xGJxlq.ZZZHEO');
+				user = JWT.decode(iniciarSesion.token, '$2a$08$sxsFC91y2xGJxlq.ZZZHEO',{ timeSkew: 30 });
 				dispatch({ type: 'SIGN_IN', token: iniciarSesion.token, userdata: user});
 			}catch (e){
 				console.log('ERROR EN useMeMO SignIN');
@@ -122,7 +128,7 @@ export default function App() {
 				const saveKeyStore =  await SecureStore.setItemAsync('userToken', iniciarSesion.token);
 
 				//TODO: Manejo de controles y fail de inicio / registro
-				user = JWT.decode(iniciarSesion.token, '$2a$08$sxsFC91y2xGJxlq.ZZZHEO');
+				user = JWT.decode(iniciarSesion.token, '$2a$08$sxsFC91y2xGJxlq.ZZZHEO',{ timeSkew: 30 });
 				dispatch({ type: 'SIGN_IN', token: iniciarSesion.token, userdata: user });
 			}catch (e){
 				console.log('ERROR EN CREAR USUARIO. USEMEMO');

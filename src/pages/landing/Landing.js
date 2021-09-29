@@ -1,10 +1,11 @@
-import React, {useState, useRef, useContext} from 'react'
-import { View, Text, ImageBackground,Platform, TouchableOpacity, Image, Animated, Dimensions, TextInput,Keyboard } from 'react-native';
+import React, {useState, useRef, useContext, useEffect} from 'react'
+import { View, Text, ImageBackground,Platform, TouchableOpacity, Image, Animated, Dimensions, TextInput,Keyboard, ScrollView } from 'react-native';
 import { BlurView } from 'expo-blur';
 import styles from './Styles'
 import Colors from '../../constants/colors';
 import LoadingPage from '../../components/loadingPage/LoadingPage';
 import { UserContext } from '../../components/context/authContext';
+import Paquete from '../../components/paquete/Paquete';
 
 import { LiteCreditCardInput } from "react-native-credit-card-input-view";
 
@@ -24,6 +25,7 @@ const Landing = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [credit, setCredit] = useState();
+    const [paquetes, setPaquetes] = useState();
 
     const yScrollLogo = useRef(new Animated.Value(0)).current;
     const yScrollButtons = useRef(new Animated.Value((height.valueOf())-(height.valueOf()*0.8))).current;
@@ -32,10 +34,23 @@ const Landing = ({navigation}) => {
     const yScrollTestPackage = useRef(new Animated.Value(height.valueOf()+200)).current; //El animation del paquetes
     const yScrollTestCard = useRef(new Animated.Value(height.valueOf()+200)).current; //El animation del tarjeta
 
+    useEffect(() => {
+        try{
+            const paquetesData = async ()=>{
+                let data = await (await fetch('https://suscripciones-backend.herokuapp.com/api/packages/v1/list')).json();
+                setPaquetes(data.data);
+            }
+            paquetesData();
+        }catch (e){
+            console.log("Error al adquirir paquetes");
+        }
+    }, [])
+
+
     const handleRegister = (value) =>{
         //TODO: Manejo de paquetes y tarjeta
-        console.log(credit);
-        // value.authContext.signUp({email,name,surname,password})
+        // console.log(credit);
+        value.authContext.signUp({email,name,surname,password})
     }
 
     const handleShowLogin = () =>{
@@ -81,8 +96,6 @@ const Landing = ({navigation}) => {
         ]).start(() => {
             // callback
             setregisterStatus(!registerStatus);
-            // setregisterPackage(!registerPackage);
-
         });
     }
 
@@ -100,9 +113,7 @@ const Landing = ({navigation}) => {
             }).start(),
         ]).start(() => {
             // callback
-            // setregisterStatus(!registerStatus);
             setregisterPackage(!registerPackage);
-            console.log('REGISTRO PAQUETE');
         });
     }
 
@@ -193,11 +204,16 @@ const Landing = ({navigation}) => {
         return(
             <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTestPackage, Index: 100}}>
                 <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
-                    <View style={styles.inputWrapper}>
-                        <TextInput placeholder={'Nombre'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={(text)=>setName(text)}></TextInput>
-                        <TextInput placeholder={'Correo electrónico'} style={styles.input} keyboardType={'ascii-capable'} onChangeText={(text)=>setEmail(text)}></TextInput>
-                        <TextInput placeholder={'Contraseña'} style={styles.input} keyboardType={'visible-password'} onChangeText={(text)=>setPassword(text)}></TextInput>
-                    </View>
+                    <Text style={styles.paqueteText}>Seleccion de Paquetes</Text>
+                    <ScrollView style={styles.paquetesWrapper} contentContainerStyle={{flexGrow:1,justifyContent:'center', alignItems:'center'}}>
+                        {/* El flex grow makes the content container stretch to fill the ScrollView but does not restrict the maximum */}
+                        {/* height, so you can still scroll correctly when the content extends the bounds of the ScrollView */}
+                        {paquetes === undefined ? null : paquetes.map((item,index)=>{
+                            return(
+                                <Paquete key={index} id={item.id} nombre={item.nombre} precio={item.precio} imagen={item.imagen} estado={item.estado} descripcion={item.descripcion} contenidos={item.descripcion}></Paquete>
+                            )
+                        })}
+                    </ScrollView>
                     <View style={styles.buttonsWrapper}>
                         <TouchableOpacity style={styles.button} onPress={()=>handleShowCard()}>
                             <Text style={styles.buttonText}>Siguiente</Text>
@@ -206,7 +222,7 @@ const Landing = ({navigation}) => {
                             <Text style={styles.buttonText}>Atrás</Text>
                         </TouchableOpacity>
                     </View>
-            </BlurView>
+                </BlurView>
             </Animated.View>
         )
     }

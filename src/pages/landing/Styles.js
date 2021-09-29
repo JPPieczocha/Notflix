@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import colors from '../../constants/colors';
 import Colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
         height: 50,
         width:'90%',
 
-        backgroundColor: colors.secondary,
+        backgroundColor: Colors.secondary,
         marginVertical: 10,
 
         borderRadius: 25,
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
         height: 50,
         width:'90%',
 
-        backgroundColor: colors.transparentWhite,
+        backgroundColor: Colors.transparentWhite,
         marginBottom: 10,
 
         borderRadius: 25,
@@ -68,6 +67,16 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         padding: 10
     },
+    paquetesWrapper:{
+        width:'100%',
+    },
+    paqueteText:{
+        color:Colors.white,
+
+        fontSize: 20,
+        marginTop: 5
+        //TODO: Modificar ese margin, posible ponerlo automatico con flex
+    }
 
 })
 
