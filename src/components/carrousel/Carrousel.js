@@ -1,6 +1,5 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {SafeAreaView,FlatList,TouchableOpacity,ScrollView,Image,ImageBackground,TouchableWithoutFeedback,View,Text, Animated, Dimensions,StyleSheet } from 'react-native';
-import MoviePreview from '../moviePreview/MoviePreview';
+import React, {useRef} from 'react';
+import {FlatList,TouchableOpacity,ScrollView,Image,View,Text, Animated, Dimensions,StyleSheet } from 'react-native';
 import dummyData from '../../assets/moviesDummy';
 import styles from './Styles'
 import Colors from '../../constants/colors';
@@ -9,7 +8,7 @@ const Carrousel = ({nav})=>{
 
     const scrollX = React.useRef(new Animated.Value(0)).current;
     const { width, height } = Dimensions.get("window");
-    const SPACER_SIZE = (width - 270)/2 //Quiero la mitad de cada lado, es un dummy de espacio
+    const SPACER_SIZE = (width - 270)/2 //Espaciador que logra que se vea la pelicula centrada y otras a los costados.
     
     const data = ()=>{
         return [{key: 'left', id: '-1'},...dummyData.newSeason,{key: 'right', id: '-2'}];
@@ -62,7 +61,7 @@ const Carrousel = ({nav})=>{
         <View>
             <Animated.FlatList
             horizontal
-            snapToInterval={270} //Es 250 + 10 de margin de cada lado (+20)
+            snapToInterval={270} //Es 250 + 10 de margin de cada lado (es decir, 20)
             showsHorizontalScrollIndicator={false}
             decelerationRate={0}
             contentContainerStyle={{alignItems: 'center', marginTop: 15}}
@@ -77,16 +76,14 @@ const Carrousel = ({nav})=>{
                 if(item.id == '-2' || item.id == '-1'){
                     return(
                         <View style={{width: SPACER_SIZE, backgroundColor:'red'}}>
-                            {/* Esto genera el espacio a la izq y derecha para mantener centrado el flat list y mostrar cosas a los costados.
-                            Podría haber hecho que simplemente se muestre uno en el medio con una propiedad, pero me gustó más esta. */}
+                            {/* Esto genera el espacio a la izq y derecha para mantener centrado el flat list y mostrar cosas a los costados.*/}
                         </View>
                     )
                 }
 
-                // const inputRange = [(index-1)*270, index*270, (index+1)*270] //250 es el item full size, poner constante se usa para el tamaño que usa la animacion. Deprecado.
-                const inputRange = [(index-2)*270, (index-1)*270, index*270] //250 es el item full size, poner constante se usa para el tamaño que usa la animacion.
-                //Uso -2 y -1 porque ahora está el "dummy" que desplaza ambos lados
-                //Previo item y siguiente...
+                const inputRange = [(index-2)*270, (index-1)*270, index*270] 
+                //250 es el item full size, poner constante se usa para el tamaño que usa la animacion.
+                //Uso -2 y -1 porque ahora está el SPACER que desplaza ambos lados
 
                 const translateY = scrollX.interpolate({
                     inputRange,

@@ -1,6 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react'
-import { View, Text, ImageBackground,Platform, TouchableOpacity, Image, Animated, Dimensions, TextInput } from 'react-native';
-import { BlurView } from 'expo-blur';
+import { View, Image, Animated, Dimensions } from 'react-native';
 import styles from './Styles'
 import Colors from '../../constants/colors';
 
@@ -10,7 +9,6 @@ const LoadingPage = ()=>{
     const {width, height} = Dimensions.get('window')
 
     const [loading,setLoading] = useState(true);
-    //Esto de arriba se sacaría. No se maneja acá. Es prueba
 
     const widthBar = useRef(new Animated.Value(50)).current;
     const topSlider = useRef(new Animated.Value(-50)).current;
@@ -29,9 +27,6 @@ const LoadingPage = ()=>{
             }).start()
         })
     }, [loading])
-
-
-
 
     return(
         <View style={styles.container}>

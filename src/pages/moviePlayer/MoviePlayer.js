@@ -4,7 +4,6 @@ import { Video, AVPlaybackStatus } from 'expo-av';
 import * as ScreenOrientation from 'expo-screen-orientation';
 
 import LoadingPage from '../../components/loadingPage/LoadingPage';
-import Colors from '../../constants/colors';
 
 const {width, height} = Dimensions.get('window')
 
@@ -25,8 +24,6 @@ const MoviePlayer = ({navigation, route})=>{
 			ScreenOrientation.unlockAsync()
 			video.current.presentFullscreenPlayer()
 		}
-		else{
-		}
 	}
 
 	const handleDismissFullScreen = ()=>{
@@ -38,7 +35,6 @@ const MoviePlayer = ({navigation, route})=>{
 			if(status.isLoaded && fullScreen){
 				navigation.pop();
 			}
-		}else{
 		}
 	}
 
@@ -60,15 +56,12 @@ const MoviePlayer = ({navigation, route})=>{
 					onError={()=>console.log('Error')}
 					resizeMode="contain"
 
-					//Y si lo pongo en pantalla chiquita y doy la chance de que hagan fullscreen?? MMm
 					onPlaybackStatusUpdate={status => setStatus(() => status)}
 					shouldPlay={true}
 					autoplay={true}
 					useNativeControls={handlePlatformNativeControls()}
 					onLoad={()=>fullScreenPlayback()}
 					onFullscreenUpdate={()=>handleDismissFullScreen()}
-					// onReadyForDisplay={params => {params.naturalSize.orientation = "landscape"}}
-					// el onReadyForDisplay era  una solución que no funcionó de una web.
 				/>
 			</View>
 		</View>

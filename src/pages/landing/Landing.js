@@ -6,6 +6,7 @@ import Colors from '../../constants/colors';
 import LoadingPage from '../../components/loadingPage/LoadingPage';
 import { UserContext } from '../../components/context/authContext';
 import Paquete from '../../components/paquete/Paquete';
+import { getAllPaquetes } from '../../controllers/PackagesController';
 
 import { LiteCreditCardInput } from "react-native-credit-card-input-view";
 
@@ -37,7 +38,7 @@ const Landing = ({navigation}) => {
     useEffect(() => {
         try{
             const paquetesData = async ()=>{
-                let data = await (await fetch('https://suscripciones-backend.herokuapp.com/api/packages/v1/list')).json();
+                let data = await getAllPaquetes();
                 setPaquetes(data.data);
             }
             paquetesData();
@@ -48,8 +49,6 @@ const Landing = ({navigation}) => {
 
 
     const handleRegister = (value) =>{
-        //TODO: Manejo de paquetes y tarjeta
-        // console.log(credit);
         value.authContext.signUp({email,name,surname,password})
     }
 
@@ -131,9 +130,7 @@ const Landing = ({navigation}) => {
             }).start(),
         ]).start(() => {
             // callback
-            // setregisterStatus(!registerStatus);
             setregisterCard(!registerCard);
-            console.log('REGISTRO TARJETA');
         });
     }
 
@@ -258,7 +255,6 @@ const Landing = ({navigation}) => {
             )}</UserContext.Consumer>
         )
     }
-
 
     return(
         <View style={styles.container}>

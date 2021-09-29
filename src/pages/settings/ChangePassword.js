@@ -7,7 +7,6 @@ export default function ChangePassword({navigation, route}) {
     const [oldPassword, setoldPassword] = useState("")
     const [newPassword, setnewPassword] = useState("")
     const [confirmPassword, setconfirmPassword] = useState("")
-    
 
     return (
         <View style={styles.container}>

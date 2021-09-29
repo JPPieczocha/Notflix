@@ -1,8 +1,6 @@
-import React, {useState, useRef, useContext, useEffect} from 'react'
-import { View, Text, ImageBackground,Platform, TouchableOpacity, Image, Animated, Dimensions, TextInput,Keyboard, ScrollView } from 'react-native';
-import { BlurView } from 'expo-blur';
+import React from 'react'
+import { View, Text} from 'react-native';
 import styles from './Styles'
-import Colors from '../../constants/colors';
 
 const Paquete = ({id,nombre,precio,imagen,estado,descripcion, contenidos,fechaAct, fechaCreacion})=>{
     return(

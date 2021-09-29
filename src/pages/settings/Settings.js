@@ -57,7 +57,6 @@ export default function Settings({navigation, route}) {
                                 <Feather name="info" size={24} color={Colors.secondary} style={styles.opcionIcon}/>
                             </TouchableOpacity>
                             
-
                         </ScrollView>
                     </View>
                 </View>

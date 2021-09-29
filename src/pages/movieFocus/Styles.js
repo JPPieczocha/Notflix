@@ -9,9 +9,8 @@ const styles = StyleSheet.create({
         alignItems:"center"
     },
     mainHeader:{
-        // height: 100,
         width:'100%',
-        // justifyContent:"center",
+
         justifyContent:"space-between",
         alignItems:"center",
         marginVertical: 15
@@ -51,8 +50,6 @@ const styles = StyleSheet.create({
         width:'100%',
         height: 50,
 
-        // backgroundColor: 'red',
-
         flexDirection:'row',
         alignItems:"center",
         justifyContent:"space-around"
@@ -61,6 +58,7 @@ const styles = StyleSheet.create({
     movieDataText:{
         color: Colors.white,
         backgroundColor:Colors.transparentWhite,
+        
         paddingHorizontal: 20,
         paddingVertical:10,
         

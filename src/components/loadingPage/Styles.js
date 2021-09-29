@@ -20,8 +20,9 @@ const styles = StyleSheet.create({
     image:{
         resizeMode: 'contain',
         width: '80%',
-        backgroundColor:Colors.primaryv3,
         height:'7%',
+
+        backgroundColor:Colors.primaryv3,
         zIndex: 1000
     }
 

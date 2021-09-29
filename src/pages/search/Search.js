@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
-import {Text, View, TextInput,Keyboard, TouchableWithoutFeedback } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, TextInput,Keyboard, TouchableWithoutFeedback, ScrollView } from 'react-native';
 import styles from './Styles'
 
 
 const Search = ()=>{
 
     const [textSearch, setTextSearch] = useState('')
-
 
     return (
         <View style={styles.container}>
@@ -22,6 +20,9 @@ const Search = ()=>{
                         setTextSearch(event.nativeEvent.text)
                     }}></TextInput>
                 </View>
+                <ScrollView>
+                    {/* Se rendizará la busqueda aquí, en cuanto se tenga la integración final con el CMS */}
+                </ScrollView>
             </View>
             </TouchableWithoutFeedback>
 

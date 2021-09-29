@@ -1,5 +1,4 @@
-import React, {useContext} from 'react';
-import { StyleSheet, Text, View} from 'react-native';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Colors from '../constants/colors';
@@ -38,11 +37,9 @@ export default function MainNav({navigation}){
                                 fontSize: 20,
                             },
                             headerShown:false
-
                         }}/>
                 </Stack.Navigator>
             )}
         </UserContext.Consumer>
-
     );
 }

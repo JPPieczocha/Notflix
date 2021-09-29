@@ -68,7 +68,6 @@ export default function ChangeCreditCard({navigation, route}) {
                         onChange={setCreditCardData}
                     />
 
-
                     <TouchableOpacity style={[styles.boton, {alignSelf: 'center'}]} onPress={()=>handleCreditCard()}>
                         <Text style={styles.buttonText}>ACTUALIZAR TARJETA</Text>
                     </TouchableOpacity>

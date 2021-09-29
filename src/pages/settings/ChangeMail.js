@@ -29,7 +29,8 @@ export default function ChangeMail({navigation, route}) {
 
                 <TextInput 
                     placeholder = "Contraseña"
-                    keyboardType = {"ascii-capable"}
+                    keyboardType = {"default"}
+                    secureTextEntry={true}
                     onChangeText = {(text) => setPassword(text)}
                     style = {styles.input}
                 />

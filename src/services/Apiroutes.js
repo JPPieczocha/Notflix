@@ -1,5 +1,6 @@
 const cmsURL = 'https://ia-cms.herokuapp.com/';
 const ssoURL = 'https://singlesignonbackend.herokuapp.com/api/users/';
+const paqURL = 'https://suscripciones-backend.herokuapp.com/api/packages/v1/'
 
 //----------CMS DE VIDEO----------------------------------------------------
 
@@ -59,3 +60,30 @@ export const registroSSO = async (data) =>{
 }
 
 //--------------------------------------------------------------------------
+
+//----------PAQUETES Y SUBSCRIPCIONES---------------------------------------
+
+//Paquetes------
+export const allPaquetes = async () =>{
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    try {
+        const response = await fetch(paqURL+'/list',options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+//Fin Paquetes--
+
+//Subscripciones
+
+//Fin Subscripciones
+
+//--------------------------------------------------------------------------
+

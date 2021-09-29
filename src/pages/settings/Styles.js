@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
 
         backgroundColor: Colors.primaryv3
     },
-    
     mainWrapper:{
 
         width: '100%',
@@ -22,48 +21,48 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.primaryv3
 
     },
-
     scrollView: {
         width: '100%',
         height: '100%',
     },
-
     headerOption: {
         height: 75,
+
         justifyContent:'center',
         alignItems: 'center',
         borderColor: Colors.inactiveTint,
+
         borderTopWidth: 2,
         borderBottomWidth: 2,
 
         marginBottom: 3
     },
-
     headerOptionText: {
         color: Colors.inactiveTint,
         fontSize: 24
     },
-
     optionButton: {
         flexDirection: 'row',
+
         height: 40,
+
         borderBottomWidth: 1,
         borderColor: Colors.inactiveTint
     },
-
     opcionText: {
         color: Colors.inactiveTint,
+
         alignSelf: 'center',
+
         fontSize: 16,
         left: 10,
     },
-
     opcionIcon: {
         position:'absolute',
+
         right: 15,
         alignSelf: 'center',
     },
-
     input: {
         width:'90%',
         height: 50,
@@ -75,7 +74,6 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         padding: 10
     },
-
     boton: {
         height: 50,
         width:'90%',
@@ -88,12 +86,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems:'center'
     },
-    
     buttonText:{
         color: Colors.white,
         fontSize: 20
     },
-
     botonCancel: {
         height: 50,
         width:'75%',
@@ -106,7 +102,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems:'center'
     },
-
     creditCard: {
         width: '100%',
         top: '25%',

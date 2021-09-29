@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
 	container: {
 		backgroundColor: Colors.primaryv3,
         height: '100%',
-		borderTopWidth:2,
 	},
     header:{
         height:100,
@@ -22,9 +21,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2
     },
     mainWrapper: {
-		// alignItems: 'center',
-		// justifyContent: 'center',
-        
+
 	},
     sep:{
         height:1,
@@ -39,12 +36,14 @@ const styles = StyleSheet.create({
         color:Colors.white,
         fontSize:20,
         fontWeight:'bold',
+
         marginBottom:10,
         marginHorizontal:15,
         marginTop:15
     },
     actorsItem:{
         backgroundColor:Colors.transparentWhite,
+        
         marginHorizontal: 5,
         paddingVertical: 5,
         paddingHorizontal: 5,

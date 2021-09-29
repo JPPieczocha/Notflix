@@ -1,11 +1,8 @@
 import React from 'react';
-import {SafeAreaView,FlatList,TouchableOpacity,Image,ImageBackground,TouchableWithoutFeedback,View, Animated, StyleSheet } from 'react-native';
+import {FlatList,TouchableOpacity,Image,View, Animated, StyleSheet } from 'react-native';
 import styles from './Styles';
-import dummyData from '../../assets/moviesDummy';
 
 const CarrouselBasic = ({nav, route, movies})=>{
-
-    // const {movies} = route.params;
 
     const handleOnPress = (item)=>{
         nav.navigate('MovieFocus',{title:item.movie.title, idMovie: item.movie._id, imageSource: item.movie.imageMobile, ratings: item.movie.value, genre: 'dummy', age: item.movie.minAge, desc: item.movie.description, urlFile: item.movie.movieUrl});
@@ -16,7 +13,6 @@ const CarrouselBasic = ({nav, route, movies})=>{
         horizontal
         bounces={false}
         showsHorizontalScrollIndicator={false}
-        // data={dummyData.newSeason}
         data={movies}
         keyExtractor={item => `${item.pos}`}
 
@@ -34,13 +30,11 @@ const CarrouselBasic = ({nav, route, movies})=>{
                         overflow:'hidden',
                         justifyContent: 'center',
                     }]}>
-                        <Image 
-                        // source={item.thumbnail} dummy
+                        <Image
                         source={{uri:item.movie.imageMobile}}
                         style={{
                             width: '100%',
                             height:'100%',
-                            // width: 200,
                             resizeMode:'contain',
                             backgroundColor:'red'
                             

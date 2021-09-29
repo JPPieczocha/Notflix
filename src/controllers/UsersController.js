@@ -7,6 +7,7 @@ export const login = async (data)=>{
         return json;
     }else{
         console.log('BadLogin into UsersController');
+        console.log('Codigo de respuesta en Login: ' + response.status);
         return response.status
     }
 }
@@ -18,6 +19,7 @@ export const registro = async (data)=>{
         return json;
     }else{
         console.log('BadRegister into UsersController');
+        console.log('Codigo de respuesta en Registro: '+ response.status);
         return response.status;
     }
 }
