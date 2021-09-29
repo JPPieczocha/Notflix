@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 	},
 
 	profileHeader:{
-		height: '45%',
+		height: '40%',
 		width: '100%',
 		justifyContent:"center",
 		alignItems:"center",
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 	buttonWrapper: {
 		alignItems:"center",
 		justifyContent:"center",
-		height: '55%'
+		height: '60%'
 	},
 
 	buttonStyle:{

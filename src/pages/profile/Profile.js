@@ -1,11 +1,10 @@
-import React, {useContext} from 'react';
-import {Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import {Text, View, Image, TouchableOpacity } from 'react-native';
+import * as Linking from 'expo-linking'
+
 import styles from './Styles'
-import Colors from '../../constants/colors';
 import { UserContext } from '../../components/context/authContext';
 
-import * as Linking from 'expo-linking'
 
 export default function Profile({navigation}) {
 
@@ -17,7 +16,6 @@ export default function Profile({navigation}) {
         <UserContext.Consumer>
             {value =>(
                 <View style={styles.container}>
-                    {/* {console.log(value)} */}
                     <View style={styles.mainWrapper}>
                         <View style={styles.profileHeader}>
                             {/* Foto de perfil */}
@@ -34,11 +32,11 @@ export default function Profile({navigation}) {
                             </TouchableOpacity>
 
                             <TouchableOpacity style={styles.buttonStyle} onPress={() => handleFacturacion(value)}>
-                                <Text style={styles.buttonText}>FACTURACION</Text>
+                                <Text style={styles.buttonText}>FACTURACIÓN</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity style={styles.buttonStyleLogOut} onPress={() => value.authContext.signOut()}>
-                                    <Text style={styles.buttonText}>CERRAR SESION</Text>
+                                    <Text style={styles.buttonText}>CERRAR SESIÓN</Text>
                             </TouchableOpacity>
 
                             <Text style={{color:'grey', position:'absolute', bottom: 5}}>Version: 0.9 - Pre-Alpha</Text>
