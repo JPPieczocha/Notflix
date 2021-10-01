@@ -4,7 +4,7 @@ import Colors from '../../constants/colors';
 const styles = StyleSheet.create({
     container:{
         width:'90%',
-        height:50,
+        height:55,
         backgroundColor:Colors.transparentWhite, 
 
         borderRadius: 25,
