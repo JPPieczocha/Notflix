@@ -81,7 +81,7 @@ const MovieDetails = ({navigation,route})=>{
                     renderItem={({ item }) => {
                         return(
                             <View style={styles.actorsItem}>
-                                <Image source={item.image} style={{resizeMode:'center',height:90,width:90,borderRadius:100}}></Image>
+                                <Image source={item.image} style={{resizeMode:'cover',height:90,width:90,borderRadius:100}}></Image>
                                 <Text style={{color:Colors.white, marginTop:5}}>{item.title}</Text>
                                 {/* <Text style={{color:'#C5C3C3'}}>{item.title}</Text> */}
                             </View>
