@@ -27,16 +27,17 @@ export default function ChangePackage({navigation, route}) {
     return (
         <View style={styles.container}>
             <View style={styles.mainWrapper}>
-                <ScrollView style={{width:'100%', maxHeight:'100%'}} contentContainerStyle={{justifyContent:'center', alignItems:'center'}}>
+                <View style={{width:'100%', maxHeight:'100%', justifyContent:'center', alignItems:'center'}}>
                     {paquetes === undefined ? <LoadingPage/> : 
-                <ScrollView style={{width:'100%', maxHeight:'60%', marginBottom:25}} contentContainerStyle={{justifyContent:'center', alignItems:'center'}}>
-                    {paquetes.map((item,index)=>{
-                            return(
-                                <Paquete key={index} id={item.id} nombre={item.nombre} precio={item.precio} imagen={item.imagen} estado={item.estado} descripcion={item.descripcion} contenidos={item.descripcion}></Paquete>
-                            )
-                    })}
-                </ScrollView>}
-
+                        <ScrollView style={{width:'100%', maxHeight:'60%', marginBottom:25}} contentContainerStyle={{justifyContent:'center', alignItems:'center'}}>
+                            {paquetes.map((item,index)=>{
+                                    return(
+                                        <Paquete key={index} id={item.id} nombre={item.nombre} precio={item.precio} imagen={item.imagen} estado={item.estado} descripcion={item.descripcion} contenidos={item.descripcion}></Paquete>
+                                    )
+                            })}
+                        </ScrollView>
+                    }
+                
                 <TouchableOpacity style={styles.boton}>
                     <Text style={styles.buttonText}>CONFIRMAR CAMBIO</Text>
                 </TouchableOpacity>
@@ -44,7 +45,7 @@ export default function ChangePackage({navigation, route}) {
                 <TouchableOpacity style={styles.botonCancel} onPress={() => navigation.goBack()}>
                     <Text style={styles.buttonText}>CANCELAR</Text>
                 </TouchableOpacity>
-                </ScrollView>
+                </View>
 
             </View>
         </View>
