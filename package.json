@@ -11,10 +11,12 @@
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
+    "@react-navigation/stack": "^6.0.9",
     "expo": "~42.0.1",
     "expo-av": "~9.2.3",
     "expo-blur": "~9.0.3",
     "expo-jwt": "^1.4.1",
+    "expo-linking": "~2.3.1",
     "expo-screen-orientation": "~3.2.1",
     "expo-secure-store": "~10.2.0",
     "expo-status-bar": "~1.0.4",
@@ -24,8 +26,7 @@
     "react-native-credit-card-input-view": "^0.0.7",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
-    "react-native-web": "~0.13.12",
-    "expo-linking": "~2.3.1"
+    "react-native-web": "~0.13.12"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
