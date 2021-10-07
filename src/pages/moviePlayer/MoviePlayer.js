@@ -52,8 +52,7 @@ const MoviePlayer = ({navigation, route})=>{
 				<Video
 					ref={video}
 					style={styles.video}
-					// source={{uri: fileURL,}}
-					source={{uri: 'https://vod-progressive.akamaized.net/exp=1633142766~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F3396%2F23%2F591980247%2F2790069735.mp4~hmac=d7dc11438cd517a533d611d5824b8fe510bec1fc9a581259582bb828ef9668a2/vimeo-prod-skyfire-std-us/01/3396/23/591980247/2790069735.mp4?filename=Spider-Man%3A+No+Way+Home+-+Teaser+Trailer+%28127042%29.mp4',}}
+					source={{uri: fileURL,}}
 					onError={()=>console.log('Error')}
 					resizeMode="contain"
 
