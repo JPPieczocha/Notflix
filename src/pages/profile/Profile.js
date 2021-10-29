@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, Image, TouchableOpacity } from 'react-native';
+import {Text, View, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import * as Linking from 'expo-linking'
 
 import styles from './Styles'
@@ -20,7 +20,7 @@ export default function Profile({navigation}) {
                         <View style={styles.profileHeader}>
                             {/* Foto de perfil */}
                             <TouchableOpacity>
-                                <Image style={styles.profileImage} source={require('../../../src/assets/images/dummy_profile/4.jpg')}></Image>
+                                <Image style={styles.profileImage} source={require('../../../src/assets/images/dummy_profile/4.jpg')} onProgress={()=> <ActivityIndicator size={'large'} color={'white'}/>}></Image>
                             </TouchableOpacity>
                             <Text style={styles.headerProfileText}>{value.state.userData.name + " " + value.state.userData.last_name}</Text>
                             <Text style={styles.packageProfileText}>ID (test): {value.state.userData._id}</Text>

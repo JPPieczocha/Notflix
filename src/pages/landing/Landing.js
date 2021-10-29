@@ -1,5 +1,5 @@
 import React, {useState, useRef, useContext, useEffect} from 'react'
-import { View, Text, ImageBackground,Platform, TouchableOpacity, Image, Animated, Dimensions, TextInput,Keyboard, ScrollView } from 'react-native';
+import { View, Text, ImageBackground,Platform, TouchableOpacity, Image, Animated, Dimensions, TextInput,Keyboard, ScrollView, ActivityIndicator } from 'react-native';
 import { BlurView } from 'expo-blur';
 import styles from './Styles'
 import Colors from '../../constants/colors';
@@ -9,10 +9,12 @@ import Paquete from '../../components/paquete/Paquete';
 import { getAllPaquetes } from '../../controllers/PackagesController';
 
 import { LiteCreditCardInput } from "react-native-credit-card-input-view";
+import colors from '../../constants/colors';
 
 const Landing = ({navigation}) => {
 
     const {height, width} = Dimensions.get('window');
+	const [loading, setLoading] = useState(false);
  
     const [loginStatus, setLogInStatus] = useState(false);
     const [registerStatus, setregisterStatus] = useState(false);
@@ -135,10 +137,12 @@ const Landing = ({navigation}) => {
     }
 
     const handleLogin =  async(value)=>{
-        const status =await value.authContext.signIn({emailLOGIN,passwordLOGIN});
+        console.log(loading);
+        const status = await value.authContext.signIn({emailLOGIN,passwordLOGIN});
         if(status === 401){
             setbadLogin(3);
         }
+        // setLoading(false);
     }
 
     const handleTextMail = (text)=>{
@@ -160,9 +164,9 @@ const Landing = ({navigation}) => {
                                     <TextInput autoCapitalize={'none'} placeholder={'Contraseña'} style={[styles.input, {borderColor:'red', borderWidth: badLogin}]} keyboardType={'default'} secureTextEntry={true} onChangeText={text => setpasswordLOGIN(text)}></TextInput>
                                 </View>
                                 <View style={styles.buttonsWrapper}>
-                                    <TouchableOpacity style={styles.button} onPress={()=>handleLogin(value)}>
-
-                                        <Text style={styles.buttonText}>Iniciar Sesión</Text>
+                                    <TouchableOpacity style={styles.button} onPress={()=>{setLoading(true); handleLogin(value);}}>
+                                        {loading ? <ActivityIndicator size={'large'} color={colors.white}/> : 
+                                        <Text style={styles.buttonText}>Iniciar Sesion</Text>}
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.buttonSignUp} onPress={()=>handleShowLogin()}>
                                         <Text style={styles.buttonText}>Atrás</Text>
@@ -243,8 +247,10 @@ const Landing = ({navigation}) => {
                                 </View>
                             </View>
                             <View style={styles.buttonsWrapper}>
-                                <TouchableOpacity style={styles.button} onPress={()=>handleRegister(value)}>
-                                    <Text style={styles.buttonText}>Registrarse</Text>
+                                <TouchableOpacity style={styles.button} onPress={()=>{setLoading(true); handleRegister(value)}}>
+                                    {/* <Text style={styles.buttonText}>Registrarse</Text> */}
+                                    {loading ? <ActivityIndicator size={'large'} color={colors.white}/> : 
+                                        <Text style={styles.buttonText}>Iniciar Sesion</Text>}
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.buttonSignUp} onPress={()=>handleShowCard()}>
                                     <Text style={styles.buttonText}>Atrás</Text>
@@ -262,6 +268,7 @@ const Landing = ({navigation}) => {
             source={require('../../assets/landing/fondov2.png')}
             style={{width:'100%', height:'100%', backgroundColor: Colors.primaryv3, alignItems:'center'}}
             resizeMode={'cover'}
+            onLoadStart={()=><ActivityIndicator size={'large'} color={colors.white}/>}
             >
             <View style={styles.logoWrapper}>
                 <Animated.Image

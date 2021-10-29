@@ -15,17 +15,18 @@
     "expo-av": "~9.2.3",
     "expo-blur": "~9.0.3",
     "expo-jwt": "^1.4.1",
+    "expo-linking": "~2.3.1",
     "expo-screen-orientation": "~3.2.1",
     "expo-secure-store": "~10.2.0",
     "expo-status-bar": "~1.0.4",
+    "jwt-decode": "^3.1.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-credit-card-input-view": "^0.0.7",
     "react-native-safe-area-context": "3.2.0",
     "react-native-screens": "~3.4.0",
-    "react-native-web": "~0.13.12",
-    "expo-linking": "~2.3.1"
+    "react-native-web": "~0.13.12"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
