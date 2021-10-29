@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useState, createContext, useMemo, useEffect} from 'react';
-import JWT from 'expo-jwt';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SecureStore from 'expo-secure-store';
+import jwt_decode from "jwt-decode";
 
 import MainNav from './src/navigation/MainNav';
 import LoadingPage from './src/components/loadingPage/LoadingPage';
@@ -12,6 +12,7 @@ import { login, registro } from './src/controllers/UsersController';
 import Landing from './src/pages/landing/Landing';
 
 export default function App() {
+
 
 	const [state, dispatch] = React.useReducer(
 		(prevState, action) => {
@@ -57,7 +58,7 @@ export default function App() {
 			try {
 				userToken = await SecureStore.getItemAsync('userToken');
 				if(userToken !== null){
-					user = JWT.decode(userToken,'$2a$08$sxsFC91y2xGJxlq.ZZZHEO');
+					user = jwt_decode(userToken);
 				}
 			} catch (e) {
 				// Restoring token failed
@@ -95,7 +96,15 @@ export default function App() {
 				}
 				//---------------------
 				const saveKeyStore =  await SecureStore.setItemAsync('userToken', iniciarSesion.token);
-				user = JWT.decode(iniciarSesion.token, '$2a$08$sxsFC91y2xGJxlq.ZZZHEO',{ timeSkew: 30 });
+				
+				user = jwt_decode(iniciarSesion.token);
+				console.log('USER: ');
+				console.log(user);
+				console.log();
+
+				let decodedHeader = jwt_decode(iniciarSesion.token, { header: true });
+				console.log(decodedHeader);
+
 				dispatch({ type: 'SIGN_IN', token: iniciarSesion.token, userdata: user});
 			}catch (e){
 				console.log('ERROR EN useMeMO SignIN');
@@ -126,9 +135,9 @@ export default function App() {
 				}
 				const iniciarSesion = await login(auxUser);
 				const saveKeyStore =  await SecureStore.setItemAsync('userToken', iniciarSesion.token);
-
+				user = jwt_decode(iniciarSesion.token);
 				//TODO: Manejo de controles y fail de inicio / registro
-				user = JWT.decode(iniciarSesion.token, '$2a$08$sxsFC91y2xGJxlq.ZZZHEO',{ timeSkew: 30 });
+				// user = JWT.decode(iniciarSesion.token, '$2a$08$sxsFC91y2xGJxlq.ZZZHEO',{ timeSkew: 30 });
 				dispatch({ type: 'SIGN_IN', token: iniciarSesion.token, userdata: user });
 			}catch (e){
 				console.log('ERROR EN CREAR USUARIO. USEMEMO');
