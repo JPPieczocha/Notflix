@@ -39,7 +39,7 @@ export default function Profile({navigation}) {
                                     <Text style={styles.buttonText}>CERRAR SESIÓN</Text>
                             </TouchableOpacity>
 
-                            <Text style={{color:'grey', position:'absolute', bottom: 5}}>Version: 0.9 - Pre-Alpha</Text>
+                            <Text style={{color:'grey', position:'absolute', bottom: 5}}>Version: 0.95 - Beta</Text>
                         </View>
                     </View>
                 </View>

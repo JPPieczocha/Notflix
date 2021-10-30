@@ -57,7 +57,7 @@ const MovieDetails = ({navigation,route})=>{
                         <Ionicons name={'arrow-back'} size={30} color={Colors.inactiveTint}/>
                     </TouchableOpacity>
                 </View>
-                <Text style={{color:"#fff",fontSize:23,fontWeight:'bold'}}>{allData.movie.title}</Text>
+                <Text style={{color:"#fff",fontSize:23,fontWeight:'bold', textAlign: 'center'}}>{allData.movie.title}</Text>
                 <View style={{
                     width:50,
                     height:50,

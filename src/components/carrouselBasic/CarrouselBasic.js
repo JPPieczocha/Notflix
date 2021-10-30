@@ -2,6 +2,8 @@ import React from 'react';
 import {FlatList,TouchableOpacity,Image,View, Animated, StyleSheet, ActivityIndicator } from 'react-native';
 import styles from './Styles';
 
+import Colors from '../../constants/colors';
+
 const CarrouselBasic = ({nav, route, movies})=>{
 
     const handleOnPress = (item)=>{
@@ -36,7 +38,7 @@ const CarrouselBasic = ({nav, route, movies})=>{
                             width: '100%',
                             height:'100%',
                             resizeMode:'contain',
-                            backgroundColor:'red'
+                            backgroundColor: Colors.secondary
                         }}
                         onError={()=>console.log('Error al cargar la imagen del carrousel basic')}
                         onProgress={()=> { return <ActivityIndicator size={'small'} color={'white'}/>}}

@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
 	},
 	inputMain:{
 		height: '12%',
-		backgroundColor: 'red',
 		width:'100%',
 		marginTop: 15,
 		paddingBottom: 15,

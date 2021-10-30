@@ -1,13 +1,19 @@
-import React, {useState ,useEffect} from 'react';
+import React, {useState ,useEffect,useRef} from 'react';
 import { View, TextInput,Keyboard, TouchableWithoutFeedback, ScrollView, FlatList,Text, Dimensions,TouchableOpacity, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import styles from './Styles';
 
 import { MovieContext } from '../../components/context/movieContext';
 import { getAllMovies } from '../../controllers/MoviesController';
 import { UserContext } from '../../components/context/authContext';
+import colors from '../../constants/colors';
 
 
 const Search = ({navigation})=>{
+
+    const refInput = useRef(null);
+    const refList = useRef([]);
+    const AuxrefList = useRef([]);
+
 
     const [textSearch, setTextSearch] = useState('');
 	const token = React.useContext(UserContext);
@@ -26,7 +32,7 @@ const Search = ({navigation})=>{
 			}else{
 				setMovies(response)
 				setBusy(false)
-                // console.log(response);
+                refInput.current.focus();
 			}
 		}
 		fetchMovies();
@@ -34,20 +40,34 @@ const Search = ({navigation})=>{
 
     const handleTextInput = (text) => {
         if(movies != undefined){
+            console.log('---------------------------------------------------------------------------');
             let auxArray = [];
-            if(text== ''){
+            setMovieFind([]);
+            
+            // AuxrefList.current = [];
+            // refList.current = [];
+
+            if(text.length == 0){
+                setMovieFind([]);
+                // refList.current = [];
 
             }else
             if(movies != undefined){
                 movies.map((movie,index) => {
                     movie.movies.map((insideItem, indexItem)=>{
-                        if(insideItem.movie.title.includes(text)){
-                            auxArray.push(insideItem)
+                        if(insideItem.movie.title.toLowerCase().includes(text.toLowerCase())){
+                            auxArray.push(insideItem);
+
+                            // AuxrefList.current.push(insideItem);
                         }
                     })
                 })
-                setMovieFind(...movieFind,auxArray);
+                setMovieFind(auxArray);
+                refInput.current.focus();
+                //NO FUNCA ESE REFINPUT
+                // refList.current = AuxrefList.current;
             }
+            console.log(text);
         }
     }
 
@@ -59,20 +79,20 @@ const Search = ({navigation})=>{
                     <TextInput style={styles.inputText} 
                     placeholder={'Busque lo que desee...'} 
                     keyboardType={'web-search'} 
-                    onSubmitEditing={(event)=>{
-                        console.log(event.nativeEvent.text);
-                        setTextSearch(event.nativeEvent.text)
-                    }}
+                    keyboardAppearance={'dark'}
+                    autoFocus={true}
+                    ref={refInput}
                     onChangeText={(text)=>handleTextInput(text)}
                     ></TextInput>
                 </View>
-                <View style={{width:'100%', justifyContent: 'center', alignItems: 'center', height: '82%', backgroundColor: 'green'}}>
+                <View style={{width:'100%', justifyContent: 'center', alignItems: 'center', height: '82%'}}>
                 <FlatList
+                showsVerticalScrollIndicator={false}
                 data={movieFind}
+                // data={refList.current}
                 numColumns={2}
                 keyExtractor={item => `${item._id}`}
                 renderItem={(item)=> {
-                    console.log(item);
                     return <TouchableOpacity
                     onPress={()=>navigation.navigate('MovieFocus',{allData: item.item})}
                     style={styles.buttonMovie}
@@ -89,7 +109,7 @@ const Search = ({navigation})=>{
                             width: '100%',
                             height:'100%',
                             resizeMode:'contain',
-                            backgroundColor:'red'
+                            backgroundColor:colors.secondary
                         }}
                         onError={()=>console.log('Error al cargar la imagen del carrousel basic')}
                         onProgress={()=> { return <ActivityIndicator size={'small'} color={'white'}/>}}
