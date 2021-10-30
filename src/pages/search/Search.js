@@ -1,8 +1,7 @@
 import React, {useState ,useEffect,useRef} from 'react';
-import { View, TextInput,Keyboard, TouchableWithoutFeedback, ScrollView, FlatList,Text, Dimensions,TouchableOpacity, StyleSheet, Image, ActivityIndicator } from 'react-native';
+import { View, TextInput,Keyboard, TouchableWithoutFeedback, FlatList,Text,TouchableOpacity, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import styles from './Styles';
 
-import { MovieContext } from '../../components/context/movieContext';
 import { getAllMovies } from '../../controllers/MoviesController';
 import { UserContext } from '../../components/context/authContext';
 import colors from '../../constants/colors';
@@ -40,7 +39,6 @@ const Search = ({navigation})=>{
 
     const handleTextInput = (text) => {
         if(movies != undefined){
-            console.log('---------------------------------------------------------------------------');
             let auxArray = [];
             setMovieFind([]);
             
@@ -67,7 +65,6 @@ const Search = ({navigation})=>{
                 //NO FUNCA ESE REFINPUT
                 // refList.current = AuxrefList.current;
             }
-            console.log(text);
         }
     }
 
