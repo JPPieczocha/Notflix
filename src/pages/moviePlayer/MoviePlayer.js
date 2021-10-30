@@ -9,7 +9,7 @@ const {width, height} = Dimensions.get('window')
 
 const MoviePlayer = ({navigation, route})=>{
 
-	const {title, fileURL} = route.params;
+	const {fileURL} = route.params;
 	const [fullScreen,setFullScreen] = useState(false);
 	const [status, setStatus] = React.useState({});
 	const [isLoading,setIsLoading] = useState(true);

@@ -28,7 +28,6 @@ const Home = ({navigation})=>{
 			}else{
 				setMovies(response);
 				setBusy(false);
-				// console.log(response);
 			}
 		}
 		fetchMovies();
@@ -43,7 +42,7 @@ const Home = ({navigation})=>{
 			<View style={styles.mainWrapper}>
 				<ScrollView style={{width: '100%', height: '100%'}}>
 					<Text style={{color:'white', fontSize: 20, paddingLeft: 15, marginTop: 10, marginBottom: 10}}>What's next?</Text>
-					<Carrousel nav={navigation} movieData={movies[0]}></Carrousel>
+					{movies === undefined ? null :  <Carrousel nav={navigation} movieData={movies[0]}></Carrousel>}
 					{
 						movies === undefined ? null : movies.map((item, index) =>{
 							if(item.name === "New Releases"){

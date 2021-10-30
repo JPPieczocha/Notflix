@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	inputMain:{
+		height: '12%',
+		backgroundColor: 'red',
 		width:'100%',
 		marginTop: 15,
 		paddingBottom: 15,
@@ -41,13 +43,13 @@ const styles = StyleSheet.create({
         width: width*0.35, 
         height: width*0.5,
         marginHorizontal: 10,
-        marginVertical: 5,
+        marginVertical: 10,
         
         justifyContent:'center', 
         alignItems:'center',
 
         borderRadius: 15,
-        overflow:'hidden'
+        overflow:'hidden',
 	},
 });
 

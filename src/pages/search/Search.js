@@ -1,14 +1,18 @@
 import React, {useState ,useEffect} from 'react';
-import { View, TextInput,Keyboard, TouchableWithoutFeedback, ScrollView, FlatList,Text, Dimensions,TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, TextInput,Keyboard, TouchableWithoutFeedback, ScrollView, FlatList,Text, Dimensions,TouchableOpacity, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import styles from './Styles';
 
 import { MovieContext } from '../../components/context/movieContext';
 import { getAllMovies } from '../../controllers/MoviesController';
+import { UserContext } from '../../components/context/authContext';
 
 
-const Search = ()=>{
+const Search = ({navigation})=>{
 
     const [textSearch, setTextSearch] = useState('');
+	const token = React.useContext(UserContext);
+    // console.log(token);
+
 
     const [movies,setMovies] = useState()
 	const [busy,setBusy] = useState(true);
@@ -17,43 +21,33 @@ const Search = ()=>{
 
     useEffect(() => {
 		const fetchMovies = async () => {
-			const response = await getAllMovies();
+			const response = await getAllMovies(token.state.userToken);
 			if(response === undefined){
 			}else{
-				setMovies(response.categories)
+				setMovies(response)
 				setBusy(false)
+                // console.log(response);
 			}
 		}
 		fetchMovies();
 	}, [reload])
 
     const handleTextInput = (text) => {
-        setReload(true);
         if(movies != undefined){
-            // let stringAux = movies.filter(item => item.movie.title);
-            // console.log(stringAux);
-            // console.log(movies);
-            // console.log(movies.filter((item)=> item.movies.filter((insideItem)=> insideItem.title.includes(text))));
-
             let auxArray = [];
-            console.log(movies);
-            
+            if(text== ''){
+
+            }else
             if(movies != undefined){
-                movies.map((item,index) => {
-                    item.movies.map((insideItem, indexItem)=>{
-                        // console.log(insideItem.movie.title);
-                        // console.log(insideItem.movie.imageMobile);
+                movies.map((movie,index) => {
+                    movie.movies.map((insideItem, indexItem)=>{
                         if(insideItem.movie.title.includes(text)){
-                            console.log('TENGOO');
-                            auxArray.push(insideItem.movie)
-                            setMovieFind(...movieFind,auxArray);
+                            auxArray.push(insideItem)
                         }
                     })
                 })
-                // setMovieFind(auxArray)
+                setMovieFind(...movieFind,auxArray);
             }
-            
-            // setMovieFind(movies.filter(item => item.movies.title.includes(text)));
         }
     }
 
@@ -72,13 +66,15 @@ const Search = ()=>{
                     onChangeText={(text)=>handleTextInput(text)}
                     ></TextInput>
                 </View>
-                <View style={{backgroundColor:'red', width:'100%'}}>
+                <View style={{width:'100%', justifyContent: 'center', alignItems: 'center', height: '82%', backgroundColor: 'green'}}>
                 <FlatList
                 data={movieFind}
-                keyExtractor={item => `${item.pos}`}
+                numColumns={2}
+                keyExtractor={item => `${item._id}`}
                 renderItem={(item)=> {
-                    <TouchableOpacity
-                    onPress={()=>console.log(item)}
+                    console.log(item);
+                    return <TouchableOpacity
+                    onPress={()=>navigation.navigate('MovieFocus',{allData: item.item})}
                     style={styles.buttonMovie}
                     >
                     <View
@@ -88,7 +84,7 @@ const Search = ()=>{
                         justifyContent: 'center',
                     }]}>
                         <Image
-                        source={{uri:item.item.imageMobile}}
+                        source={{uri:item.item.movie.imageMobile}}
                         style={{
                             width: '100%',
                             height:'100%',

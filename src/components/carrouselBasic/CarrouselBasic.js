@@ -5,7 +5,7 @@ import styles from './Styles';
 const CarrouselBasic = ({nav, route, movies})=>{
 
     const handleOnPress = (item)=>{
-        nav.navigate('MovieFocus',{title:item.movie.title, idMovie: item.movie._id, imageSource: item.movie.imageMobile, ratings: item.movie.value, genre: 'dummy', age: item.movie.minAge, desc: item.movie.description, urlFile: item.movie.movieUrl, allData: item});
+        nav.navigate('MovieFocus',{allData: item});
     }
 
     return(

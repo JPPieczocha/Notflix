@@ -17,7 +17,9 @@ const styles = StyleSheet.create({
     },
     titleText:{
         color: Colors.white,
-        fontSize: 30
+        fontSize: 30,
+
+        textAlign: "center"
     },
     playMovie:{
         height:40,
