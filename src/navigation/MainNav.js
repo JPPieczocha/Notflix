@@ -1,5 +1,5 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
 
 import Colors from '../constants/colors';
 import NavSettings from './NavSettings';
@@ -12,17 +12,22 @@ import MovieDetails from '../pages/movieDetails/MovieDetails';
 
 export default function MainNav({navigation}){
 
-    const Stack = createNativeStackNavigator();
+    const Stack = createStackNavigator();
 
+      const forFade = ({ current }) => ({
+        cardStyle: {
+            opacity: current.progress,
+        },
+});
     // El navigation container está abstraido en el App.js
     return(
         <UserContext.Consumer>
             {value => (
-                <Stack.Navigator>
-                        <Stack.Screen name="Homee" component={Tabs} options={{headerShown:false}}/>
-                        <Stack.Screen name="MovieFocus" component={MovieFocus} options={{headerShown:false}}/>
-                        <Stack.Screen name="MoviePlayer" component={MoviePlayer} options={{headerShown:false}}/>
-                        <Stack.Screen name="MovieDetails" component={MovieDetails} options={{headerShown:false}}/>
+                <Stack.Navigator >
+                        <Stack.Screen name="Homee" component={Tabs} options={{headerShown:false, cardStyleInterpolator:forFade}}/>
+                        <Stack.Screen name="MovieFocus" component={MovieFocus} options={{headerShown:false, cardStyleInterpolator:forFade}}/>
+                        <Stack.Screen name="MoviePlayer" component={MoviePlayer} options={{headerShown:false, cardStyleInterpolator:forFade}}/>
+                        <Stack.Screen name="MovieDetails" component={MovieDetails} options={{headerShown:false, cardStyleInterpolator:forFade}}/>
                         <Stack.Screen name="Settings" component={NavSettings} options={{
                             title: 'Ajustes',
                             headerStyle:{
@@ -36,7 +41,8 @@ export default function MainNav({navigation}){
                                 color: Colors.inactiveTint,
                                 fontSize: 20,
                             },
-                            headerShown:false
+                            headerShown:false,
+                            cardStyleInterpolator: forFade,
                         }}/>
                 </Stack.Navigator>
             )}

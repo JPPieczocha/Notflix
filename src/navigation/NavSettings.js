@@ -1,5 +1,5 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import Colors from "../constants/colors";
 
 import Settings from '../pages/settings/Settings'
@@ -11,7 +11,13 @@ import ChangePackage from './../pages/settings/ChangePackage'
 
 export default function NavSettings({navigation}){
 
-    const Stack = createNativeStackNavigator();
+    const Stack = createStackNavigator();
+
+    const forFade = ({ current }) => ({
+        cardStyle: {
+            opacity: current.progress,
+        },
+    });
     // El navigation container está abstraido en el App.js
 
     return(
@@ -34,6 +40,7 @@ export default function NavSettings({navigation}){
                         color: Colors.inactiveTint,
                         fontSize: 20,
                     },
+                    cardStyleInterpolator: forFade,
                 }}   
             />
 
@@ -53,6 +60,7 @@ export default function NavSettings({navigation}){
                         color: Colors.inactiveTint,
                         fontSize: 20,
                     },
+                    cardStyleInterpolator: forFade,
                 }}   
             />
 
@@ -72,6 +80,7 @@ export default function NavSettings({navigation}){
                         color: Colors.inactiveTint,
                         fontSize: 20,
                     },
+                    cardStyleInterpolator: forFade,
                 }}   
             />
             
@@ -90,7 +99,8 @@ export default function NavSettings({navigation}){
                     headerTitleStyle:{
                         color: Colors.inactiveTint,
                         fontSize: 20,
-                    }
+                    },
+                    cardStyleInterpolator: forFade,
                 }}   
             />
 
@@ -110,6 +120,7 @@ export default function NavSettings({navigation}){
                         color: Colors.inactiveTint,
                         fontSize: 20,
                     },
+                    cardStyleInterpolator: forFade,
                 }}   
             />
         </Stack.Navigator>
