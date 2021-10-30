@@ -5,15 +5,16 @@ const paqURL = 'https://suscripciones-backend.herokuapp.com/api/packages/v1/'
 //----------CMS DE VIDEO----------------------------------------------------
 
 //Endpoints de Peliculas
-export const allMovies = async () =>{
+export const allMovies = async (data) =>{
     const options = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'x-access-token' : data
         },
     }
     try {
-        const response = await fetch(cmsURL+'api/v1/public/data',options);
+        const response = await fetch(cmsURL+'api/v1/public/mobile',options);
         return response
     } 
     catch (error) {

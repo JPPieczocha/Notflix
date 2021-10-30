@@ -7,7 +7,7 @@ import styles from './Styles';
 
 const MovieDetails = ({navigation,route})=>{
 
-    const {title, idMovie, imageSource,ratings,genre,age, desc} = route.params;
+    const {title, idMovie, imageSource,ratings,genre,age, desc, allData} = route.params;
     const dataArray = [
         {   
          image:require('../../assets/images/images/series/actorsAvatars/brad.jpg'),
@@ -90,13 +90,17 @@ const MovieDetails = ({navigation,route})=>{
                     showsHorizontalScrollIndicator={false}
                     />
                 <Text style={styles.detailText}>Sinopsis</Text>
-                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>To carry out the biggest heist in history, a mysterious man called The Professor recruits a band of eight robbers who have a single characteristic: none of them has anything to lose. Five months of seclusion memorizing every step, every detail, every probability culminate in eleven days locked up in the National Coinage and Stamp Factory of Spain, surrounded by police forces and with dozens of hostages in their power, to find out whether their suicide wager will lead to everything or nothing.</Text>
+                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.description}</Text>
+                <Text style={styles.detailText}>Lanzamiento</Text>
+                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.launch}</Text>
                 <Text style={styles.detailText}>Director</Text>
-                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>David Fincher</Text>
+                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.director}</Text>
+                <Text style={styles.detailText}>Producer</Text>
+                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.producer}</Text>
                 <Text style={styles.detailText}>IMDb Rating</Text>
                 <View style={{flexDirection:'row',marginBottom:10, alignItems:'center'}}>
                     <Ionicons name={'star'} size={30} color={'gold'} style={{marginLeft:15}}/>
-                    <Text style={{marginHorizontal:10,color:'#C5C3C3',fontSize:20}}>{ratings}</Text>
+                    <Text style={{marginHorizontal:10,color:'#C5C3C3',fontSize:20}}>{allData.movie.value}</Text>
                 </View>
             </ScrollView>
         </View>

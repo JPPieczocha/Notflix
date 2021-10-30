@@ -4,7 +4,14 @@ import dummyData from '../../assets/moviesDummy';
 import styles from './Styles'
 import Colors from '../../constants/colors';
 
-const Carrousel = ({nav})=>{
+
+
+const Carrousel = ({nav, movieData})=>{
+    // console.log('asjdaksdasdas');
+    if(movieData != undefined){
+
+        // console.log(movieData.movies);
+    }
 
     const scrollX = React.useRef(new Animated.Value(0)).current;
     const { width, height } = Dimensions.get("window");

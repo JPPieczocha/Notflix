@@ -33,7 +33,15 @@ const styles = StyleSheet.create({
 		height: 150,
 		width: 150,
 
-		borderRadius: 100
+		borderRadius: 100,
+
+		//---prueba
+		justifyContent: "center",
+		alignItems: "center",
+		borderWidth: 2,
+		borderColor: Colors.secondary
+
+
 	},
 	headerProfileText:{
 		color: Colors.white,

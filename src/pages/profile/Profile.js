@@ -4,12 +4,14 @@ import * as Linking from 'expo-linking'
 
 import styles from './Styles'
 import { UserContext } from '../../components/context/authContext';
+import Colors from '../../constants/colors';
 
 
 export default function Profile({navigation}) {
 
     const handleFacturacion = (value) =>{
-        Linking.openURL(`http://facturacion-front.vercel.app/?from=mobile&token=${value.state.userToken}`)
+        console.log(value.state.userToken);
+        Linking.openURL(`https://fya-develop.vercel.app/?from=mobile&token=${value.state.userToken}`)
     }
 
     return (
@@ -18,12 +20,10 @@ export default function Profile({navigation}) {
                 <View style={styles.container}>
                     <View style={styles.mainWrapper}>
                         <View style={styles.profileHeader}>
-                            {/* Foto de perfil */}
-                            <TouchableOpacity>
-                                <Image style={styles.profileImage} source={require('../../../src/assets/images/dummy_profile/4.jpg')} onProgress={()=> <ActivityIndicator size={'large'} color={'white'}/>}></Image>
-                            </TouchableOpacity>
+                            <View style={styles.profileImage}>
+                                <Text style={{fontSize: 40, color: Colors.white}}>{value.state.userData.name[0]}{value.state.userData.last_name[0]}</Text>
+                            </View>
                             <Text style={styles.headerProfileText}>{value.state.userData.name + " " + value.state.userData.last_name}</Text>
-                            <Text style={styles.packageProfileText}>ID (test): {value.state.userData._id}</Text>
                         </View>
                         
                         <View style={styles.buttonWrapper}>
@@ -32,7 +32,7 @@ export default function Profile({navigation}) {
                             </TouchableOpacity>
 
                             <TouchableOpacity style={styles.buttonStyle} onPress={() => handleFacturacion(value)}>
-                                <Text style={styles.buttonText}>FACTURACIÓN</Text>
+                                <Text style={styles.buttonText}>AUTOGESTIÓN</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity style={styles.buttonStyleLogOut} onPress={() => value.authContext.signOut()}>

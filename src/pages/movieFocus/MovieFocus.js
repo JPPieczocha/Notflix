@@ -7,7 +7,7 @@ import styles from './Styles';
 
 const MovieFocus = ({navigation,route})=>{
 
-    const {title, idMovie, imageSource,ratings,genre,age, desc, urlFile} = route.params;
+    const {title, idMovie, imageSource,ratings,genre,age, desc, urlFile, allData} = route.params;
 
     const header = ()=>{
         return(
@@ -53,8 +53,8 @@ const MovieFocus = ({navigation,route})=>{
                         <View style={styles.mainHeader}>
                             <Text style={styles.titleText}>{title}</Text>
                             <View style={styles.movieData}>
-                                <Text style={styles.movieDataText}>+{age}</Text>
-                                <Text style={styles.movieDataText}>{genre}</Text>
+                                <Text style={styles.movieDataText}>{age}</Text>
+                                <Text style={styles.movieDataText}>{allData.movie.duration} Minutos</Text>
                                 <Text style={styles.movieDataText}>{ratings}</Text>
                             </View>
                             <TouchableOpacity style={styles.playMovie} onPress={()=>navigation.navigate('MoviePlayer',{title:title, fileURL: urlFile})}>
@@ -64,7 +64,7 @@ const MovieFocus = ({navigation,route})=>{
                         <View style={styles.sinopsis}>
                                 <Text style={styles.sinopsisText}>{desc}</Text>
                         </View>
-                        <TouchableOpacity style={styles.details} onPress={()=>navigation.navigate('MovieDetails',{title:title, ratings:ratings})}>
+                        <TouchableOpacity style={styles.details} onPress={()=>navigation.navigate('MovieDetails',{title:title, ratings:ratings, allData: allData})}>
                                 <Text style={styles.playMovieText}>Más detalles</Text>
                         </TouchableOpacity>
                     </ScrollView>

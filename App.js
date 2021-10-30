@@ -90,6 +90,7 @@ export default function App() {
 			let user;
 			try{
 				const iniciarSesion = await login(userData);
+				console.log(iniciarSesion);
 				//---------------------
 				if(iniciarSesion === 401){
 					return iniciarSesion;
@@ -99,11 +100,14 @@ export default function App() {
 				
 				user = jwt_decode(iniciarSesion.token);
 				console.log('USER: ');
-				console.log(user);
 				console.log();
+				user.token = iniciarSesion.token;
+				console.log(user);
 
 				let decodedHeader = jwt_decode(iniciarSesion.token, { header: true });
 				console.log(decodedHeader);
+				console.log(user);
+
 
 				dispatch({ type: 'SIGN_IN', token: iniciarSesion.token, userdata: user});
 			}catch (e){
