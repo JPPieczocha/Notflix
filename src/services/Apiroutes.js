@@ -65,11 +65,12 @@ export const registroSSO = async (data) =>{
 //----------PAQUETES Y SUBSCRIPCIONES---------------------------------------
 
 //Paquetes------
-export const allPaquetes = async () =>{
+export const allPaquetes = async (data) =>{
     const options = {
         method: 'GET',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'x-access-token' : data
         },
     }
     try {

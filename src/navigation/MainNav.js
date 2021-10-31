@@ -10,6 +10,13 @@ import { UserContext } from '../components/context/authContext';
 import MovieDetails from '../pages/movieDetails/MovieDetails';
 
 
+import Settings from '../pages/settings/Settings';
+import ChangeMail from '../pages/settings/ChangeMail';
+import ChangePassword from '../pages/settings/ChangePassword';
+import ChangeCreditCard from '../pages/settings/ChangeCreditCard';
+import ChangePackage from '../pages/settings/ChangePackage';
+
+
 export default function MainNav({navigation}){
 
     const Stack = createStackNavigator();
@@ -23,12 +30,12 @@ export default function MainNav({navigation}){
     return(
         <UserContext.Consumer>
             {value => (
-                <Stack.Navigator >
-                        <Stack.Screen name="Homee" component={Tabs} options={{headerShown:false, cardStyleInterpolator:forFade}}/>
-                        <Stack.Screen name="MovieFocus" component={MovieFocus} options={{headerShown:false, cardStyleInterpolator:forFade}}/>
-                        <Stack.Screen name="MoviePlayer" component={MoviePlayer} options={{headerShown:false, cardStyleInterpolator:forFade}}/>
-                        <Stack.Screen name="MovieDetails" component={MovieDetails} options={{headerShown:false, cardStyleInterpolator:forFade}}/>
-                        <Stack.Screen name="Settings" component={NavSettings} options={{
+                <Stack.Navigator>
+                        <Stack.Screen name="Homee" component={Tabs} options={{headerShown:false}}/>
+                        <Stack.Screen name="MovieFocus" component={MovieFocus} options={{headerShown:false}}/>
+                        <Stack.Screen name="MoviePlayer" component={MoviePlayer} options={{headerShown:false}}/>
+                        <Stack.Screen name="MovieDetails" component={MovieDetails} options={{headerShown:false}}/>
+                        {/* <Stack.Screen name="Settings" component={NavSettings} options={{
                             title: 'Ajustes',
                             headerStyle:{
                                 backgroundColor: Colors.primaryv3,
@@ -41,9 +48,67 @@ export default function MainNav({navigation}){
                                 color: Colors.inactiveTint,
                                 fontSize: 20,
                             },
-                            headerShown:false,
-                            cardStyleInterpolator: forFade,
-                        }}/>
+                            headerShown:false
+                        }}/> */}
+
+                        {/* Profile V2 */}
+
+                    <Stack.Screen
+                        name="ChangeMail"
+                        component={ChangeMail}
+                        options={{
+                            title: 'Cambiar Correo',
+                            headerStyle:{
+                                backgroundColor: Colors.primaryv3,
+                            },
+                            headerShadowVisible:false,
+                            headerBackTitle:'Perfil',
+                            headerTintColor: Colors.inactiveTint,
+                            headerTitleAlign:'left',
+                            headerTitleStyle:{
+                                color: Colors.inactiveTint,
+                                fontSize: 20,
+                            },
+                        }}   
+                    />
+
+                    <Stack.Screen
+                        name="ChangeContraseña"
+                        component={ChangePassword}
+                        options={{
+                            title: 'Cambiar Contraseña',
+                            headerStyle:{
+                                backgroundColor: Colors.primaryv3,
+                            },
+                            headerShadowVisible:false,
+                            headerBackTitle:'Perfil',
+                            headerTintColor: Colors.inactiveTint,
+                            headerTitleAlign:'left',
+                            headerTitleStyle:{
+                                color: Colors.inactiveTint,
+                                fontSize: 20,
+                            },
+                        }}   
+                    />
+
+                    <Stack.Screen
+                        name="ChangePaquete"
+                        component={ChangePackage}
+                        options={{
+                            title: 'Cambiar Paquetes',
+                            headerStyle:{
+                                backgroundColor: Colors.primaryv3,
+                            },
+                            headerShadowVisible:false,
+                            headerBackTitle:'Perfil',
+                            headerTintColor: Colors.inactiveTint,
+                            headerTitleAlign:'left',
+                            headerTitleStyle:{
+                                color: Colors.inactiveTint,
+                                fontSize: 20,
+                            },
+                        }}   
+                    />
                 </Stack.Navigator>
             )}
         </UserContext.Consumer>
