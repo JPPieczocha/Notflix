@@ -8,6 +8,8 @@ import styles from './Styles';
 const MovieDetails = ({navigation,route})=>{
 
     const {allData} = route.params;
+    let movieDate = JSON.parse(allData.movie.launch);
+    console.log(movieDate);
     const dataArray = [
         {   
          image:require('../../assets/images/images/series/actorsAvatars/brad.jpg'),
