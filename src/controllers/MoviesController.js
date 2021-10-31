@@ -6,7 +6,6 @@ export const getAllMovies = async (data)=>{
         const json = await response.json();
         return json;
     }else{
-        console.log('ERROR en getAllMovies');
         console.log('Codigo de respuesta en getAllMovies: ' + response.status);
         return response.status
     }

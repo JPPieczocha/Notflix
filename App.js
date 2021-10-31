@@ -37,6 +37,8 @@ export default function App() {
 						isSignout: true,
 						userToken: null,
 						userData: null,
+						//Abajo nuevo agregado
+						isloading: false,
 					};
 			}
 		},
@@ -54,11 +56,26 @@ export default function App() {
 		const bootstrapAsync = async () => {
 			let userToken;
 			let user;
-		
+			let todayDate = new Date();
+
 			try {
 				userToken = await SecureStore.getItemAsync('userToken');
 				if(userToken !== null){
 					user = jwt_decode(userToken);
+					if(user.exp*100 > todayDate.getTime()){
+						console.log('Token vencido');
+						const deleteKeyStore = await SecureStore.deleteItemAsync('userToken');
+						dispatch({ type: 'SIGN_OUT'});
+					}else{
+						// After restoring token, we may need to validate it in production apps
+						// This will switch to the App screen or Auth screen and this loading
+						// screen will be unmounted and thrown away.
+						console.log('Token restaurado. No se encuentra vencido');
+						dispatch({ type: 'RESTORE_TOKEN', token: userToken, userdata: user});
+					}
+				}else{
+					dispatch({ type: 'SIGN_OUT'});
+					console.log('Token no encontrado');
 				}
 			} catch (e) {
 				// Restoring token failed
@@ -69,12 +86,7 @@ export default function App() {
 					const deleteKeyStore = await SecureStore.deleteItemAsync('userToken')
 					dispatch({ type: 'SIGN_OUT'});
 				}
-				
 			}
-			// After restoring token, we may need to validate it in production apps
-			// This will switch to the App screen or Auth screen and this loading
-			// screen will be unmounted and thrown away.
-			dispatch({ type: 'RESTORE_TOKEN', token: userToken, userdata: user});
 		};
 		bootstrapAsync();
 
@@ -105,7 +117,7 @@ export default function App() {
 			}
 		},
 		signOut: async() => {
-			const deleteKeyStore = await SecureStore.deleteItemAsync('userToken')
+			const deleteKeyStore = await SecureStore.deleteItemAsync('userToken');
 			dispatch({ type: 'SIGN_OUT' });
 		},
 		signUp: async data => {
