@@ -63,10 +63,10 @@ const styles = StyleSheet.create({
 	},
 	buttonStyle:{
 		height: 50,
-        width:'90%',
+        width:'75%',
 
         backgroundColor: Colors.secondary,
-        marginVertical: 10,
+        marginTop: 20,
 
         borderRadius: 25,
         
@@ -82,13 +82,75 @@ const styles = StyleSheet.create({
         width:'75%',
 
         backgroundColor: Colors.logOut,
-        marginVertical: 30,
+        marginVertical: 20,
 
         borderRadius: 25,
         
         justifyContent: 'center',
         alignItems:'center'
 	},
+
+
+
+
+
+
+
+	mainContentWrapper:{
+
+        width: '100%',
+        height: '100%',
+        justifyContent:'center',
+        alignItems: 'center',
+
+        backgroundColor: Colors.primaryv3,
+
+		marginTop: 5
+
+    },
+    scrollView: {
+        width: '100%',
+        height: '100%',
+    },
+    headerOption: {
+        height: 75,
+
+        justifyContent:'center',
+        alignItems: 'center',
+        borderColor: Colors.inactiveTint,
+
+        borderTopWidth: 2,
+        borderBottomWidth: 2,
+
+        marginBottom: 3
+    },
+    headerOptionText: {
+        color: Colors.inactiveTint,
+        fontSize: 24
+    },
+    optionButton: {
+        flexDirection: 'row',
+		width: '100%',
+
+        height: 40,
+
+        borderBottomWidth: 1,
+        borderColor: Colors.inactiveTint
+    },
+    opcionText: {
+        color: Colors.inactiveTint,
+
+        alignSelf: 'center',
+
+        fontSize: 16,
+        left: 10,
+    },
+    opcionIcon: {
+        position:'absolute',
+
+        right: 15,
+        alignSelf: 'center',
+    },
 });
 
 export default styles;

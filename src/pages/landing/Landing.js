@@ -8,6 +8,8 @@ import { UserContext } from '../../components/context/authContext';
 import Paquete from '../../components/paquete/Paquete';
 import { getAllPaquetes } from '../../controllers/PackagesController';
 
+
+
 import { LiteCreditCardInput } from "react-native-credit-card-input-view";
 import colors from '../../constants/colors';
 
@@ -41,7 +43,11 @@ const Landing = ({navigation}) => {
         try{
             const paquetesData = async ()=>{
                 let data = await getAllPaquetes();
-                setPaquetes(data.data);
+                if(data != undefined){
+
+                    setPaquetes(data.data);
+                    console.log(data.data);
+                }
             }
             paquetesData();
         }catch (e){

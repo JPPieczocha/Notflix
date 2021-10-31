@@ -6,15 +6,19 @@ import LoadingPage from '../../components/loadingPage/LoadingPage';
 import Paquete from '../../components/paquete/Paquete';
 import {getAllPaquetes} from '../../controllers/PackagesController';
 
+import { UserContext } from '../../components/context/authContext';
+
+
 
 export default function ChangePackage({navigation, route}) {
 
     const [paquetes, setPaquetes] = useState();
+	const token = React.useContext(UserContext);
 
     useEffect(() => {
         try{
             const paquetesData = async ()=>{
-                let data = await getAllPaquetes();
+                let data = await getAllPaquetes(token.state.userToken);
                 setPaquetes(data.data);
             }
             paquetesData();
