@@ -1,5 +1,5 @@
 import React, {useState, useRef, useContext, useEffect} from 'react'
-import { View, Text, ImageBackground,Platform, TouchableOpacity, Image, Animated, Dimensions, TextInput,Keyboard, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, ImageBackground,Platform, TouchableOpacity, Image,KeyboardAvoidingView, Animated, Dimensions, TextInput,Keyboard, ScrollView, ActivityIndicator } from 'react-native';
 import { BlurView } from 'expo-blur';
 import styles from './Styles'
 import Colors from '../../constants/colors';
@@ -12,6 +12,7 @@ import { getAllPaquetes } from '../../controllers/PackagesController';
 
 import { LiteCreditCardInput } from "react-native-credit-card-input-view";
 import colors from '../../constants/colors';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Landing = ({navigation}) => {
 
@@ -188,12 +189,14 @@ const Landing = ({navigation}) => {
         return(
             <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTestRegister, Index: 100}}>
                 <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
-                    <View style={styles.inputWrapper}>
+                    <ScrollView style={{width:'100%'}}>
+                        <View style={styles.inputWrapper}>
                         <TextInput placeholder={'Nombre'} style={styles.input} keyboardType={'default'} onChangeText={(text)=>setName(text)}></TextInput>
                         <TextInput placeholder={'Apellido'} style={styles.input} keyboardType={'default'} onChangeText={(text)=>setSurname(text)}></TextInput>
                         <TextInput placeholder={'Correo electrónico'} style={styles.input} keyboardType={'email-address'} onChangeText={(text)=>setEmail(text)}></TextInput>
-                        <TextInput placeholder={'Contraseña'} style={styles.input} keyboardType={'default'} secureTextEntry={true} onChangeText={(text)=>setPassword(text)}></TextInput>
-                    </View>
+                        <TextInput placeholder={'Contraseña'} style={styles.input}  keyboardType={'default'} secureTextEntry={true} onChangeText={(text)=>setPassword(text)}></TextInput>
+                        </View>
+                    </ScrollView>
                     <View style={styles.buttonsWrapper}>
                         <TouchableOpacity style={styles.button} onPress={()=>handleShowPackage()}>
                             <Text style={styles.buttonText}>Siguiente</Text>

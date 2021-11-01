@@ -1,7 +1,6 @@
 import React, {useState ,useEffect,useRef} from 'react';
 import { View, TextInput,Keyboard, TouchableWithoutFeedback, FlatList,Text,TouchableOpacity, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import styles from './Styles';
-
 import { getAllMovies } from '../../controllers/MoviesController';
 import { UserContext } from '../../components/context/authContext';
 import colors from '../../constants/colors';
@@ -31,7 +30,7 @@ const Search = ({navigation})=>{
 			}else{
 				setMovies(response)
 				setBusy(false)
-                refInput.current.focus();
+                //refInput.current.focus();
 			}
 		}
 		fetchMovies();
@@ -61,24 +60,22 @@ const Search = ({navigation})=>{
                     })
                 })
                 setMovieFind(auxArray);
-                refInput.current.focus();
+                //refInput.current.focus();
                 //NO FUNCA ESE REFINPUT
                 // refList.current = AuxrefList.current;
             }
         }
     }
-
+    
     return (
         <View style={styles.container}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss()}>
             <View style={styles.main}>
                 <View style={styles.inputMain}>
                     <TextInput style={styles.inputText} 
                     placeholder={'Busque lo que desee...'} 
                     keyboardType={'web-search'} 
                     keyboardAppearance={'dark'}
-                    autoFocus={true}
-                    ref={refInput}
+                    //ref={refInput}
                     onChangeText={(text)=>handleTextInput(text)}
                     ></TextInput>
                 </View>
@@ -117,10 +114,9 @@ const Search = ({navigation})=>{
                 }}
                 ListEmptyComponent={()=><Text style={{color: 'white'}}>VACIO</Text>}
                 >
-                </FlatList>
+            </FlatList>
                 </View>
             </View>
-            </TouchableWithoutFeedback>
 
         </View>
     );
