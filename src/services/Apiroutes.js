@@ -1,6 +1,6 @@
 const cmsURL = 'https://ia-cms.herokuapp.com/';
 const ssoURL = 'https://singlesignonbackend.herokuapp.com/api/users/';
-const paqURL = 'https://suscripciones-backend.herokuapp.com/api/packages/v1/'
+const paqURL = 'https://suscripciones-backend.herokuapp.com/api/'
 
 //----------CMS DE VIDEO----------------------------------------------------
 
@@ -65,16 +65,16 @@ export const registroSSO = async (data) =>{
 //----------PAQUETES Y SUBSCRIPCIONES---------------------------------------
 
 //Paquetes------
-export const allPaquetes = async (data) =>{
+export const allPaquetes = async () =>{
     const options = {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'x-access-token' : data
+            'x-auth-key' : '4X2jHmW75y4dHhTaFy8PEznDB3T99K2K'
         },
     }
     try {
-        const response = await fetch(paqURL+'/list',options);
+        const response = await fetch(paqURL+'packages/v1/list',options);
         return response
     } 
     catch (error) {
@@ -83,9 +83,27 @@ export const allPaquetes = async (data) =>{
 }
 //Fin Paquetes--
 
-//Subscripciones
+//Subscripciones----
+export const getSubscriptionsUser = async (data) =>{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+    try {
+        const response = await fetch(paqURL+'subscriptions/v1/list',options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
 
-//Fin Subscripciones
+
+//Fin Subscripciones---
+
+
 
 //--------------------------------------------------------------------------
 

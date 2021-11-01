@@ -3,8 +3,8 @@ import Colors from '../../constants/colors';
 
 const styles = StyleSheet.create({
     container:{
-        width:'90%',
-        height:55,
+        width:'100%',
+        height:70,
         backgroundColor:Colors.transparentWhite, 
 
         borderRadius: 25,
@@ -16,16 +16,16 @@ const styles = StyleSheet.create({
         flexDirection:'row'
     },
     infoWrapper:{
-
+        width: '70%'
     },
     precioWrapper:{
-
+        width: '30%',
+        alignItems: 'flex-end'
     },
     nombre:{
         color: Colors.white,
 
         fontSize: 20
-
     },
     descripcion:{
         color: Colors.white
