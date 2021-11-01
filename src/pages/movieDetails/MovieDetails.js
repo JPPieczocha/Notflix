@@ -8,6 +8,8 @@ import styles from './Styles';
 const MovieDetails = ({navigation,route})=>{
 
     const {allData} = route.params;
+    let movieDate = allData.movie.launch;
+
     const dataArray = [
         {   
          image:require('../../assets/images/images/series/actorsAvatars/brad.jpg'),
@@ -91,7 +93,7 @@ const MovieDetails = ({navigation,route})=>{
                 <Text style={styles.detailText}>Sinopsis</Text>
                 <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.description}</Text>
                 <Text style={styles.detailText}>Lanzamiento</Text>
-                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.launch}</Text>
+                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{movieDate.slice(8,10)} / {movieDate.slice(5,7)} / {movieDate.slice(0,4)}</Text>
                 <Text style={styles.detailText}>Director</Text>
                 <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.director}</Text>
                 <Text style={styles.detailText}>Producer</Text>
