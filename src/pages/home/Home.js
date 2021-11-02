@@ -20,7 +20,6 @@ const Home = ({ navigation }) => {
     useEffect(() => {
         const fetchMovies = async () => {
             const response = await getAllMovies(token.state.userToken);
-			console.log(token.state.userToken);
             if (response === undefined) {
             } else {
                 setMovies(response);

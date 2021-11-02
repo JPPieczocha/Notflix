@@ -73,6 +73,58 @@ const styles = StyleSheet.create({
     },
     sinopsisText:{
         color: Colors.white
+    },
+
+
+    modalFilter:{
+        flex: 1,
+
+        justifyContent:'center',
+        alignItems:'center',
+
+        backgroundColor: 'rgba(0,0,0, 0.6)',
+    },
+    modalContainer:{
+
+        width: '90%',
+
+        padding: 15,
+        
+        alignItems: 'center',
+        justifyContent:'center',
+        
+        backgroundColor: Colors.primaryv3,
+        borderRadius: 15,
+        borderWidth: 1,
+        borderColor: Colors.secondary
+    },
+
+    title: {
+        fontSize: 28,
+        color: 'white',
+        textAlign: 'center'
+    },
+
+    description: {
+        fontSize: 18,
+        textAlign: 'center',
+        color: 'white',
+        marginVertical: 10
+    },
+
+    button: {
+        alignSelf: 'center',
+        width: '75%',
+        height: 32,
+        borderRadius: 10,
+        marginVertical: 10,
+        backgroundColor: Colors.logOut
+    },
+    buttonText: {
+        fontSize: 24,
+        color: 'white',
+        textAlign: 'center',
+        textAlignVertical: 'center',
     }
 });
 

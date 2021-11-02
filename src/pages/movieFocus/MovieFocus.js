@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text, View, ImageBackground, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from 'react-native';
+import { Text, View, ImageBackground, TouchableOpacity, ScrollView, ActivityIndicator, Modal, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import Colors from '../../constants/colors'
@@ -15,6 +15,8 @@ const MovieFocus = ({navigation,route})=>{
 
     const [loading, setLoading] = useState(false);
 
+    const [modal, setModal] = useState(false)
+
     const handleMoviePlayer = async () => {
         setLoading(true)
         let movie = {
@@ -27,9 +29,7 @@ const MovieFocus = ({navigation,route})=>{
                 navigation.navigate('MoviePlayer',{fileURL: allData.movie.movieUrl});
             }else{
                 setLoading(false);
-                Alert.alert('No puedes reproducirlo', 'No cuentas con el paquete para reproducir esta película o no has abonado.', [
-                    { text: 'Aceptar', onPress: () => console.log('OK Pressed') },
-                ]);
+                setModal(true);
             }
         }
     };
@@ -53,6 +53,31 @@ const MovieFocus = ({navigation,route})=>{
             </View>
         )
     }
+
+    const ModalWarning =
+    (
+        <Modal
+            animationType="fade"
+            transparent={true}
+            visible={modal}
+            onRequestClose={() => setModal(false)} //Back de android
+        >
+            <View style={styles.modalFilter}>
+                <View style={styles.modalContainer}>
+                    <Text style={styles.title}>No puedes ver "{allData.movie.title}"</Text>
+                    <Text style={styles.description}>
+                        Para ver este título, debes suscribirte a un paquete que pueda reproducir esta película.
+                    </Text>
+
+                    <TouchableOpacity style={styles.button} onPress={() => setModal(false)}>
+                        <Text style={styles.buttonText}>Volver</Text>
+                    </TouchableOpacity>
+
+                    <Image />
+                </View>
+            </View>
+        </Modal>
+    )
 
     return(
         <View style={{height:'100%', width:'100%', backgroundColor: Colors.primaryv3}}>
@@ -80,7 +105,7 @@ const MovieFocus = ({navigation,route})=>{
                                 <Text style={styles.movieDataText}>{allData.movie.duration} Minutos</Text>
                                 <Text style={styles.movieDataText}><Ionicons name={'star'} size={14} color={'gold'} style={{marginLeft:15}}/> {allData.movie.value}</Text>
                             </View>
-                            <TouchableOpacity style={styles.playMovie} onPress={()=>handleMoviePlayer()}>
+                            <TouchableOpacity style={styles.playMovie} onPress={()=>handleMoviePlayer()} disabled={loading}>
                                 { loading ? <ActivityIndicator size={'small'} color={Colors.white}/> : <Text style={styles.playMovieText}>Reproducir</Text>}
                             </TouchableOpacity>
                         </View>
@@ -93,6 +118,7 @@ const MovieFocus = ({navigation,route})=>{
                     </ScrollView>
                 </BlurView>
             </ImageBackground>
+            {ModalWarning}
             {header()}
         </View>
     )
