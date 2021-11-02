@@ -13,8 +13,30 @@ const styles = StyleSheet.create({
 
         justifyContent:'space-between',
         alignItems:'center',
-        flexDirection:'row'
+        flexDirection:'row',
+        
+
+        borderWidth: 0,
+        borderColor: Colors.secondary
     },
+
+    containerSelected:{
+        width:'100%',
+        height:70,
+        backgroundColor:Colors.transparentWhite, 
+
+        borderRadius: 25,
+        paddingHorizontal: 20,
+        marginVertical: 5,
+
+        justifyContent:'space-between',
+        alignItems:'center',
+        flexDirection:'row',
+
+        borderWidth: 3,
+        borderColor: Colors.secondary
+    },
+
     infoWrapper:{
         width: '70%'
     },

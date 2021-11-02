@@ -205,10 +205,12 @@ const Landing = ({navigation}) => {
 
         if(selectedPackages.includes(packageID)){
             let aux = selectedPackages;
+            console.log("Se fué " + packageID);
             aux.pop(packageID);
             setSelectedPackages(aux)
         }else{
             console.log(packageID);
+            console.log("Entró " + packageID);
             setSelectedPackages([...selectedPackages,packageID]);
         }
 
@@ -337,9 +339,7 @@ const Landing = ({navigation}) => {
                             selectedFlag = true;
                         };
                         return(
-                            <TouchableOpacity onPress={()=>handleAddPackage(item.item.id_paquete)}>
-                                <Paquete id={item.item.id_paquete} selected={selectedFlag} nombre={item.item.nombre} precio={item.item.precio} imagen={item.item.imagen} estado={item.item.estado} descripcion={item.item.descripcion} contenidos={item.item.descripcion}></Paquete>
-                            </TouchableOpacity>
+                            <Paquete id={item.item.id_paquete} selected={selectedFlag} nombre={item.item.nombre} precio={item.item.precio} imagen={item.item.imagen} estado={item.item.estado} descripcion={item.item.descripcion} contenidos={item.item.descripcion} handleAddPackage={handleAddPackage}/>
                         )
                     }}
 
