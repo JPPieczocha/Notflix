@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text, View, ImageBackground, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { Text, View, ImageBackground, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import Colors from '../../constants/colors'
@@ -27,6 +27,9 @@ const MovieFocus = ({navigation,route})=>{
                 navigation.navigate('MoviePlayer',{fileURL: allData.movie.movieUrl});
             }else{
                 setLoading(false);
+                Alert.alert('No puedes reproducirlo', 'No cuentas con el paquete para reproducir esta película o no has abonado.', [
+                    { text: 'Aceptar', onPress: () => console.log('OK Pressed') },
+                ]);
             }
         }
     };
@@ -75,9 +78,8 @@ const MovieFocus = ({navigation,route})=>{
                             <View style={styles.movieData}>
                                 <Text style={styles.movieDataText}>{allData.movie.minAge}</Text>
                                 <Text style={styles.movieDataText}>{allData.movie.duration} Minutos</Text>
-                                <Text style={styles.movieDataText}>{allData.movie.value}</Text>
+                                <Text style={styles.movieDataText}><Ionicons name={'star'} size={14} color={'gold'} style={{marginLeft:15}}/> {allData.movie.value}</Text>
                             </View>
-                            {/* <TouchableOpacity style={styles.playMovie} onPress={()=>navigation.navigate('MoviePlayer',{fileURL: allData.movie.movieUrl})}> */}
                             <TouchableOpacity style={styles.playMovie} onPress={()=>handleMoviePlayer()}>
                                 { loading ? <ActivityIndicator size={'small'} color={Colors.white}/> : <Text style={styles.playMovieText}>Reproducir</Text>}
                             </TouchableOpacity>

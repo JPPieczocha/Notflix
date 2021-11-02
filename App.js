@@ -95,8 +95,8 @@ export default function App() {
 	const authContext = useMemo(() => ({
 		signIn: async data => {
 			let userData = {
-				email: data.emailLOGIN,
-				password: data.passwordLOGIN,
+				email: data.emailString,
+				password: data.passString,
 				tenant: 'mobile'
 			}
 			let user;

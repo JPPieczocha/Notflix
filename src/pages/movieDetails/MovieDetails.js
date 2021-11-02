@@ -74,22 +74,6 @@ const MovieDetails = ({navigation,route})=>{
         <View style={styles.container}>
             {header()}
             <ScrollView style={{width: '100%'}} bounces={false}>
-                {/* <Text style={styles.detailText}>Reparto</Text> */}
-                {/* <FlatList
-                    data={dataArray}
-                    bounces={false}
-                    horizontal
-                    keyExtractor={({ id }) => id.toString()}
-                    renderItem={({ item }) => {
-                        return(
-                            <View style={styles.actorsItem}>
-                                <Image source={item.image} style={{resizeMode:'cover',height:90,width:90,borderRadius:100}}></Image>
-                                <Text style={{color:Colors.white, marginTop:5}}>{item.title}</Text>
-                            </View>
-                        )
-                    }}
-                    showsHorizontalScrollIndicator={false}
-                    /> */}
                 <Text style={styles.detailText}>Sinopsis</Text>
                 <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.description}</Text>
                 <Text style={styles.detailText}>Lanzamiento</Text>
@@ -100,7 +84,7 @@ const MovieDetails = ({navigation,route})=>{
                 <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.producer}</Text>
                 <Text style={styles.detailText}>IMDb Rating</Text>
                 <View style={{flexDirection:'row',marginBottom:10, alignItems:'center'}}>
-                    <Ionicons name={'star'} size={30} color={'gold'} style={{marginLeft:15}}/>
+                    <Ionicons name={'star'} size={26} color={'gold'} style={{marginLeft:15}}/>
                     <Text style={{marginHorizontal:10,color:'#C5C3C3',fontSize:20}}>{allData.movie.value}</Text>
                 </View>
             </ScrollView>

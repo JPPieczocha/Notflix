@@ -169,11 +169,25 @@ const Landing = ({navigation}) => {
         });
     }
 
-    const handleLogin =  async(value)=>{
-        console.log(loading);
-        const status = await value.authContext.signIn({emailLOGIN,passwordLOGIN});
-        if(status === 401){
-            setbadLogin(3);
+    const handleLogin =  async(value, flag, emailAux = null, passAux = null)=>{
+
+        //Flag on TRUE comes from login - False from register
+        if(flag){
+            let emailString = emailLOGIN;
+            let passString = passwordLOGIN;
+            // const status = await value.authContext.signIn({emailString,passwordLOGIN});
+            const status = await value.authContext.signIn({emailString,passString});
+            if(status === 401){
+                setbadLogin(3);
+            }
+        }else{
+            let emailString = emailAux;
+            let passString = passAux;
+            // const status = await value.authContext.signIn({emailString,passwordLOGIN});
+            const status = await value.authContext.signIn({emailString,passString});
+            if(status === 401){
+                setbadLogin(3);
+            }
         }
         // setLoading(false);
     }
@@ -219,7 +233,6 @@ const Landing = ({navigation}) => {
             console.log('FROM LANDING');
             console.log(userData);
             setAuxUserData(userData.user);
-            // setRegisterLoading(false);
             setemailOGIN(email);
             setpasswordLOGIN(password);
         
@@ -237,10 +250,15 @@ const Landing = ({navigation}) => {
             let response = await crearSubscription(auxData);
             console.log('RESPONSE DEL CREARSUBSCRIPCIOn');
             console.log(response);
+
             if(response != undefined){
+
+                //---logueo-----
                 console.log('LOGUE EMAIL: ' + email);
                 console.log('LOGUE PASSWORD: ' + password);
-                await handleLogin(value);
+                await handleLogin(value, false,AUXREGISTRODATA.email, AUXREGISTRODATA.password);
+                //BUG, Corregir que no loguea porque es undefined, hay que cambiar el handleLogin y app js para que no acepte cosa rara
+                //Debería ser facil, después lo hago
             }else{
                 console.log('Error al crear Sub');
             }
@@ -261,7 +279,7 @@ const Landing = ({navigation}) => {
                                     <TextInput autoCapitalize={'none'} placeholder={'Contraseña'} style={[styles.input, {borderColor:'red', borderWidth: badLogin}]} keyboardType={'default'} secureTextEntry={true} onChangeText={text => setpasswordLOGIN(text)}></TextInput>
                                 </KeyboardAvoidingView>
                                 <View style={styles.buttonsWrapper}>
-                                    <TouchableOpacity style={styles.button} onPress={()=>{setLoading(true); handleLogin(value);}}>
+                                    <TouchableOpacity style={styles.button} onPress={()=>{setLoading(true); handleLogin(value, true);}}>
                                         {loading ? <ActivityIndicator size={'large'} color={colors.white}/> : 
                                         <Text style={styles.buttonText}>Iniciar Sesion</Text>}
                                     </TouchableOpacity>
