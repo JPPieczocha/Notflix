@@ -68,14 +68,14 @@ const styles = StyleSheet.create({
         padding: 10
     },
     paquetesWrapper:{
-        width:'100%',
+        width:'95%',
+        maxHeight: 300
     },
     paqueteText:{
         color:Colors.white,
 
         fontSize: 20,
-        marginTop: 5
-        //TODO: Modificar ese margin, posible ponerlo automatico con flex
+        marginVertical: 7
     }
 
 })

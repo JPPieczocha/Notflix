@@ -1,8 +1,14 @@
 import React, {useState, useRef, useContext, useEffect} from 'react'
-import { View, Text, ImageBackground, TouchableOpacity,KeyboardAvoidingView, Animated, Dimensions, TextInput,Keyboard, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity,KeyboardAvoidingView, Animated, Dimensions, TextInput,Keyboard, ScrollView, ActivityIndicator, Platform } from 'react-native';
 import { BlurView } from 'expo-blur';
+import { LiteCreditCardInput } from "react-native-credit-card-input-view";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { FlatList } from 'react-native-gesture-handler';
+
 import styles from './Styles'
 import Colors from '../../constants/colors';
+import colors from '../../constants/colors';
+
 import LoadingPage from '../../components/loadingPage/LoadingPage';
 import { UserContext } from '../../components/context/authContext';
 import Paquete from '../../components/paquete/Paquete';
@@ -10,18 +16,10 @@ import { getAllPaquetes, crearSubscription } from '../../controllers/PackagesCon
 import { registro } from '../../controllers/UsersController';
 
 
-
-
-import { LiteCreditCardInput } from "react-native-credit-card-input-view";
-import colors from '../../constants/colors';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { FlatList } from 'react-native-gesture-handler';
-
 const Landing = ({navigation}) => {
 
     const {height, width} = Dimensions.get('window');
 	const [loading, setLoading] = useState(false);
-    const [registerLoading, setRegisterLoading] = useState(false);
 
     const [loginStatus, setLogInStatus] = useState(false);
     const [registerStatus, setregisterStatus] = useState(false);
@@ -60,14 +58,6 @@ const Landing = ({navigation}) => {
             console.log("Error al adquirir paquetes");
         }
     }, [])
-
-
-    const handleRegister = (value) =>{
-        // const userData = value.authContext.signUp({email,name,surname,password});
-        console.log('FROM LANDING');
-        // console.log(userData);
-        // return userData;
-    }
 
     const handleShowLogin = () =>{
         Animated.parallel([
@@ -117,26 +107,26 @@ const Landing = ({navigation}) => {
 
     const handleShowPackage = async (value) =>{
 
-        setRegisterLoading(true);
+        // setRegisterLoading(true);
         // const userData = value.authContext.signUp({email,name,surname,password});
 
-        let AUXREGISTRODATA = {
-            email: email,
-            password: password,
-            name: name,
-            last_name: surname,
-            admin: false,
-            tenant: 'mobile'
-        }
+        // let AUXREGISTRODATA = {
+        //     email: email,
+        //     password: password,
+        //     name: name,
+        //     last_name: surname,
+        //     admin: false,
+        //     tenant: 'mobile'
+        // }
 
-        const userData = await registro(AUXREGISTRODATA);
-        if(userData != undefined){
-            console.log('FROM LANDING');
-            console.log(userData);
-            setAuxUserData(userData.user);
-            setRegisterLoading(false);
-            setemailOGIN(email);
-            setpasswordLOGIN(password);
+        // const userData = await registro(AUXREGISTRODATA);
+        // if(userData != undefined){
+        //     console.log('FROM LANDING');
+        //     console.log(userData);
+        //     setAuxUserData(userData.user);
+        //     setRegisterLoading(false);
+        //     setemailOGIN(email);
+        //     setpasswordLOGIN(password);
 
         Animated.parallel([
             Animated.timing(yScrollTestRegister, {
@@ -153,9 +143,9 @@ const Landing = ({navigation}) => {
             // callback
             setregisterPackage(!registerPackage);
         });
-        }else{
-            console.log('NO SE PUDO REGISTRAR');
-        }
+        // }else{
+        //     console.log('NO SE PUDO REGISTRAR');
+        // }
     }
 
     const handleShowCard = () =>{
@@ -210,30 +200,50 @@ const Landing = ({navigation}) => {
 
 
     }
+
     const handleLoginAfterRegister = async (value) => {
-
-        console.log('PRUEBA DEL AUXUSERDATA');
-        console.log(auxUserData);
-
-        let auxData = {
-            id_usuario: auxUserData._id,
-            paquetes: selectedPackages,
-            firstName: auxUserData.name,
-            lastName: auxUserData.last_name,
-            email: auxUserData.email,
-            telephone: "1111111111"
+        //----Registro------
+        
+        let AUXREGISTRODATA = {
+            email: email,
+            password: password,
+            name: name,
+            last_name: surname,
+            admin: false,
+            tenant: 'mobile'
         }
-        let response = await crearSubscription(auxData);
-        console.log('RESPONSE DEL CREARSUBSCRIPCIOn');
-        console.log(response);
-        if(response != undefined){
-            let emString = auxUserData.email;
-            let pasString = password;
-            console.log('LOGUE EMAIL: ' + email);
-            console.log('LOGUE PASSWORD: ' + password);
-            await handleLogin(value);
-        }else{
-            console.log('mmmmmmm');
+
+        const userData = await registro(AUXREGISTRODATA);
+
+        if(userData != undefined){
+            console.log('FROM LANDING');
+            console.log(userData);
+            setAuxUserData(userData.user);
+            // setRegisterLoading(false);
+            setemailOGIN(email);
+            setpasswordLOGIN(password);
+        
+            //Crear subscripción
+            
+            let auxData = {
+                id_usuario: userData.user._id,
+                paquetes: selectedPackages,
+                firstName: userData.user.name,
+                lastName: userData.user.last_name,
+                email: userData.user.email,
+                telephone: "1111111111"
+            }
+            
+            let response = await crearSubscription(auxData);
+            console.log('RESPONSE DEL CREARSUBSCRIPCIOn');
+            console.log(response);
+            if(response != undefined){
+                console.log('LOGUE EMAIL: ' + email);
+                console.log('LOGUE PASSWORD: ' + password);
+                await handleLogin(value);
+            }else{
+                console.log('Error al crear Sub');
+            }
         }
     }
 
@@ -245,11 +255,11 @@ const Landing = ({navigation}) => {
                     {value => (
                         <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTest, Index: 100}} onTouchStart={()=>handleKeyboard()}>
                             <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%',justifyContent:'space-around', alignItems:'center'}}>
-                                <View style={styles.inputWrapper}>
+                                <KeyboardAvoidingView style={styles.inputWrapper} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
                                     {badLogin === 3 ? <Text style={{color: 'red', fontSize: 20}}>Error, datos incorrectos</Text> : null}
                                     <TextInput autoCapitalize={'none'} placeholder={'Mail'} style={[styles.input, {borderColor:'red', borderWidth: badLogin}]} keyboardType={'email-address'} onChangeText={text => handleTextMail(text)}></TextInput>
                                     <TextInput autoCapitalize={'none'} placeholder={'Contraseña'} style={[styles.input, {borderColor:'red', borderWidth: badLogin}]} keyboardType={'default'} secureTextEntry={true} onChangeText={text => setpasswordLOGIN(text)}></TextInput>
-                                </View>
+                                </KeyboardAvoidingView>
                                 <View style={styles.buttonsWrapper}>
                                     <TouchableOpacity style={styles.button} onPress={()=>{setLoading(true); handleLogin(value);}}>
                                         {loading ? <ActivityIndicator size={'large'} color={colors.white}/> : 
@@ -271,19 +281,19 @@ const Landing = ({navigation}) => {
             {value => (
                 <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTestRegister, Index: 100}}>
                     <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
-                        <ScrollView style={{width:'100%'}}>
-                            <View style={styles.inputWrapper}>
+                        <KeyboardAvoidingView style={{width:'100%'}} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                            <View style={styles.inputWrapper} >
                             <TextInput placeholder={'Nombre'} style={styles.input} keyboardType={'default'} onChangeText={(text)=>setName(text)}></TextInput>
                             <TextInput placeholder={'Apellido'} style={styles.input} keyboardType={'default'} onChangeText={(text)=>setSurname(text)}></TextInput>
                             <TextInput placeholder={'Correo electrónico'} style={styles.input} keyboardType={'email-address'} onChangeText={(text)=>setEmail(text)}></TextInput>
                             <TextInput placeholder={'Contraseña'} style={styles.input}  keyboardType={'default'} secureTextEntry={true} onChangeText={(text)=>setPassword(text)}></TextInput>
                             </View>
-                        </ScrollView>
+                        </KeyboardAvoidingView>
                         <View style={styles.buttonsWrapper}>
                             <TouchableOpacity style={styles.button} onPress={()=>handleShowPackage(value)}>
-                                {/* <Text style={styles.buttonText}>Siguiente</Text> */}
-                                {registerLoading ? <ActivityIndicator size={'large'} color={colors.white}/> : 
-                                        <Text style={styles.buttonText}>Siguiente</Text>}
+                                <Text style={styles.buttonText}>Siguiente</Text>
+                                {/* {registerLoading ? <ActivityIndicator size={'large'} color={colors.white}/> : 
+                                        <Text style={styles.buttonText}>Siguiente</Text>} */}
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.buttonSignUp} onPress={()=>handleShowRegister()}>
                                 <Text style={styles.buttonText}>Atrás</Text>
@@ -299,8 +309,8 @@ const Landing = ({navigation}) => {
     const packageSelector = ()=>{
         return(
             <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTestPackage, Index: 100}}>
-                <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
-                    <Text style={styles.paqueteText}>Seleccion de Paquetes</Text>
+                <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', alignItems:'center'}}>
+                    <Text style={styles.paqueteText}>Selección de Paquetes</Text>
                     <FlatList
                     data={paquetes}
                     style={styles.paquetesWrapper}
@@ -350,10 +360,7 @@ const Landing = ({navigation}) => {
                                 </View>
                             </View>
                             <View style={styles.buttonsWrapper}>
-                                {/* <TouchableOpacity style={styles.button} onPress={()=>{setLoading(true); handleRegister(value)}}> */}
                                 <TouchableOpacity style={styles.button} onPress={()=>{setLoading(true); handleLoginAfterRegister(value)}}>
-
-                                    {/* <Text style={styles.buttonText}>Registrarse</Text> */}
                                     {loading ? <ActivityIndicator size={'large'} color={colors.white}/> : 
                                         <Text style={styles.buttonText}>Registrarse</Text>}
                                 </TouchableOpacity>
@@ -361,7 +368,7 @@ const Landing = ({navigation}) => {
                                     <Text style={styles.buttonText}>Atrás</Text>
                                 </TouchableOpacity>
                             </View>
-                    </BlurView>
+                        </BlurView>
                     </Animated.View>
             )}</UserContext.Consumer>
         )
