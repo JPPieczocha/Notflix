@@ -206,10 +206,8 @@ const Landing = ({navigation}) => {
         if(selectedPackages.includes(packageID)){
             let aux = selectedPackages;
             console.log("Se fué " + packageID);
-            aux.pop(packageID);
-            setSelectedPackages(aux)
+            setSelectedPackages(aux.filter(auxID => auxID != packageID))
         }else{
-            console.log(packageID);
             console.log("Entró " + packageID);
             setSelectedPackages([...selectedPackages,packageID]);
         }
