@@ -9,16 +9,10 @@ const styles = StyleSheet.create({
 		height: '100%',
 
 		borderTopWidth:2,
-		borderTopColor: Colors.secondary
-	},
-	mainWrapper: {
-        height: '100%',
-		width:'100%',
-
-		flexDirection: 'column',
+		borderTopColor: Colors.secondary,
 	},
 	profileHeader:{
-		height: '40%',
+		height: '33%',
 		width: '100%',
 
 		justifyContent:"center",
@@ -26,19 +20,22 @@ const styles = StyleSheet.create({
 
 		borderBottomColor: Colors.secondary,
 		borderBottomWidth: 2,
+
+		flexDirection: "row",
+		justifyContent: "space-around"
 	},
 	profileImage:{
 		resizeMode: "cover",
 
-		height: 150,
-		width: 150,
+		height: '60%',
+		aspectRatio: 1/1,
 
 		borderRadius: 100,
 
 		//---prueba
 		justifyContent: "center",
 		alignItems: "center",
-		borderWidth: 2,
+		borderWidth: 5,
 		borderColor: Colors.secondary
 
 
@@ -51,106 +48,27 @@ const styles = StyleSheet.create({
 
 		fontSize: 24
 	},
-	packageProfileText: {
-		color: 'grey',
-		marginBottom: 5
-	},
-	buttonWrapper: {
-		alignItems:"center",
-		justifyContent:"center",
 
-		height: '60%'
-	},
 	buttonStyle:{
 		height: 50,
-        width:'75%',
+        width:'90%',
+
+		flexDirection: "row",
 
         backgroundColor: Colors.secondary,
-        marginTop: 20,
-
-        borderRadius: 25,
-        
-        justifyContent: 'center',
-        alignItems:'center'
-	},
-	buttonText:{
-		color: Colors.white,
-        fontSize: 20
-	},
-	buttonStyleLogOut:{
-		height: 50,
-        width:'75%',
-
-        backgroundColor: Colors.logOut,
         marginVertical: 20,
 
         borderRadius: 25,
         
-        justifyContent: 'center',
+		alignSelf: 'center',
+        justifyContent: 'space-around',
         alignItems:'center'
 	},
 
-
-
-
-
-
-
-	mainContentWrapper:{
-
-        width: '100%',
-        height: '100%',
-        justifyContent:'center',
-        alignItems: 'center',
-
-        backgroundColor: Colors.primaryv3,
-
-		marginTop: 5
-
-    },
-    scrollView: {
-        width: '100%',
-        height: '100%',
-    },
-    headerOption: {
-        height: 75,
-
-        justifyContent:'center',
-        alignItems: 'center',
-        borderColor: Colors.inactiveTint,
-
-        borderTopWidth: 2,
-        borderBottomWidth: 2,
-
-        marginBottom: 3
-    },
-    headerOptionText: {
-        color: Colors.inactiveTint,
-        fontSize: 24
-    },
-    optionButton: {
-        flexDirection: 'row',
-		width: '100%',
-
-        height: 40,
-
-        borderBottomWidth: 1,
-        borderColor: Colors.inactiveTint
-    },
-    opcionText: {
-        color: Colors.inactiveTint,
-
-        alignSelf: 'center',
-
-        fontSize: 16,
-        left: 10,
-    },
-    opcionIcon: {
-        position:'absolute',
-
-        right: 15,
-        alignSelf: 'center',
-    },
+	buttonText:{
+		color: Colors.white,
+        fontSize: 20
+	},
 });
 
 export default styles;
