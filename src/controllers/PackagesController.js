@@ -1,4 +1,4 @@
-import { allPaquetes, getSubscriptionsUser } from "../services/Apiroutes";
+import { allPaquetes, createSubscription } from "../services/Apiroutes";
 
 /**
  * 
@@ -18,14 +18,14 @@ export const getAllPaquetes = async ()=>{
 }
 
 
-export const getAllSubscriptions = async (data)=>{
-    const response = await getSubscriptionsUser(data);
-    if(response.status === 200){
+export const crearSubscription = async (data)=>{
+    const response = await createSubscription(data);
+    if(response.status === 201){
         const json = await response.json();
         return json;
     }else{
-        console.log('ERROR en getAllSubscriptions');
-        console.log("Codigo devuelto por getAllSubcriptions: " + response.status);
+        console.log('ERROR en createSub');
+        console.log("Codigo devuelto por createSub: " + response.status);
         return response.status
     }
 }

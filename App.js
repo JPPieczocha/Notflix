@@ -121,6 +121,8 @@ export default function App() {
 			dispatch({ type: 'SIGN_OUT' });
 		},
 		signUp: async data => {
+
+			//DEPRECATED SIGNUP
 			let user;
 
 			let registerData = {
@@ -133,16 +135,9 @@ export default function App() {
 			}
 			try{
 				const registrarse = await registro(registerData);
-				const auxUser = {
-					email: registrarse.user.email,
-					password: data.password,
-					tenant: 'mobile'
-				}
-				const iniciarSesion = await login(auxUser);
-				const saveKeyStore =  await SecureStore.setItemAsync('userToken', iniciarSesion.token);
-				user = jwt_decode(iniciarSesion.token);
-				//TODO: Manejo de controles y fail de inicio / registro
-				dispatch({ type: 'SIGN_IN', token: iniciarSesion.token, userdata: user });
+				console.log('FROM REGISTRO');
+				console.log(registrarse);
+				return registrarse;
 			}catch (e){
 				console.log('ERROR EN CREAR USUARIO. USEMEMO');
 			}

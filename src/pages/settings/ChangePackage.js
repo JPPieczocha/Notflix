@@ -40,6 +40,7 @@ export default function ChangePackage({navigation, route}) {
                         data={paquetes}
                         style={{width: '95%'}}
                         contentContainerStyle={{width: '100%'}}
+                        keyExtractor={item => `${item.id_paquete}`}
                         renderItem={(item)=> { 
                             return (<TouchableOpacity onPress={()=> console.log(item.item)} style={{width: '100%'}}>
                                 <Paquete key={item.item.id_paquete} id={item.item.id_paquete} nombre={item.item.nombre} precio={item.item.precio} imagen={item.item.imagen} estado={item.item.estado} descripcion={item.item.descripcion} contenidos={item.item.descripcion}></Paquete>

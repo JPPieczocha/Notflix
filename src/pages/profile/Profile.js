@@ -13,7 +13,6 @@ import Colors from '../../constants/colors';
 export default function Profile({navigation}) {
 
     const handleFacturacion = (value) =>{
-        console.log(value.state.userToken);
         Linking.openURL(`https://fya-develop.vercel.app/?from=mobile&token=${value.state.userToken}`)
     }
 

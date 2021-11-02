@@ -1,24 +1,28 @@
 import React, {useState, useRef, useContext, useEffect} from 'react'
-import { View, Text, ImageBackground,Platform, TouchableOpacity, Image,KeyboardAvoidingView, Animated, Dimensions, TextInput,Keyboard, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, ImageBackground, TouchableOpacity,KeyboardAvoidingView, Animated, Dimensions, TextInput,Keyboard, ScrollView, ActivityIndicator } from 'react-native';
 import { BlurView } from 'expo-blur';
 import styles from './Styles'
 import Colors from '../../constants/colors';
 import LoadingPage from '../../components/loadingPage/LoadingPage';
 import { UserContext } from '../../components/context/authContext';
 import Paquete from '../../components/paquete/Paquete';
-import { getAllPaquetes } from '../../controllers/PackagesController';
+import { getAllPaquetes, crearSubscription } from '../../controllers/PackagesController';
+import { registro } from '../../controllers/UsersController';
+
 
 
 
 import { LiteCreditCardInput } from "react-native-credit-card-input-view";
 import colors from '../../constants/colors';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { FlatList } from 'react-native-gesture-handler';
 
 const Landing = ({navigation}) => {
 
     const {height, width} = Dimensions.get('window');
 	const [loading, setLoading] = useState(false);
- 
+    const [registerLoading, setRegisterLoading] = useState(false);
+
     const [loginStatus, setLogInStatus] = useState(false);
     const [registerStatus, setregisterStatus] = useState(false);
     const [registerPackage, setregisterPackage] = useState(false);
@@ -33,6 +37,9 @@ const Landing = ({navigation}) => {
     const [credit, setCredit] = useState();
     const [paquetes, setPaquetes] = useState();
 
+    const [auxUserData, setAuxUserData] = useState({});
+    const [selectedPackages, setSelectedPackages] = useState([]);
+
     const yScrollLogo = useRef(new Animated.Value(0)).current;
     const yScrollButtons = useRef(new Animated.Value((height.valueOf())-(height.valueOf()*0.8))).current;
     const yScrollTest = useRef(new Animated.Value(height.valueOf())).current; //El animation del login
@@ -45,9 +52,7 @@ const Landing = ({navigation}) => {
             const paquetesData = async ()=>{
                 let data = await getAllPaquetes();
                 if(data != undefined){
-
                     setPaquetes(data.data);
-                    console.log(data.data);
                 }
             }
             paquetesData();
@@ -58,7 +63,10 @@ const Landing = ({navigation}) => {
 
 
     const handleRegister = (value) =>{
-        value.authContext.signUp({email,name,surname,password})
+        // const userData = value.authContext.signUp({email,name,surname,password});
+        console.log('FROM LANDING');
+        // console.log(userData);
+        // return userData;
     }
 
     const handleShowLogin = () =>{
@@ -107,7 +115,29 @@ const Landing = ({navigation}) => {
         });
     }
 
-    const handleShowPackage = () =>{
+    const handleShowPackage = async (value) =>{
+
+        setRegisterLoading(true);
+        // const userData = value.authContext.signUp({email,name,surname,password});
+
+        let AUXREGISTRODATA = {
+            email: email,
+            password: password,
+            name: name,
+            last_name: surname,
+            admin: false,
+            tenant: 'mobile'
+        }
+
+        const userData = await registro(AUXREGISTRODATA);
+        if(userData != undefined){
+            console.log('FROM LANDING');
+            console.log(userData);
+            setAuxUserData(userData.user);
+            setRegisterLoading(false);
+            setemailOGIN(email);
+            setpasswordLOGIN(password);
+
         Animated.parallel([
             Animated.timing(yScrollTestRegister, {
                 toValue: registerPackage ? height.valueOf()*0.35 : height.valueOf()+200, 
@@ -123,9 +153,15 @@ const Landing = ({navigation}) => {
             // callback
             setregisterPackage(!registerPackage);
         });
+        }else{
+            console.log('NO SE PUDO REGISTRAR');
+        }
     }
 
     const handleShowCard = () =>{
+
+        console.log(selectedPackages);
+
         Animated.parallel([
             Animated.timing(yScrollTestPackage, {
                 toValue: registerCard ? height.valueOf()*0.35 : height.valueOf()+200, 
@@ -159,6 +195,50 @@ const Landing = ({navigation}) => {
         }
     }
 
+    const handleAddPackage = (packageID) => {
+
+        //TODO: HANDLE EL ELIMINAR UN PAQUETE YA SELECCIONADO. HECHO PERO NO SE VE
+
+        if(selectedPackages.includes(packageID)){
+            let aux = selectedPackages;
+            aux.pop(packageID);
+            setSelectedPackages(aux)
+        }else{
+            console.log(packageID);
+            setSelectedPackages([...selectedPackages,packageID]);
+        }
+
+
+    }
+    const handleLoginAfterRegister = async (value) => {
+
+        console.log('PRUEBA DEL AUXUSERDATA');
+        console.log(auxUserData);
+
+        let auxData = {
+            id_usuario: auxUserData._id,
+            paquetes: selectedPackages,
+            firstName: auxUserData.name,
+            lastName: auxUserData.last_name,
+            email: auxUserData.email,
+            telephone: "1111111111"
+        }
+        let response = await crearSubscription(auxData);
+        console.log('RESPONSE DEL CREARSUBSCRIPCIOn');
+        console.log(response);
+        if(response != undefined){
+            let emString = auxUserData.email;
+            let pasString = password;
+            console.log('LOGUE EMAIL: ' + email);
+            console.log('LOGUE PASSWORD: ' + password);
+            await handleLogin(value);
+        }else{
+            console.log('mmmmmmm');
+        }
+    }
+
+    //---------Renders------------
+
     const login = ()=>{
             return(
                 <UserContext.Consumer>
@@ -187,26 +267,32 @@ const Landing = ({navigation}) => {
 
     const register = ()=>{
         return(
-            <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTestRegister, Index: 100}}>
-                <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
-                    <ScrollView style={{width:'100%'}}>
-                        <View style={styles.inputWrapper}>
-                        <TextInput placeholder={'Nombre'} style={styles.input} keyboardType={'default'} onChangeText={(text)=>setName(text)}></TextInput>
-                        <TextInput placeholder={'Apellido'} style={styles.input} keyboardType={'default'} onChangeText={(text)=>setSurname(text)}></TextInput>
-                        <TextInput placeholder={'Correo electrónico'} style={styles.input} keyboardType={'email-address'} onChangeText={(text)=>setEmail(text)}></TextInput>
-                        <TextInput placeholder={'Contraseña'} style={styles.input}  keyboardType={'default'} secureTextEntry={true} onChangeText={(text)=>setPassword(text)}></TextInput>
+            <UserContext.Consumer>
+            {value => (
+                <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTestRegister, Index: 100}}>
+                    <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
+                        <ScrollView style={{width:'100%'}}>
+                            <View style={styles.inputWrapper}>
+                            <TextInput placeholder={'Nombre'} style={styles.input} keyboardType={'default'} onChangeText={(text)=>setName(text)}></TextInput>
+                            <TextInput placeholder={'Apellido'} style={styles.input} keyboardType={'default'} onChangeText={(text)=>setSurname(text)}></TextInput>
+                            <TextInput placeholder={'Correo electrónico'} style={styles.input} keyboardType={'email-address'} onChangeText={(text)=>setEmail(text)}></TextInput>
+                            <TextInput placeholder={'Contraseña'} style={styles.input}  keyboardType={'default'} secureTextEntry={true} onChangeText={(text)=>setPassword(text)}></TextInput>
+                            </View>
+                        </ScrollView>
+                        <View style={styles.buttonsWrapper}>
+                            <TouchableOpacity style={styles.button} onPress={()=>handleShowPackage(value)}>
+                                {/* <Text style={styles.buttonText}>Siguiente</Text> */}
+                                {registerLoading ? <ActivityIndicator size={'large'} color={colors.white}/> : 
+                                        <Text style={styles.buttonText}>Siguiente</Text>}
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.buttonSignUp} onPress={()=>handleShowRegister()}>
+                                <Text style={styles.buttonText}>Atrás</Text>
+                            </TouchableOpacity>
                         </View>
-                    </ScrollView>
-                    <View style={styles.buttonsWrapper}>
-                        <TouchableOpacity style={styles.button} onPress={()=>handleShowPackage()}>
-                            <Text style={styles.buttonText}>Siguiente</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonSignUp} onPress={()=>handleShowRegister()}>
-                            <Text style={styles.buttonText}>Atrás</Text>
-                        </TouchableOpacity>
-                    </View>
-            </BlurView>
-            </Animated.View>
+                </BlurView>
+                </Animated.View>
+            )}
+            </UserContext.Consumer>
         )
     }
 
@@ -215,15 +301,23 @@ const Landing = ({navigation}) => {
             <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTestPackage, Index: 100}}>
                 <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
                     <Text style={styles.paqueteText}>Seleccion de Paquetes</Text>
-                    <ScrollView style={styles.paquetesWrapper} contentContainerStyle={{flexGrow:1,justifyContent:'center', alignItems:'center'}}>
-                        {/* El flex grow makes the content container stretch to fill the ScrollView but does not restrict the maximum */}
-                        {/* height, so you can still scroll correctly when the content extends the bounds of the ScrollView */}
-                        {paquetes === undefined ? null : paquetes.map((item,index)=>{
-                            return(
-                                <Paquete key={index} id={item.id} nombre={item.nombre} precio={item.precio} imagen={item.imagen} estado={item.estado} descripcion={item.descripcion} contenidos={item.descripcion}></Paquete>
-                            )
-                        })}
-                    </ScrollView>
+                    <FlatList
+                    data={paquetes}
+                    style={styles.paquetesWrapper}
+                    keyExtractor={item => `${item.id_paquete}`}
+                    renderItem={(item) => {
+                        let selectedFlag = false;
+                        if(selectedPackages.includes(item.item.id_paquete)){
+                            selectedFlag = true;
+                        };
+                        return(
+                            <TouchableOpacity onPress={()=>handleAddPackage(item.item.id_paquete)}>
+                                <Paquete id={item.item.id_paquete} selected={selectedFlag} nombre={item.item.nombre} precio={item.item.precio} imagen={item.item.imagen} estado={item.item.estado} descripcion={item.item.descripcion} contenidos={item.item.descripcion}></Paquete>
+                            </TouchableOpacity>
+                        )
+                    }}
+
+                    />
                     <View style={styles.buttonsWrapper}>
                         <TouchableOpacity style={styles.button} onPress={()=>handleShowCard()}>
                             <Text style={styles.buttonText}>Siguiente</Text>
@@ -256,10 +350,12 @@ const Landing = ({navigation}) => {
                                 </View>
                             </View>
                             <View style={styles.buttonsWrapper}>
-                                <TouchableOpacity style={styles.button} onPress={()=>{setLoading(true); handleRegister(value)}}>
+                                {/* <TouchableOpacity style={styles.button} onPress={()=>{setLoading(true); handleRegister(value)}}> */}
+                                <TouchableOpacity style={styles.button} onPress={()=>{setLoading(true); handleLoginAfterRegister(value)}}>
+
                                     {/* <Text style={styles.buttonText}>Registrarse</Text> */}
                                     {loading ? <ActivityIndicator size={'large'} color={colors.white}/> : 
-                                        <Text style={styles.buttonText}>Iniciar Sesion</Text>}
+                                        <Text style={styles.buttonText}>Registrarse</Text>}
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.buttonSignUp} onPress={()=>handleShowCard()}>
                                     <Text style={styles.buttonText}>Atrás</Text>

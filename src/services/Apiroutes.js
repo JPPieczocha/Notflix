@@ -84,22 +84,22 @@ export const allPaquetes = async () =>{
 //Fin Paquetes--
 
 //Subscripciones----
-export const getSubscriptionsUser = async (data) =>{
+export const createSubscription = async (data) =>{
     const options = {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
+        body: JSON.stringify(data)
     }
     try {
-        const response = await fetch(paqURL+'subscriptions/v1/list',options);
+        const response = await fetch(paqURL+'subscriptions/v1/create',options);
         return response
     } 
     catch (error) {
         console.error(error)
     }
 }
-
 
 //Fin Subscripciones---
 
