@@ -100,8 +100,25 @@ export const createSubscription = async (data) =>{
         console.error(error)
     }
 }
-
 //Fin Subscripciones---
+export const canPlayMovie = async (token, data) =>{
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(data)
+    }
+    try {
+        const response = await fetch(paqURL+'content/v1/approve/content/use',options);
+        return response
+    } 
+    catch (error) {
+        console.error(error)
+    }
+}
+
 
 
 

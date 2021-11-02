@@ -1,4 +1,4 @@
-import { allPaquetes, createSubscription } from "../services/Apiroutes";
+import { allPaquetes, createSubscription, canPlayMovie } from "../services/Apiroutes";
 
 /**
  * 
@@ -26,6 +26,17 @@ export const crearSubscription = async (data)=>{
     }else{
         console.log('ERROR en createSub');
         console.log("Codigo devuelto por createSub: " + response.status);
+        return response.status
+    }
+}
+
+export const checkPlayMovie = async (token, data)=>{
+    const response = await canPlayMovie(token, data);
+    if(response.status === 200){
+        const json = await response.json();
+        return json;
+    }else{
+        console.log("Codigo devuelto por checkPlayMovie: " + response.status);
         return response.status
     }
 }

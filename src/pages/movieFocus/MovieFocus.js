@@ -1,13 +1,35 @@
 import React, {useState} from 'react';
-import { Text, View, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, ImageBackground, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import Colors from '../../constants/colors'
 import styles from './Styles';
 
+import { checkPlayMovie } from '../../controllers/PackagesController';
+import { UserContext } from '../../components/context/authContext';
+
 const MovieFocus = ({navigation,route})=>{
 
+	const token = React.useContext(UserContext);
     const {allData} = route.params;
+
+    const [loading, setLoading] = useState(false);
+
+    const handleMoviePlayer = async () => {
+        setLoading(true)
+        let movie = {
+            id_contenido: allData._id
+        }
+        let checked = await checkPlayMovie(token.state.userToken, movie);
+        if(checked != undefined){
+            if(checked.status == 200){
+                setLoading(false);
+                navigation.navigate('MoviePlayer',{fileURL: allData.movie.movieUrl});
+            }else{
+                setLoading(false);
+            }
+        }
+    };
 
     const header = ()=>{
         return(
@@ -55,8 +77,9 @@ const MovieFocus = ({navigation,route})=>{
                                 <Text style={styles.movieDataText}>{allData.movie.duration} Minutos</Text>
                                 <Text style={styles.movieDataText}>{allData.movie.value}</Text>
                             </View>
-                            <TouchableOpacity style={styles.playMovie} onPress={()=>navigation.navigate('MoviePlayer',{fileURL: allData.movie.movieUrl})}>
-                                <Text style={styles.playMovieText}>Reproducir</Text>
+                            {/* <TouchableOpacity style={styles.playMovie} onPress={()=>navigation.navigate('MoviePlayer',{fileURL: allData.movie.movieUrl})}> */}
+                            <TouchableOpacity style={styles.playMovie} onPress={()=>handleMoviePlayer()}>
+                                { loading ? <ActivityIndicator size={'small'} color={Colors.white}/> : <Text style={styles.playMovieText}>Reproducir</Text>}
                             </TouchableOpacity>
                         </View>
                         <View style={styles.sinopsis}>
