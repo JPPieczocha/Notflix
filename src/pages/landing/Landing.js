@@ -257,8 +257,6 @@ const Landing = ({navigation}) => {
                 console.log('LOGUE EMAIL: ' + email);
                 console.log('LOGUE PASSWORD: ' + password);
                 await handleLogin(value, false,AUXREGISTRODATA.email, AUXREGISTRODATA.password);
-                //BUG, Corregir que no loguea porque es undefined, hay que cambiar el handleLogin y app js para que no acepte cosa rara
-                //Debería ser facil, después lo hago
             }else{
                 console.log('Error al crear Sub');
             }
