@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
-import * as Linking from 'expo-linking'
+import {openBrowserAsync} from 'expo-web-browser'
 
 import { FontAwesome5, FontAwesome, Ionicons  } from '@expo/vector-icons';
 
@@ -14,11 +14,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 export default function Profile({navigation}) {
 
     const handleFacturacion = (value) =>{
-        Linking.openURL(`https://fya-develop.vercel.app/?from=mobile&token=${value.state.userToken}`)
+        openBrowserAsync(`https://fya-develop.vercel.app/?from=mobile&token=${value.state.userToken}`)
     }
 
     const redirectLegal = () => {
-        Linking.openURL('https://www.termsfeed.com/public/uploads/2019/04/terms-and-conditions-template.pdf')
+        openBrowserAsync('https://www.termsfeed.com/public/uploads/2019/04/terms-and-conditions-template.pdf')
     }
 
     const handleLogOut = (value) => {
