@@ -69,7 +69,7 @@ const Carrousel = ({nav, movieData})=>{
             snapToInterval={270} //Es 250 + 10 de margin de cada lado (es decir, 20)
             showsHorizontalScrollIndicator={false}
             decelerationRate={0}
-            contentContainerStyle={{alignItems: 'center', marginTop: 15}}
+            contentContainerStyle={{alignItems: 'center', paddingTop: 17}}
             bounces = {false}
             data={data()}
             keyExtractor={item => `${item._id}`}
