@@ -32,11 +32,16 @@ const Landing = ({navigation}) => {
     const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const [creditTitular, setCreditTitular] = useState("")
     const [credit, setCredit] = useState();
+    
     const [paquetes, setPaquetes] = useState();
 
     const [auxUserData, setAuxUserData] = useState({});
     const [selectedPackages, setSelectedPackages] = useState([]);
+    const [montoPaquetes, setMontoPaquetes] = useState(0)
+    
 
     const yScrollLogo = useRef(new Animated.Value(0)).current;
     const yScrollButtons = useRef(new Animated.Value((height.valueOf())-(height.valueOf()*0.8))).current;
@@ -149,9 +154,6 @@ const Landing = ({navigation}) => {
     }
 
     const handleShowCard = () =>{
-
-        console.log(selectedPackages);
-
         Animated.parallel([
             Animated.timing(yScrollTestPackage, {
                 toValue: registerCard ? height.valueOf()*0.35 : height.valueOf()+200, 
@@ -170,7 +172,7 @@ const Landing = ({navigation}) => {
     }
 
     const handleLogin =  async(value, flag, emailAux = null, passAux = null)=>{
-
+        setLoading(true)
         //Flag on TRUE comes from login - False from register
         if(flag){
             let emailString = emailLOGIN;
@@ -189,7 +191,7 @@ const Landing = ({navigation}) => {
                 setbadLogin(3);
             }
         }
-        // setLoading(false);
+        setLoading(false);
     }
 
     const handleTextMail = (text)=>{
@@ -199,17 +201,17 @@ const Landing = ({navigation}) => {
         }
     }
 
-    const handleAddPackage = (packageID) => {
+    const handleAddPackage = (packageID, price) => {
 
         //TODO: HANDLE EL ELIMINAR UN PAQUETE YA SELECCIONADO. HECHO PERO NO SE VE
 
         if(selectedPackages.includes(packageID)){
             let aux = selectedPackages;
-            console.log("Se fué " + packageID);
             setSelectedPackages(aux.filter(auxID => auxID != packageID))
+            setMontoPaquetes(montoPaquetes - price)
         }else{
-            console.log("Entró " + packageID);
             setSelectedPackages([...selectedPackages,packageID]);
+            setMontoPaquetes(montoPaquetes + price)
         }
 
 
@@ -277,7 +279,7 @@ const Landing = ({navigation}) => {
                                     <TextInput autoCapitalize={'none'} placeholder={'Contraseña'} style={[styles.input, {borderColor:'red', borderWidth: badLogin}]} keyboardType={'default'} secureTextEntry={true} onChangeText={text => setpasswordLOGIN(text)}></TextInput>
                                 </KeyboardAvoidingView>
                                 <View style={styles.buttonsWrapper}>
-                                    <TouchableOpacity style={styles.button} onPress={()=>{setLoading(true); handleLogin(value, true);}}>
+                                    <TouchableOpacity style={styles.button} onPress={()=>{handleLogin(value, true);}} disabled={emailLOGIN === "" || passwordLOGIN === ""}>
                                         {loading ? <ActivityIndicator size={'large'} color={colors.white}/> : 
                                         <Text style={styles.buttonText}>Iniciar Sesion</Text>}
                                     </TouchableOpacity>
@@ -306,7 +308,7 @@ const Landing = ({navigation}) => {
                             </View>
                         </KeyboardAvoidingView>
                         <View style={styles.buttonsWrapper}>
-                            <TouchableOpacity style={styles.button} onPress={()=>handleShowPackage(value)}>
+                            <TouchableOpacity style={styles.button} onPress={()=>handleShowPackage(value)} disabled={name === "" && surname === "" && email === "" && password === ""}>
                                 <Text style={styles.buttonText}>Siguiente</Text>
                                 {/* {registerLoading ? <ActivityIndicator size={'large'} color={colors.white}/> : 
                                         <Text style={styles.buttonText}>Siguiente</Text>} */}
@@ -343,7 +345,7 @@ const Landing = ({navigation}) => {
 
                     />
                     <View style={styles.buttonsWrapper}>
-                        <TouchableOpacity style={styles.button} onPress={()=>handleShowCard()}>
+                        <TouchableOpacity style={styles.button} onPress={()=>handleShowCard()} disabled={selectedPackages.length === 0}>
                             <Text style={styles.buttonText}>Siguiente</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonSignUp} onPress={()=>handleShowPackage()}>
@@ -369,9 +371,12 @@ const Landing = ({navigation}) => {
                         <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}} onTouchStart={()=>handleKeyboard()}>
                             <Text style={styles.buttonText}>Ingrese su Método de Pago</Text>
                             <View style={[styles.inputWrapper]}>
+                                <TextInput placeholder={'Nombre del Titular'} style={styles.input} keyboardType={'default'} onChangeText={(text) => setCreditTitular(text)} />
                                 <View style={[styles.input, {justifyContent: 'center', alignItems: 'center'}]}>
-                                    <LiteCreditCardInput onChange={data => setCredit(data)}/>
+                                    <LiteCreditCardInput  onChange={data => setCredit(data)}/>
                                 </View>
+
+                                <Text style={styles.buttonText}>Monto a pagar mensualmente: $ {montoPaquetes}</Text>
                             </View>
                             <View style={styles.buttonsWrapper}>
                                 <TouchableOpacity style={styles.button} onPress={()=>{setLoading(true); handleLoginAfterRegister(value)}}>

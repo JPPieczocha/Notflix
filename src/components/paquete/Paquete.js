@@ -7,7 +7,7 @@ const Paquete = ({id,nombre,precio,imagen,estado,descripcion, contenidos,fechaAc
     const [selection, setSelection] = useState(false)
 
     const handleSelection = () => {
-        handleAddPackage(id)
+        handleAddPackage(id, precio)
         setSelection(!selection)
     }
 
