@@ -181,6 +181,7 @@ const Landing = ({navigation}) => {
             const status = await value.authContext.signIn({emailString,passString});
             if(status === 401){
                 setbadLogin(3);
+                setLoading(false)
             }
         }else{
             let emailString = emailAux;
@@ -189,9 +190,10 @@ const Landing = ({navigation}) => {
             const status = await value.authContext.signIn({emailString,passString});
             if(status === 401){
                 setbadLogin(3);
+                setLoading(false)
             }
         }
-        setLoading(false);
+        
     }
 
     const handleTextMail = (text)=>{
@@ -279,7 +281,7 @@ const Landing = ({navigation}) => {
                                     <TextInput autoCapitalize={'none'} placeholder={'Contraseña'} style={[styles.input, {borderColor:'red', borderWidth: badLogin}]} keyboardType={'default'} secureTextEntry={true} onChangeText={text => setpasswordLOGIN(text)}></TextInput>
                                 </KeyboardAvoidingView>
                                 <View style={styles.buttonsWrapper}>
-                                    <TouchableOpacity style={styles.button} onPress={()=>{handleLogin(value, true);}} disabled={emailLOGIN === "" || passwordLOGIN === ""}>
+                                    <TouchableOpacity style={styles.button} onPress={()=>{handleLogin(value, true)}} disabled={emailLOGIN === "" || passwordLOGIN === ""}>
                                         {loading ? <ActivityIndicator size={'large'} color={colors.white}/> : 
                                         <Text style={styles.buttonText}>Iniciar Sesion</Text>}
                                     </TouchableOpacity>
