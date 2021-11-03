@@ -50,6 +50,23 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         overflow:'hidden',
 	},
+	logoWrapper:{
+        height:'40%',
+        width:'100%',
+
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+    },
+
+	emptyImage: {
+
+		marginVertical: 90,
+		width: width * 0.7,
+		height: height * 0.125,
+		resizeMode: "stretch"
+
+	}
 });
 
 export default styles;

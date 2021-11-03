@@ -44,7 +44,7 @@ const Search = ({ navigation }) => {
     }, [reload]);
 
     const handleTextInput = (text) => {
-        setTextSearch(text)
+        setTextSearch(text);
         if (movies != undefined) {
             let auxArray = [];
             setMovieFind([]);
@@ -154,9 +154,21 @@ const Search = ({ navigation }) => {
                                 </TouchableOpacity>
                             );
                         }}
-                        ListEmptyComponent={() => (
-                            textSearch === "" ? null : <Text style={{ color: "white" }}>No se han encontrado películas que coincidan con su búsqueda.</Text>
-                        )}
+                        ListEmptyComponent={() =>
+                            textSearch === "" ? (
+                                <View styles={{alignItems: 'center'}}>
+                                    <Image
+                                        style={styles.emptyImage}
+                                        source={require("../../assets/landing/Logo_final.png")}
+                                    />
+                                    <Text style={{ color: "white", textAlign: 'center' }}>Empezá a escribir, nosotros te lo traemos.</Text>
+                                </View>
+                            ) : (
+                                <Text style={{ color: "white" }}>
+                                    No se han encontrado películas que coincidan con su búsqueda.
+                                </Text>
+                            )
+                        }
                     ></FlatList>
                 </View>
             </View>
