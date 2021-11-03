@@ -301,14 +301,14 @@ const Landing = ({navigation}) => {
             {value => (
                 <Animated.View style={{width:'100%', height:'65%',  position: 'absolute', top: yScrollTestRegister, Index: 100}}>
                     <BlurView  intensity={80} tint="dark" style={{width: '100%', height: '100%', justifyContent:'space-evenly', alignItems:'center'}}>
-                        <KeyboardAvoidingView style={{width:'100%'}} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+                        <ScrollView style={{width:'100%'}}>
                             <View style={styles.inputWrapper} >
                             <TextInput placeholder={'Nombre'} style={styles.input} keyboardType={'default'} onChangeText={(text)=>setName(text)}></TextInput>
                             <TextInput placeholder={'Apellido'} style={styles.input} keyboardType={'default'} onChangeText={(text)=>setSurname(text)}></TextInput>
                             <TextInput placeholder={'Correo electrónico'} style={styles.input} keyboardType={'email-address'} onChangeText={(text)=>setEmail(text)}></TextInput>
                             <TextInput placeholder={'Contraseña'} style={styles.input}  keyboardType={'default'} secureTextEntry={true} onChangeText={(text)=>setPassword(text)}></TextInput>
                             </View>
-                        </KeyboardAvoidingView>
+                        </ScrollView>
                         <View style={styles.buttonsWrapper}>
                             <TouchableOpacity style={styles.button} onPress={()=>handleShowPackage(value)} disabled={name === "" && surname === "" && email === "" && password === ""}>
                                 <Text style={styles.buttonText}>Siguiente</Text>
