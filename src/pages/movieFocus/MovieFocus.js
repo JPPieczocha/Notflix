@@ -20,19 +20,16 @@ const MovieFocus = ({navigation,route})=>{
     const handleMoviePlayer = async () => {
         setLoading(true)
         let movie = {
-            id_contenido: allData._id
+            id_contenido: allData.movie._id
         }
         let checked = await checkPlayMovie(token.state.userToken, movie);
-        if(checked != undefined){
-            if(checked.status == 200){
-                setLoading(false);
-                navigation.navigate('MoviePlayer',{fileURL: allData.movie.movieUrl});
-            }else{
-                setLoading(false);
-                setModal(true);
-            }
+        if(checked === 403){
+            setModal(true);
+        }else{
+            navigation.navigate('MoviePlayer',{fileURL: allData.movie.movieUrl});
         }
-    };
+        setLoading(false);
+    }
 
     const header = ()=>{
         return(

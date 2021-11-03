@@ -110,6 +110,7 @@ export const canPlayMovie = async (token, data) =>{
         },
         body: JSON.stringify(data)
     }
+
     try {
         const response = await fetch(paqURL+'content/v1/approve/content/use',options);
         return response
