@@ -4,7 +4,7 @@
     "slug": "iapp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/splash/Splash3.png",
+    "icon": "./src/assets/app_icon.png",
     "splash": {
       "image": "./src/assets/splash/Splash2.png",
       "resizeMode": "contain",
@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#121212"
-      }
+      },
+      "package": "expo.iapp.notflix"
     },
     "web": {
       "favicon": "./assets/favicon.png"
