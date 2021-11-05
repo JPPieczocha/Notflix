@@ -62,7 +62,7 @@ export default function App() {
 				userToken = await SecureStore.getItemAsync('userToken');
 				if(userToken !== null){
 					user = jwt_decode(userToken);
-					if(user.exp*100 < todayDate.getTime()){
+					if(user.exp*1000 < todayDate.getTime()){
 						console.log('Token vencido');
 						const deleteKeyStore = await SecureStore.deleteItemAsync('userToken');
 						dispatch({ type: 'SIGN_OUT'});
