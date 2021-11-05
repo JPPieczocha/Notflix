@@ -6,16 +6,23 @@ import LoadingPage from '../../components/loadingPage/LoadingPage';
 import Paquete from '../../components/paquete/Paquete';
 import {getAllPaquetes} from '../../controllers/PackagesController';
 
+import { UserContext } from '../../components/context/authContext';
+import { FlatList } from 'react-native-gesture-handler';
+
+
 
 export default function ChangePackage({navigation, route}) {
 
     const [paquetes, setPaquetes] = useState();
+	const token = React.useContext(UserContext);
 
     useEffect(() => {
         try{
             const paquetesData = async ()=>{
                 let data = await getAllPaquetes();
-                setPaquetes(data.data);
+                if(data != undefined){
+                    setPaquetes(data.data);
+                }
             }
             paquetesData();
         }catch (e){
@@ -29,13 +36,18 @@ export default function ChangePackage({navigation, route}) {
             <View style={styles.mainWrapper}>
                 <View style={{width:'100%', maxHeight:'100%', justifyContent:'center', alignItems:'center'}}>
                     {paquetes === undefined ? <LoadingPage/> : 
-                        <ScrollView style={{width:'100%', maxHeight:'60%', marginBottom:25}} contentContainerStyle={{justifyContent:'center', alignItems:'center'}}>
-                            {paquetes.map((item,index)=>{
-                                    return(
-                                        <Paquete key={index} id={item.id} nombre={item.nombre} precio={item.precio} imagen={item.imagen} estado={item.estado} descripcion={item.descripcion} contenidos={item.descripcion}></Paquete>
-                                    )
-                            })}
-                        </ScrollView>
+                        <FlatList
+                        data={paquetes}
+                        style={{width: '95%'}}
+                        contentContainerStyle={{width: '100%'}}
+                        keyExtractor={item => `${item.id_paquete}`}
+                        renderItem={(item)=> { 
+                            return (<TouchableOpacity onPress={()=> console.log(item.item)} style={{width: '100%'}}>
+                                <Paquete key={item.item.id_paquete} id={item.item.id_paquete} nombre={item.item.nombre} precio={item.item.precio} imagen={item.item.imagen} estado={item.item.estado} descripcion={item.item.descripcion} contenidos={item.item.descripcion}></Paquete>
+                                </TouchableOpacity>
+                            )}}
+                        />
+
                     }
                 
                 <TouchableOpacity style={styles.boton}>

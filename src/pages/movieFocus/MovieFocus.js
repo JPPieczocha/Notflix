@@ -1,13 +1,35 @@
 import React, {useState} from 'react';
-import { Text, View, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, ImageBackground, TouchableOpacity, ScrollView, ActivityIndicator, Modal, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
 import Colors from '../../constants/colors'
 import styles from './Styles';
 
+import { checkPlayMovie } from '../../controllers/PackagesController';
+import { UserContext } from '../../components/context/authContext';
+
 const MovieFocus = ({navigation,route})=>{
 
-    const {title, idMovie, imageSource,ratings,genre,age, desc, urlFile} = route.params;
+	const token = React.useContext(UserContext);
+    const {allData} = route.params;
+
+    const [loading, setLoading] = useState(false);
+
+    const [modal, setModal] = useState(false)
+
+    const handleMoviePlayer = async () => {
+        setLoading(true)
+        let movie = {
+            id_contenido: allData.movie._id
+        }
+        let checked = await checkPlayMovie(token.state.userToken, movie);
+        if(checked === 403){
+            setModal(true);
+        }else{
+            navigation.navigate('MoviePlayer',{fileURL: allData.movie.movieUrl});
+        }
+        setLoading(false);
+    }
 
     const header = ()=>{
         return(
@@ -29,6 +51,31 @@ const MovieFocus = ({navigation,route})=>{
         )
     }
 
+    const ModalWarning =
+    (
+        <Modal
+            animationType="fade"
+            transparent={true}
+            visible={modal}
+            onRequestClose={() => setModal(false)} //Back de android
+        >
+            <View style={styles.modalFilter}>
+                <View style={styles.modalContainer}>
+                    <Text style={styles.title}>No puedes ver "{allData.movie.title}"</Text>
+                    <Text style={styles.description}>
+                        Para ver este título, debes suscribirte a un paquete que pueda reproducir esta película.
+                    </Text>
+
+                    <TouchableOpacity style={styles.button} onPress={() => setModal(false)}>
+                        <Text style={styles.buttonText}>Volver</Text>
+                    </TouchableOpacity>
+
+                    <Image />
+                </View>
+            </View>
+        </Modal>
+    )
+
     return(
         <View style={{height:'100%', width:'100%', backgroundColor: Colors.primaryv3}}>
             <ImageBackground 
@@ -38,9 +85,7 @@ const MovieFocus = ({navigation,route})=>{
                 width:'100%',
                 justifyContent:'flex-end'
             }} 
-            source={{
-                uri:  imageSource,
-              }}
+            source={{ uri: allData.movie.imageMobile }}
             >
                 <BlurView  intensity={80} tint="dark" style={styles.main}>
                     <ScrollView
@@ -51,27 +96,26 @@ const MovieFocus = ({navigation,route})=>{
                     bouncesZoom={false}
                     style={{width:'100%'}}>
                         <View style={styles.mainHeader}>
-                            <Text style={styles.titleText}>{title}</Text>
+                            <Text style={styles.titleText}>{allData.movie.title}</Text>
                             <View style={styles.movieData}>
-                                <Text style={styles.movieDataText}>+{age}</Text>
-                                <Text style={styles.movieDataText}>{genre}</Text>
-                                <Text style={styles.movieDataText}>{ratings}</Text>
+                                <Text style={styles.movieDataText}>{allData.movie.minAge}</Text>
+                                <Text style={styles.movieDataText}>{allData.movie.duration} Minutos</Text>
+                                <Text style={styles.movieDataText}><Ionicons name={'star'} size={14} color={'gold'} style={{marginLeft:15}}/> {allData.movie.value}</Text>
                             </View>
-                            <TouchableOpacity style={styles.playMovie} onPress={()=>navigation.navigate('MoviePlayer',{title:title, fileURL: urlFile})}>
-                                <Text style={styles.playMovieText}>Reproducir</Text>
+                            <TouchableOpacity style={styles.playMovie} onPress={()=>handleMoviePlayer()} disabled={loading}>
+                                { loading ? <ActivityIndicator size={'small'} color={Colors.white}/> : <Text style={styles.playMovieText}>Reproducir</Text>}
                             </TouchableOpacity>
                         </View>
                         <View style={styles.sinopsis}>
-                                <Text style={styles.sinopsisText}>{desc}</Text>
+                                <Text style={styles.sinopsisText}>{allData.movie.description}</Text>
                         </View>
-                        <TouchableOpacity style={styles.details} onPress={()=>navigation.navigate('MovieDetails',{title:title, ratings:ratings})}>
+                        <TouchableOpacity style={styles.details} onPress={()=>navigation.navigate('MovieDetails',{allData: allData})}>
                                 <Text style={styles.playMovieText}>Más detalles</Text>
                         </TouchableOpacity>
                     </ScrollView>
                 </BlurView>
-
-
             </ImageBackground>
+            {ModalWarning}
             {header()}
         </View>
     )

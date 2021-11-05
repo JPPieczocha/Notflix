@@ -4,14 +4,19 @@ import dummyData from '../../assets/moviesDummy';
 import styles from './Styles'
 import Colors from '../../constants/colors';
 
-const Carrousel = ({nav})=>{
+
+
+const Carrousel = ({nav, movieData})=>{
 
     const scrollX = React.useRef(new Animated.Value(0)).current;
     const { width, height } = Dimensions.get("window");
     const SPACER_SIZE = (width - 270)/2 //Espaciador que logra que se vea la pelicula centrada y otras a los costados.
     
     const data = ()=>{
-        return [{key: 'left', id: '-1'},...dummyData.newSeason,{key: 'right', id: '-2'}];
+        if(movieData != undefined){
+
+            return [{key: 'left', _id: '-1'},...movieData.movies,{key: 'right', _id: '-2'}];
+        }return []
     }
 
     const renderPuntos = ()=>{
@@ -27,7 +32,7 @@ const Carrousel = ({nav})=>{
                         extrapolate: "clamp"
                     })
 
-                    if(item.id == '-1' || item.id == '-2'){
+                    if(item._id == '-1' || item._id == '-2'){
                         return(
                             <Animated.View
                             key={`dot-${index}`}
@@ -64,16 +69,16 @@ const Carrousel = ({nav})=>{
             snapToInterval={270} //Es 250 + 10 de margin de cada lado (es decir, 20)
             showsHorizontalScrollIndicator={false}
             decelerationRate={0}
-            contentContainerStyle={{alignItems: 'center', marginTop: 15}}
+            contentContainerStyle={{alignItems: 'center', paddingTop: 17}}
             bounces = {false}
             data={data()}
-            keyExtractor={item => `${item.id}`}
+            keyExtractor={item => `${item._id}`}
             overScrollMode={'always'}
             onScroll={Animated.event([{nativeEvent:{contentOffset: {x: scrollX}}}],{useNativeDriver:false})}
 
             // Se renderiza la pelicula
             renderItem={({index,item}) => {
-                if(item.id == '-2' || item.id == '-1'){
+                if(item._id == '-2' || item._id == '-1'){
                     return(
                         <View style={{width: SPACER_SIZE, backgroundColor:'red'}}>
                             {/* Esto genera el espacio a la izq y derecha para mantener centrado el flat list y mostrar cosas a los costados.*/}
@@ -89,10 +94,9 @@ const Carrousel = ({nav})=>{
                     inputRange,
                     outputRange: [0,-20,0]
                 })
-
                 return(
                     <TouchableOpacity
-                    onPress={()=>nav.navigate('MovieFocus',{title:item.name, idMovie: item.id, imageSource: item.details.coverImage, ratings: item.details.ratings, genre: item.details.genre, age: item.details.age, desc: item.details.desc})}
+                    onPress={()=>nav.navigate('MovieFocus',{allData: item})}
                     style={styles.buttonMovie}>
                         <Animated.View style={
                             [StyleSheet.absoluteFillObject,{
@@ -103,8 +107,8 @@ const Carrousel = ({nav})=>{
                                 transform:[{translateY}]
                             }]}>
                                 <Animated.Image 
-                                source={item.thumbnail}
-                                style={{resizeMode:'contain', width:250}}
+                                source={{uri:item.movie.imageMobile}}
+                                style={{resizeMode:'contain', width:250,height:'100%', backgroundColor: Colors.secondary}}
                                 >
                                 </Animated.Image>
                         </Animated.View>

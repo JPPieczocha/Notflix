@@ -7,7 +7,9 @@ import styles from './Styles';
 
 const MovieDetails = ({navigation,route})=>{
 
-    const {title, idMovie, imageSource,ratings,genre,age, desc} = route.params;
+    const {allData} = route.params;
+    let movieDate = allData.movie.launch;
+
     const dataArray = [
         {   
          image:require('../../assets/images/images/series/actorsAvatars/brad.jpg'),
@@ -57,7 +59,7 @@ const MovieDetails = ({navigation,route})=>{
                         <Ionicons name={'arrow-back'} size={30} color={Colors.inactiveTint}/>
                     </TouchableOpacity>
                 </View>
-                <Text style={{color:"#fff",fontSize:23,fontWeight:'bold'}}>{title}</Text>
+                <Text style={{color:"#fff",fontSize:23,fontWeight:'bold', textAlign: 'center'}}>{allData.movie.title}</Text>
                 <View style={{
                     width:50,
                     height:50,
@@ -72,31 +74,18 @@ const MovieDetails = ({navigation,route})=>{
         <View style={styles.container}>
             {header()}
             <ScrollView style={{width: '100%'}} bounces={false}>
-                <Text style={styles.detailText}>Reparto</Text>
-                <FlatList
-                    data={dataArray}
-                    bounces={false}
-                    horizontal
-                    keyExtractor={({ id }) => id.toString()}
-                    renderItem={({ item }) => {
-                        return(
-                            <View style={styles.actorsItem}>
-                                <Image source={item.image} style={{resizeMode:'cover',height:90,width:90,borderRadius:100}}></Image>
-                                <Text style={{color:Colors.white, marginTop:5}}>{item.title}</Text>
-                                {/* <Text style={{color:'#C5C3C3'}}>{item.title}</Text> */}
-                            </View>
-                        )
-                    }}
-                    showsHorizontalScrollIndicator={false}
-                    />
                 <Text style={styles.detailText}>Sinopsis</Text>
-                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>To carry out the biggest heist in history, a mysterious man called The Professor recruits a band of eight robbers who have a single characteristic: none of them has anything to lose. Five months of seclusion memorizing every step, every detail, every probability culminate in eleven days locked up in the National Coinage and Stamp Factory of Spain, surrounded by police forces and with dozens of hostages in their power, to find out whether their suicide wager will lead to everything or nothing.</Text>
+                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.description}</Text>
+                <Text style={styles.detailText}>Lanzamiento</Text>
+                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{movieDate.slice(8,10)} / {movieDate.slice(5,7)} / {movieDate.slice(0,4)}</Text>
                 <Text style={styles.detailText}>Director</Text>
-                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>David Fincher</Text>
+                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.director}</Text>
+                <Text style={styles.detailText}>Producer</Text>
+                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.producer}</Text>
                 <Text style={styles.detailText}>IMDb Rating</Text>
                 <View style={{flexDirection:'row',marginBottom:10, alignItems:'center'}}>
-                    <Ionicons name={'star'} size={30} color={'gold'} style={{marginLeft:15}}/>
-                    <Text style={{marginHorizontal:10,color:'#C5C3C3',fontSize:20}}>{ratings}</Text>
+                    <Ionicons name={'star'} size={26} color={'gold'} style={{marginLeft:15}}/>
+                    <Text style={{marginHorizontal:10,color:'#C5C3C3',fontSize:20}}>{allData.movie.value}</Text>
                 </View>
             </ScrollView>
         </View>

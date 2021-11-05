@@ -2,10 +2,12 @@ import React from 'react';
 import {FlatList,TouchableOpacity,Image,View, Animated, StyleSheet, ActivityIndicator } from 'react-native';
 import styles from './Styles';
 
+import Colors from '../../constants/colors';
+
 const CarrouselBasic = ({nav, route, movies})=>{
 
     const handleOnPress = (item)=>{
-        nav.navigate('MovieFocus',{title:item.movie.title, idMovie: item.movie._id, imageSource: item.movie.imageMobile, ratings: item.movie.value, genre: 'dummy', age: item.movie.minAge, desc: item.movie.description, urlFile: item.movie.movieUrl});
+        nav.navigate('MovieFocus',{allData: item});
     }
 
     return(
@@ -36,7 +38,7 @@ const CarrouselBasic = ({nav, route, movies})=>{
                             width: '100%',
                             height:'100%',
                             resizeMode:'contain',
-                            backgroundColor:'red'
+                            backgroundColor: Colors.secondary
                         }}
                         onError={()=>console.log('Error al cargar la imagen del carrousel basic')}
                         onProgress={()=> { return <ActivityIndicator size={'small'} color={'white'}/>}}

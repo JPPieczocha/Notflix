@@ -37,6 +37,8 @@ export default function App() {
 						isSignout: true,
 						userToken: null,
 						userData: null,
+						//Abajo nuevo agregado
+						isloading: false,
 					};
 			}
 		},
@@ -54,11 +56,26 @@ export default function App() {
 		const bootstrapAsync = async () => {
 			let userToken;
 			let user;
-		
+			let todayDate = new Date();
+
 			try {
 				userToken = await SecureStore.getItemAsync('userToken');
 				if(userToken !== null){
 					user = jwt_decode(userToken);
+					if(user.exp*100 < todayDate.getTime()){
+						console.log('Token vencido');
+						const deleteKeyStore = await SecureStore.deleteItemAsync('userToken');
+						dispatch({ type: 'SIGN_OUT'});
+					}else{
+						// After restoring token, we may need to validate it in production apps
+						// This will switch to the App screen or Auth screen and this loading
+						// screen will be unmounted and thrown away.
+						console.log('Token restaurado. No se encuentra vencido');
+						dispatch({ type: 'RESTORE_TOKEN', token: userToken, userdata: user});
+					}
+				}else{
+					dispatch({ type: 'SIGN_OUT'});
+					console.log('Token no encontrado');
 				}
 			} catch (e) {
 				// Restoring token failed
@@ -69,12 +86,7 @@ export default function App() {
 					const deleteKeyStore = await SecureStore.deleteItemAsync('userToken')
 					dispatch({ type: 'SIGN_OUT'});
 				}
-				
 			}
-			// After restoring token, we may need to validate it in production apps
-			// This will switch to the App screen or Auth screen and this loading
-			// screen will be unmounted and thrown away.
-			dispatch({ type: 'RESTORE_TOKEN', token: userToken, userdata: user});
 		};
 		bootstrapAsync();
 
@@ -83,27 +95,20 @@ export default function App() {
 	const authContext = useMemo(() => ({
 		signIn: async data => {
 			let userData = {
-				email: data.emailLOGIN,
-				password: data.passwordLOGIN,
+				email: data.emailString,
+				password: data.passString,
 				tenant: 'mobile'
 			}
 			let user;
 			try{
 				const iniciarSesion = await login(userData);
-				//---------------------
 				if(iniciarSesion === 401){
 					return iniciarSesion;
 				}
-				//---------------------
 				const saveKeyStore =  await SecureStore.setItemAsync('userToken', iniciarSesion.token);
-				
 				user = jwt_decode(iniciarSesion.token);
-				console.log('USER: ');
-				console.log(user);
-				console.log();
-
+				user.token = iniciarSesion.token;
 				let decodedHeader = jwt_decode(iniciarSesion.token, { header: true });
-				console.log(decodedHeader);
 
 				dispatch({ type: 'SIGN_IN', token: iniciarSesion.token, userdata: user});
 			}catch (e){
@@ -112,10 +117,12 @@ export default function App() {
 			}
 		},
 		signOut: async() => {
-			const deleteKeyStore = await SecureStore.deleteItemAsync('userToken')
+			const deleteKeyStore = await SecureStore.deleteItemAsync('userToken');
 			dispatch({ type: 'SIGN_OUT' });
 		},
 		signUp: async data => {
+
+			//DEPRECATED SIGNUP
 			let user;
 
 			let registerData = {
@@ -128,17 +135,9 @@ export default function App() {
 			}
 			try{
 				const registrarse = await registro(registerData);
-				const auxUser = {
-					email: registrarse.user.email,
-					password: data.password,
-					tenant: 'mobile'
-				}
-				const iniciarSesion = await login(auxUser);
-				const saveKeyStore =  await SecureStore.setItemAsync('userToken', iniciarSesion.token);
-				user = jwt_decode(iniciarSesion.token);
-				//TODO: Manejo de controles y fail de inicio / registro
-				// user = JWT.decode(iniciarSesion.token, '$2a$08$sxsFC91y2xGJxlq.ZZZHEO',{ timeSkew: 30 });
-				dispatch({ type: 'SIGN_IN', token: iniciarSesion.token, userdata: user });
+				console.log('FROM REGISTRO');
+				console.log(registrarse);
+				return registrarse;
 			}catch (e){
 				console.log('ERROR EN CREAR USUARIO. USEMEMO');
 			}

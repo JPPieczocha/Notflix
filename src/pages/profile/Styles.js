@@ -9,16 +9,10 @@ const styles = StyleSheet.create({
 		height: '100%',
 
 		borderTopWidth:2,
-		borderTopColor: Colors.secondary
-	},
-	mainWrapper: {
-        height: '100%',
-		width:'100%',
-
-		flexDirection: 'column',
+		borderTopColor: Colors.secondary,
 	},
 	profileHeader:{
-		height: '40%',
+		height: '33%',
 		width: '100%',
 
 		justifyContent:"center",
@@ -26,14 +20,25 @@ const styles = StyleSheet.create({
 
 		borderBottomColor: Colors.secondary,
 		borderBottomWidth: 2,
+
+		flexDirection: "row",
+		justifyContent: "space-around"
 	},
 	profileImage:{
 		resizeMode: "cover",
 
-		height: 150,
-		width: 150,
+		height: '60%',
+		aspectRatio: 1/1,
 
-		borderRadius: 100
+		borderRadius: 100,
+
+		//---prueba
+		justifyContent: "center",
+		alignItems: "center",
+		borderWidth: 5,
+		borderColor: Colors.secondary
+
+
 	},
 	headerProfileText:{
 		color: Colors.white,
@@ -43,43 +48,26 @@ const styles = StyleSheet.create({
 
 		fontSize: 24
 	},
-	packageProfileText: {
-		color: 'grey',
-		marginBottom: 5
-	},
-	buttonWrapper: {
-		alignItems:"center",
-		justifyContent:"center",
 
-		height: '60%'
-	},
 	buttonStyle:{
 		height: 50,
         width:'90%',
 
+		flexDirection: "row",
+
         backgroundColor: Colors.secondary,
-        marginVertical: 10,
+        marginVertical: 20,
 
         borderRadius: 25,
         
-        justifyContent: 'center',
+		alignSelf: 'center',
+        justifyContent: 'space-around',
         alignItems:'center'
 	},
+
 	buttonText:{
 		color: Colors.white,
         fontSize: 20
-	},
-	buttonStyleLogOut:{
-		height: 50,
-        width:'75%',
-
-        backgroundColor: Colors.logOut,
-        marginVertical: 30,
-
-        borderRadius: 25,
-        
-        justifyContent: 'center',
-        alignItems:'center'
 	},
 });
 
