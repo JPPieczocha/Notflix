@@ -29,73 +29,76 @@ const Home = ({ navigation }) => {
         fetchMovies();
     }, [reload]);
 
-    //Se crean tantos carrouseles como Divisiones haya del CMD
+    //Se crean tantos carrouseles como Divisiones haya del CMS
     return (
         <MovieContext.Provider value={{ movies }}>
             <View style={styles.container}>
                 {busy ? <LoadingPage /> : null}
-                <View style={styles.mainWrapper}>
-					{movies.length === 0 ? (
-						<View
-							style={{ width: "100%", height: "100%", justifyContent: 'center'}}
-						>
-							<Text
-								style={{
-									color: "white",
-									fontSize: 20,
-									textAlign: "center"
-								}}
-							>
-								No encontramos películas, intentelo más tarde.
-							</Text>
-						</View>
-					) : (
-						<ScrollView style={{ width: "100%", height: "100%" }}>
-							{movies.map((item, index) => {
-								if (item.name === "New Releases") {
-									return (
-										<View key={index}>
-											<Text
-												style={{
-													color: "white",
-													fontSize: 20,
-													paddingLeft: 15,
-													marginTop: 10,
-													marginBottom: 10,
-												}}
-											>
-												What's next?
-											</Text>
-											<Carrousel
-												nav={navigation}
-												movieData={item}
-											/>
-										</View>
-									);
-								} else {
-									return (
-										<View key={index}>
-											<Text
-												style={{
-													color: "white",
-													fontSize: 20,
-													paddingLeft: 15,
-													marginTop: 10,
-												}}
-											>
-												{item.name}
-											</Text>
-											<CarrouselBasic
-												nav={navigation}
-												movies={item.movies}
-											/>
-										</View>
-									);
-								}
-							})}
-						</ScrollView>
-
-					)}
+                <View>
+                    {movies.length === 0 ? (
+                        <View
+                            style={{
+                                width: "100%",
+                                height: "100%",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    color: "white",
+                                    fontSize: 20,
+                                    textAlign: "center",
+                                }}
+                            >
+                                No encontramos películas, intentelo más tarde.
+                            </Text>
+                        </View>
+                    ) : (
+                        <ScrollView style={{ width: "100%", height: "100%" }}>
+                            {movies.map((item, index) => {
+                                if (item.name === "New Releases") {
+                                    return (
+                                        <View key={index}>
+                                            <Text
+                                                style={{
+                                                    color: "white",
+                                                    fontSize: 20,
+                                                    paddingLeft: 15,
+                                                    marginTop: 10,
+                                                    marginBottom: 10,
+                                                }}
+                                            >
+                                                What's next?
+                                            </Text>
+                                            <Carrousel
+                                                nav={navigation}
+                                                movieData={item}
+                                            />
+                                        </View>
+                                    );
+                                } else {
+                                    return (
+                                        <View key={index}>
+                                            <Text
+                                                style={{
+                                                    color: "white",
+                                                    fontSize: 20,
+                                                    paddingLeft: 15,
+                                                    marginTop: 10,
+                                                }}
+                                            >
+                                                {item.name}
+                                            </Text>
+                                            <CarrouselBasic
+                                                nav={navigation}
+                                                movies={item.movies}
+                                            />
+                                        </View>
+                                    );
+                                }
+                            })}
+                        </ScrollView>
+                    )}
                 </View>
             </View>
         </MovieContext.Provider>
