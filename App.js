@@ -37,7 +37,6 @@ export default function App() {
 						isSignout: true,
 						userToken: null,
 						userData: null,
-						//Abajo nuevo agregado
 						isloading: false,
 					};
 			}
@@ -123,7 +122,6 @@ export default function App() {
 		signUp: async data => {
 
 			//DEPRECATED SIGNUP
-			let user;
 
 			let registerData = {
 				email: data.email,

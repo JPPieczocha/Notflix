@@ -2,8 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import {
     View,
     TextInput,
-    Keyboard,
-    TouchableWithoutFeedback,
     FlatList,
     Text,
     TouchableOpacity,
@@ -17,13 +15,9 @@ import { UserContext } from "../../components/context/authContext";
 import colors from "../../constants/colors";
 
 const Search = ({ navigation }) => {
-    const refInput = useRef(null);
-    const refList = useRef([]);
-    const AuxrefList = useRef([]);
 
     const [textSearch, setTextSearch] = useState("");
     const token = React.useContext(UserContext);
-    // console.log(token);
 
     const [movies, setMovies] = useState();
     const [busy, setBusy] = useState(true);
@@ -37,7 +31,6 @@ const Search = ({ navigation }) => {
             } else {
                 setMovies(response);
                 setBusy(false);
-                //refInput.current.focus();
             }
         };
         fetchMovies();
@@ -49,12 +42,8 @@ const Search = ({ navigation }) => {
             let auxArray = [];
             setMovieFind([]);
 
-            // AuxrefList.current = [];
-            // refList.current = [];
-
             if (text.length == 0) {
                 setMovieFind([]);
-                // refList.current = [];
             } else if (movies != undefined) {
                 movies.map((movie, index) => {
                     movie.movies.map((insideItem, indexItem) => {
@@ -64,15 +53,10 @@ const Search = ({ navigation }) => {
                                 .includes(text.toLowerCase())
                         ) {
                             auxArray.push(insideItem);
-
-                            // AuxrefList.current.push(insideItem);
                         }
                     });
                 });
                 setMovieFind(auxArray);
-                //refInput.current.focus();
-                //NO FUNCA ESE REFINPUT
-                // refList.current = AuxrefList.current;
             }
         }
     };
@@ -86,9 +70,8 @@ const Search = ({ navigation }) => {
                         placeholder={"Busque lo que desee..."}
                         keyboardType={"web-search"}
                         keyboardAppearance={"dark"}
-                        //ref={refInput}
                         onChangeText={(text) => handleTextInput(text)}
-                    ></TextInput>
+                    />
                 </View>
                 <View
                     style={{
@@ -101,7 +84,6 @@ const Search = ({ navigation }) => {
                     <FlatList
                         showsVerticalScrollIndicator={false}
                         data={movieFind}
-                        // data={refList.current}
                         numColumns={2}
                         keyExtractor={(item) => `${item._id}`}
                         renderItem={(item) => {
@@ -156,12 +138,19 @@ const Search = ({ navigation }) => {
                         }}
                         ListEmptyComponent={() =>
                             textSearch === "" ? (
-                                <View styles={{alignItems: 'center'}}>
+                                <View styles={{ alignItems: "center" }}>
                                     <Image
                                         style={styles.emptyImage}
                                         source={require("../../assets/landing/Logo_final.png")}
                                     />
-                                    <Text style={{ color: "white", textAlign: 'center' }}>Empezá a escribir, nosotros te lo traemos.</Text>
+                                    <Text
+                                        style={{
+                                            color: "white",
+                                            textAlign: "center",
+                                        }}
+                                    >
+                                        Empezá a escribir, nosotros te lo traemos.
+                                    </Text>
                                 </View>
                             ) : (
                                 <Text style={{ color: "white" }}>

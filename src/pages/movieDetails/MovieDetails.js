@@ -1,95 +1,103 @@
-import React, {useState} from 'react';
-import { StyleSheet, Text, View, ImageBackground, TouchableOpacity, ScrollView,FlatList,Image } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { BlurView } from 'expo-blur';
-import Colors from '../../constants/colors'
-import styles from './Styles';
+import React from "react";
+import { Text, View, TouchableOpacity, ScrollView } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import Colors from "../../constants/colors";
+import styles from "./Styles";
 
-const MovieDetails = ({navigation,route})=>{
-
-    const {allData} = route.params;
+const MovieDetails = ({ navigation, route }) => {
+    const { allData } = route.params;
     let movieDate = allData.movie.launch;
 
-    const dataArray = [
-        {   
-         image:require('../../assets/images/images/series/actorsAvatars/brad.jpg'),
-         title:"Brad Pitt",
-         id:1,
-        },
-        {
-            image: require('../../assets/images/images/series/actorsAvatars/angelina.jpg'),
-            title:"Angelina Jolie",
-            id:2,
-        },
-        {   
-            image:require('../../assets/images/images/series/actorsAvatars/brad.jpg'),
-            title:"Brad Pitt",
-            id:3,
-        },
-        {
-            image: require('../../assets/images/images/series/actorsAvatars/angelina.jpg'),
-            title:"Angelina Jolie",
-            id:4,
-        },
-        {   
-            image:require('../../assets/images/images/series/actorsAvatars/brad.jpg'),
-            title:"Brad Pitt",
-            id:5,
-        },
-        {
-            image: require('../../assets/images/images/series/actorsAvatars/angelina.jpg'),
-            title:"Angelina Jolie",
-            id:6,
-        }
-    ]
-
-    const header = ()=>{
-        return(
+    const header = () => {
+        return (
             <View style={styles.header}>
                 <View
-                style={{
-                    width:50,
-                    height:50,
-                    backgroundColor: Colors.transparentWhite,
-                    justifyContent:'center',
-                    alignItems:'center',
-                }}
+                    style={{
+                        width: 50,
+                        height: 50,
+                        backgroundColor: Colors.transparentWhite,
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
                 >
-                    <TouchableOpacity onPress={()=>navigation.pop()}>
-                        <Ionicons name={'arrow-back'} size={30} color={Colors.inactiveTint}/>
+                    <TouchableOpacity onPress={() => navigation.pop()}>
+                        <Ionicons
+                            name={"arrow-back"}
+                            size={30}
+                            color={Colors.inactiveTint}
+                        />
                     </TouchableOpacity>
                 </View>
-                <Text style={{color:"#fff",fontSize:23,fontWeight:'bold', textAlign: 'center'}}>{allData.movie.title}</Text>
-                <View style={{
-                    width:50,
-                    height:50,
-                    justifyContent:'center',
-                    alignItems:'center',
-                }}></View>
+                <Text
+                    style={{
+                        color: "#fff",
+                        fontSize: 23,
+                        fontWeight: "bold",
+                        textAlign: "center",
+                    }}
+                >
+                    {allData.movie.title}
+                </Text>
+                <View
+                    style={{
+                        width: 50,
+                        height: 50,
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                />
             </View>
-        )
-    }
+        );
+    };
 
-    return(
+    return (
         <View style={styles.container}>
             {header()}
-            <ScrollView style={{width: '100%'}} bounces={false}>
+            <ScrollView style={{ width: "100%" }} bounces={false}>
                 <Text style={styles.detailText}>Sinopsis</Text>
-                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.description}</Text>
+                <Text style={{ marginHorizontal: 15, color: "#C5C3C3" }}>
+                    {allData.movie.description}
+                </Text>
                 <Text style={styles.detailText}>Lanzamiento</Text>
-                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{movieDate.slice(8,10)} / {movieDate.slice(5,7)} / {movieDate.slice(0,4)}</Text>
+                <Text style={{ marginHorizontal: 15, color: "#C5C3C3" }}>
+                    {movieDate.slice(8, 10)} / {movieDate.slice(5, 7)} /{" "}
+                    {movieDate.slice(0, 4)}
+                </Text>
                 <Text style={styles.detailText}>Director</Text>
-                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.director}</Text>
+                <Text style={{ marginHorizontal: 15, color: "#C5C3C3" }}>
+                    {allData.movie.director}
+                </Text>
                 <Text style={styles.detailText}>Producer</Text>
-                <Text style={{marginHorizontal:15,color:'#C5C3C3'}}>{allData.movie.producer}</Text>
+                <Text style={{ marginHorizontal: 15, color: "#C5C3C3" }}>
+                    {allData.movie.producer}
+                </Text>
                 <Text style={styles.detailText}>IMDb Rating</Text>
-                <View style={{flexDirection:'row',marginBottom:10, alignItems:'center'}}>
-                    <Ionicons name={'star'} size={26} color={'gold'} style={{marginLeft:15}}/>
-                    <Text style={{marginHorizontal:10,color:'#C5C3C3',fontSize:20}}>{allData.movie.value}</Text>
+                <View
+                    style={{
+                        flexDirection: "row",
+                        marginBottom: 10,
+                        alignItems: "center",
+                    }}
+                >
+                    <Ionicons
+                        name={"star"}
+                        size={26}
+                        color={"gold"}
+                        style={{ marginLeft: 15 }}
+                    />
+                    <Text
+                        style={{
+                            marginHorizontal: 10,
+                            color: "#C5C3C3",
+                            fontSize: 20,
+                        }}
+                    >
+                        {allData.movie.value}
+                    </Text>
                 </View>
             </ScrollView>
         </View>
-    )
-}
+    );
+};
 
-export default MovieDetails
+export default MovieDetails;

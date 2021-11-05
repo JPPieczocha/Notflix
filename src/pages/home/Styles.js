@@ -11,9 +11,6 @@ const styles = StyleSheet.create({
         height: '100%',
 
 	},
-    mainWrapper: {
-        
-	},
 });
 
 export default styles;
