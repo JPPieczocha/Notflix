@@ -69,7 +69,7 @@ export default function Profile({ navigation }) {
                             <Text
                                 style={{ color: "grey", textAlign: "center" }}
                             >
-                                Version: 0.5
+                                Version: 0.6
                             </Text>
                         </View>
                     </View>

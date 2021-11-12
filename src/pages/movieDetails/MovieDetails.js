@@ -18,13 +18,14 @@ const MovieDetails = ({ navigation, route }) => {
                         backgroundColor: Colors.transparentWhite,
                         justifyContent: "center",
                         alignItems: "center",
+                        borderRadius: 10
                     }}
                 >
                     <TouchableOpacity onPress={() => navigation.pop()}>
                         <Ionicons
                             name={"arrow-back"}
                             size={30}
-                            color={Colors.inactiveTint}
+                            color={Colors.secondary}
                         />
                     </TouchableOpacity>
                 </View>
@@ -33,8 +34,10 @@ const MovieDetails = ({ navigation, route }) => {
                         color: "#fff",
                         fontSize: 23,
                         fontWeight: "bold",
-                        textAlign: "center",
+                        maxWidth: '70%'
                     }}
+                    numberOfLines={2}
+                    adjustsFontSizeToFit={true}
                 >
                     {allData.movie.title}
                 </Text>
