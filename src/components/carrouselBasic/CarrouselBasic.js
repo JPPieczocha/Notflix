@@ -45,7 +45,7 @@ const CarrouselBasic = ({ nav, route, movies }) => {
                                 style={{
                                     width: "100%",
                                     height: "100%",
-                                    resizeMode: "contain",
+                                    resizeMode: "cover",
                                     backgroundColor: Colors.secondary,
                                 }}
                                 onError={() =>
