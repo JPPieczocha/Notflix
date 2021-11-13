@@ -84,14 +84,17 @@ export const allPaquetes = async () =>{
 //Fin Paquetes--
 
 //Subscripciones----
-export const createSubscription = async (data) =>{
+export const createSubscription = async (data, token) =>{
+
     const options = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
     }
+
     try {
         const response = await fetch(paqURL+'subscriptions/v1/create',options);
         return response

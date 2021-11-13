@@ -21,8 +21,9 @@ export const getAllPaquetes = async () => {
     }
 };
 
-export const crearSubscription = async (data) => {
-    const response = await createSubscription(data);
+export const crearSubscription = async (data, token) => {
+
+    const response = await createSubscription(data, token);
     if (response.status === 201) {
         const json = await response.json();
         return json;

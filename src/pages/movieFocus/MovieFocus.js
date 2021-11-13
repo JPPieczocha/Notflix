@@ -31,7 +31,7 @@ const MovieFocus = ({ navigation, route }) => {
             id_contenido: allData.movie._id,
         };
         let checked = await checkPlayMovie(token.state.userToken, movie);
-        if (checked === 403) {
+        if (checked === 403 || checked === 401 || checked === 400 || checked === 500) {
             setModal(true);
         } else {
             navigation.navigate("MoviePlayer", {

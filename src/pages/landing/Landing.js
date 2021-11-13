@@ -29,7 +29,7 @@ import {
     getAllPaquetes,
     crearSubscription,
 } from "../../controllers/PackagesController";
-import { registro } from "../../controllers/UsersController";
+import { registro, login as log } from "../../controllers/UsersController";
 
 const Landing = ({ navigation }) => {
     const { height, width } = Dimensions.get("window");
@@ -76,7 +76,7 @@ const Landing = ({ navigation }) => {
             const paquetesData = async () => {
                 let data = await getAllPaquetes();
                 if (data != undefined) {
-                    setPaquetes(data.data);
+                    setPaquetes(data.data.filter(paq => paq.estado === "activo"));
                 }
             };
             paquetesData();
@@ -162,6 +162,7 @@ const Landing = ({ navigation }) => {
     };
 
     const handleShowCard = () => {
+
         Animated.parallel([
             Animated.timing(yScrollTestPackage, {
                 toValue: registerCard
@@ -249,36 +250,45 @@ const Landing = ({ navigation }) => {
         const userData = await registro(AUXREGISTRODATA);
 
         if (userData != undefined) {
-            console.log("FROM LANDING");
-            console.log(userData);
             setAuxUserData(userData.user);
             setemailOGIN(email);
             setpasswordLOGIN(password);
 
             //Crear subscripción
-
-            let auxData = {
-                id_usuario: userData.user._id,
-                paquetes: selectedPackages,
-                firstName: userData.user.name,
-                lastName: userData.user.last_name,
-                email: userData.user.email,
-                telephone: "1111111111",
+            let auxLogin = {
+                email: email,
+                password: password,
+                tenant: 'mobile'
             };
+            
+            let userTok = await log(auxLogin);
+            if(userTok != undefined){
+                let auxData = {
+                    id_usuario: userData.user._id,
+                    paquetes: selectedPackages,
+                    firstName: userData.user.name,
+                    lastName: userData.user.last_name,
+                    email: userData.user.email,
+                    telephone: "111111111",
+                };
+    
+                let response = await crearSubscription(auxData, userTok.token);
+    
+                if (response != undefined) {
+                    //---logueo-----
+                    await handleLogin(
+                        value,
+                        false,
+                        AUXREGISTRODATA.email,
+                        AUXREGISTRODATA.password
+                    );
+                } else {
+                    console.log("Error al crear Sub");
+                }
 
-            let response = await crearSubscription(auxData);
-
-            if (response != undefined) {
-                //---logueo-----
-                await handleLogin(
-                    value,
-                    false,
-                    AUXREGISTRODATA.email,
-                    AUXREGISTRODATA.password
-                );
-            } else {
-                console.log("Error al crear Sub");
             }
+
+           
         }
     };
 
@@ -429,12 +439,14 @@ const Landing = ({ navigation }) => {
                                         }
                                     ></TextInput>
                                     <TextInput
+                                        autoCapitalize={"none"}
                                         placeholder={"Correo electrónico"}
                                         style={styles.input}
                                         keyboardType={"email-address"}
                                         onChangeText={(text) => setEmail(text)}
                                     ></TextInput>
                                     <TextInput
+                                        autoCapitalize={"none"}
                                         placeholder={"Contraseña"}
                                         style={styles.input}
                                         keyboardType={"default"}
