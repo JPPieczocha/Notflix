@@ -12,6 +12,7 @@ import {
     ScrollView,
     ActivityIndicator,
     Platform,
+    Modal,
 } from "react-native";
 import { BlurView } from "expo-blur";
 import { LiteCreditCardInput } from "react-native-credit-card-input-view";
@@ -42,6 +43,8 @@ const Landing = ({ navigation }) => {
     const [badLogin, setbadLogin] = useState(0);
     const [emailLOGIN, setemailOGIN] = useState("");
     const [passwordLOGIN, setpasswordLOGIN] = useState("");
+
+    const [badEmail, setBadEmail] = useState(0)
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
@@ -55,6 +58,8 @@ const Landing = ({ navigation }) => {
     const [auxUserData, setAuxUserData] = useState({});
     const [selectedPackages, setSelectedPackages] = useState([]);
     const [montoPaquetes, setMontoPaquetes] = useState(0);
+
+    const [modal, setModal] = useState(false)
 
     const yScrollLogo = useRef(new Animated.Value(0)).current;
     const yScrollButtons = useRef(
@@ -217,6 +222,11 @@ const Landing = ({ navigation }) => {
         }
     };
 
+    const handleRegisterEmail = (text) => {
+        setEmail(text)
+        setBadEmail(0)
+    }
+
     const handleTextMail = (text) => {
         setemailOGIN(text);
         if (emailLOGIN.localeCompare("")) {
@@ -249,7 +259,7 @@ const Landing = ({ navigation }) => {
 
         const userData = await registro(AUXREGISTRODATA);
 
-        if (userData != undefined) {
+        if (userData != 400) {
             setAuxUserData(userData.user);
             setemailOGIN(email);
             setpasswordLOGIN(password);
@@ -286,13 +296,48 @@ const Landing = ({ navigation }) => {
                     console.log("Error al crear Sub");
                 }
 
-            }
+            } 
 
            
+        } else {
+            setModal(true)
+            setLoading(false)
         }
     };
 
     //---------Renders------------
+
+    const ModalWarning = (
+        <Modal
+            animationType="fade"
+            transparent={true}
+            visible={modal}
+            onRequestClose={() => {}} //Back de android
+        >
+            <View style={styles.modalFilter}>
+                <View style={styles.modalContainer}>
+                    <Text style={styles.modalTitle}>
+                        Datos inválidos.
+                    </Text>
+                    <Text style={styles.modalDescription}>
+                        Revisa que el correo que estás usando no esté registrado
+                    </Text>
+
+                    <TouchableOpacity
+                        style={styles.modalButton}
+                        onPress={() => {
+                            setModal(false)
+                            handleShowCard()
+                            handleShowPackage()
+                            setBadEmail(3)
+                        }}
+                    >
+                        <Text style={styles.modalButtonText}>Volver</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </Modal>
+    );
 
     const login = () => {
         return (
@@ -438,12 +483,24 @@ const Landing = ({ navigation }) => {
                                             setSurname(text)
                                         }
                                     ></TextInput>
+                                    {badEmail === 3 ?
+                                        <Text
+                                            style={{ color: 'red', fontSize: 20 }}
+                                        >
+                                            Correo ya registrado
+                                        </Text>
+                                    :
+                                        null
+                                    }
                                     <TextInput
                                         autoCapitalize={"none"}
                                         placeholder={"Correo electrónico"}
-                                        style={styles.input}
+                                        style={[styles.input, {
+                                            borderColor: 'red',
+                                            borderWidth: badEmail,
+                                        },]}
                                         keyboardType={"email-address"}
-                                        onChangeText={(text) => setEmail(text)}
+                                        onChangeText={(text) => handleRegisterEmail(text)}
                                     ></TextInput>
                                     <TextInput
                                         autoCapitalize={"none"}
@@ -462,10 +519,11 @@ const Landing = ({ navigation }) => {
                                     style={styles.button}
                                     onPress={() => handleShowPackage(value)}
                                     disabled={
-                                        name === "" &&
-                                        surname === "" &&
-                                        email === "" &&
-                                        password === ""
+                                        name === "" ||
+                                        surname === "" ||
+                                        email === "" ||
+                                        password === "" ||
+                                        badEmail > 0
                                     }
                                 >
                                     <Text style={styles.buttonText}>
@@ -668,6 +726,7 @@ const Landing = ({ navigation }) => {
                 {register()}
                 {packageSelector()}
                 {cardDeclarer()}
+                {ModalWarning}
                 <Animated.View
                     style={{
                         width: "100%",
