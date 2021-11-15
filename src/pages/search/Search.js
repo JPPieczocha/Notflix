@@ -114,7 +114,7 @@ const Search = ({ navigation }) => {
                                             style={{
                                                 width: "100%",
                                                 height: "100%",
-                                                resizeMode: "contain",
+                                                resizeMode: "cover",
                                                 backgroundColor:
                                                     colors.secondary,
                                             }}

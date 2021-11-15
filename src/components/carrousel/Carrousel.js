@@ -142,7 +142,7 @@ const Carrousel = ({ nav, movieData }) => {
                                 <Animated.Image
                                     source={{ uri: item.movie.imageMobile }}
                                     style={{
-                                        resizeMode: "contain",
+                                        resizeMode: "cover",
                                         width: 250,
                                         height: "100%",
                                         backgroundColor: Colors.secondary,
