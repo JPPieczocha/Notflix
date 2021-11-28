@@ -25,10 +25,10 @@ Install: `npm install`
 
 Run Project Locally: `expo start`
 
-## Features
+## Funcionamiento
 
-- Expo SDK 42
-- iOS, Android and PWA (Progressive Web App)
-- React Navigation v6
-- PropTypes
+- Registro
 
+<p align="center">
+  <img alt="registro"  src="https://github.com/machi918/iapp/blob/master/src/assets/gif/registro.gif" />
+</p>
