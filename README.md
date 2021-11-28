@@ -30,5 +30,5 @@ Run Project Locally: `expo start`
 - Registro
 
 <p align="center">
-  <img alt="registro" src="https://github.com/machi918/iapp/blob/master/src/assets/gif/registro.gif" />
+  <img alt="registro"  src="https://github.com/machi918/iapp/blob/master/src/assets/gif/registro.gif" />
 </p>
